@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:LogAnalyzer.ViewModels;assembly=LogAnalyzer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LogAnalyzer.Views.Views.MainView" 
+             x:DataType="viewModels:MainViewModel"
+			 x:Name ="MainViewControl">
+
+	<Design.DataContext>
+		<viewModels:MainViewModel/>
+	</Design.DataContext>
+	
+	<Grid ColumnDefinitions="300, *">
+		<Border Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="#303030">
+			<StackPanel x:Name="pnl_ModuleButtons" >
+                <ItemsControl ItemsSource="{Binding MainViewModules}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button 
+                                HorizontalAlignment="Stretch" 
+                                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                Command="{Binding ((viewModels:MainViewModel)DataContext).OpenModuleCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
+                                <Grid ColumnDefinitions="*,*" MaxHeight="30">
+                                    <Image Grid.Column="0" Source="{Binding ModuleIcon}"
+                                           HorizontalAlignment="Right"
+                                           Margin="0,0,20,0"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding ModuleHeader}"
+                                               HorizontalAlignment="Left" VerticalAlignment="Center"
+                                               Margin="-10,0,0,0"/>
+                                </Grid>
+							</Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+			</StackPanel>
+		</Border>
+		<ContentControl Grid.Column="1" Content="{Binding CurrentModuleView}"/>
+	</Grid>
+</UserControl>

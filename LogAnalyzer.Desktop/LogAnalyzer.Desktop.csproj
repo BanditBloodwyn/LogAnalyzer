@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!--If you are willing to use Windows/MacOS native APIs you will need to create 3 projects.
+    One for Windows with net7.0-windows TFM, one for MacOS with net7.0-macos and one with net7.0 TFM for Linux.-->
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LogAnalyzer.Views\LogAnalyzer.Views.csproj" />
+  </ItemGroup>
+
+	<Target Name="CleanOutput" BeforeTargets="Compile">
+		<Message Text="... Cleaning output directory: $(OutputPath)" Importance="high" />
+		<RemoveDir Directories="$(OutputPath)" />
+		<Message Text="... Recreating output directory: $(OutputPath)" Importance="high" />
+		<MakeDir Directories="$(OutputPath)" />
+	</Target>
+
+	<Target Name="CopyModulesDependencies" AfterTargets="Build">
+		<ItemGroup>
+			<ModulesDependencies Include="$(SolutionDir)LogAnalyzer.Modules.BackendExtentions\bin\$(Configuration)\$(TargetFramework)\*.dll" />
+			<ModulesDependencies Include="$(SolutionDir)LogAnalyzer.Modules.MainNavigationFeatures\bin\$(Configuration)\$(TargetFramework)\*.dll" />
+		</ItemGroup>
+		<Copy SourceFiles="@(ModulesDependencies)" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="false" />
+	</Target>
+</Project>
