@@ -12,7 +12,7 @@
 		<viewModels:MainViewModel/>
 	</Design.DataContext>
 	
-	<Grid ColumnDefinitions="300, *">
+	<Grid ColumnDefinitions="200, *" Margin="0,5,0,0">
 		<Border Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="#303030">
 			<StackPanel x:Name="pnl_ModuleButtons" >
                 <ItemsControl ItemsSource="{Binding MainViewModules}">
@@ -26,10 +26,10 @@
                                 <Grid ColumnDefinitions="*,*" MaxHeight="30">
                                     <Image Grid.Column="0" Source="{Binding ModuleIcon}"
                                            HorizontalAlignment="Right"
-                                           Margin="0,0,20,0"/>
+                                           Margin="0,0,30,0"/>
                                     <TextBlock Grid.Column="1" Text="{Binding ModuleHeader}"
                                                HorizontalAlignment="Left" VerticalAlignment="Center"
-                                               Margin="-10,0,0,0"/>
+                                               Margin="-20,0,0,0"/>
                                 </Grid>
 							</Button>
                         </DataTemplate>

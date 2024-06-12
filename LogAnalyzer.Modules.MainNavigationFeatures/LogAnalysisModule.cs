@@ -10,23 +10,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.Modules.MainNavigationFeatures;
 
-public class SettingsModule : MainViewModule,
+public class LogAnalysisModule : MainViewModule,
     IDependencyInjectionModule
 {
-    public override int NavigationIndex => 1;
-    public override string ModuleHeader => "Settings";
-    public override Bitmap ModuleIcon => DefaultIcons.SettingsIcon;
+    public override int NavigationIndex => 0;
+    public override string ModuleHeader => "Log Analysis";
+    public override Bitmap ModuleIcon => DefaultIcons.LogAnalysisIcon;
 
     public override UserControl GetView()
     {
-        SettingsModuleView view = new();
-        view.DataContext = new SettingsModuleViewModel(GetDependency<SettingsModel>());
+        LogAnalysisModuleView view = new();
+        view.DataContext = new LogAnalysisModuleViewModel(GetDependency<LogAnalysisModel>());
         return view;
     }
-    
+
     public void RegisterDependencies(IServiceCollection service)
     {
         service
-            .AddSingleton<SettingsModel>();
+            .AddSingleton<LogAnalysisModel>();
     }
 }

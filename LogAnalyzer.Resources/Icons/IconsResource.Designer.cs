@@ -63,6 +63,16 @@ namespace LogAnalyzer.Resources.Icons {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
+        internal static byte[] module_loganalysis {
+            get {
+                object obj = ResourceManager.GetObject("module_loganalysis", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
         internal static byte[] module_settings {
             get {
                 object obj = ResourceManager.GetObject("module_settings", resourceCulture);

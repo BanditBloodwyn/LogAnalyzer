@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\LogAnalyzer.Models\LogAnalyzer.Models.csproj" />
   </ItemGroup>
 
