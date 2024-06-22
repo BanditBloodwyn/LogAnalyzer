@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogAnalyzer.Core\LogAnalyzer.Core.csproj" />
     <ProjectReference Include="..\LogAnalyzer.Models.Data\LogAnalyzer.Models.Data.csproj" />
+    <ProjectReference Include="..\LogAnalyzer.Models.Events\LogAnalyzer.Models.Events.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\" />
   </ItemGroup>
 
 </Project>

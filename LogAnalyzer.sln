@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{1DD8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Modules.MainNavigationFeatures", "LogAnalyzer.Modules.MainNavigationFeatures\LogAnalyzer.Modules.MainNavigationFeatures.csproj", "{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Models.CommandQueue", "LogAnalyzer.Models.CommandManagement\LogAnalyzer.Models.CommandQueue.csproj", "{A9D45098-6F86-4BE0-A29C-C673F0162E50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9D45098-6F86-4BE0-A29C-C673F0162E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D45098-6F86-4BE0-A29C-C673F0162E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D45098-6F86-4BE0-A29C-C673F0162E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D45098-6F86-4BE0-A29C-C673F0162E50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{F3EAD8CF-AD93-4D7F-8CA3-C65A6F0930EB} = {F772124A-71A7-430A-8325-D68CBBE04872}
 		{1DD8A009-4A4F-4494-A13A-F80D023ED7BA} = {F772124A-71A7-430A-8325-D68CBBE04872}
 		{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77} = {1DD8A009-4A4F-4494-A13A-F80D023ED7BA}
+		{A9D45098-6F86-4BE0-A29C-C673F0162E50} = {BED705C9-CC38-4DBD-97D7-B5EDBC00C272}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F374DC6E-3A7E-4FEB-B081-2231B552DC44}
