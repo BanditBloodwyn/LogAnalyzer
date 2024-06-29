@@ -1,42 +1,58 @@
-﻿using System.Diagnostics;
-using LogAnalyzer.Core.EventBus;
+﻿using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Models.Data.Interfaces;
 using LogAnalyzer.Models.Events;
+using System.Collections.Concurrent;
 
 namespace LogAnalyzer.Models.CommandQueue;
 
 public class CommandQueue
 {
-    private readonly Queue<IQueuedCommand> _queue = new();
-
-    private bool _isProcessing;
+    private readonly ConcurrentQueue<IQueuedCommand> _commands = new();
+    private readonly SemaphoreSlim _signal = new(0);
 
     public CommandQueue()
     {
+        Task.Run(ProcessCommandsAsync);
+
         EventBinding<AddNewQueuedCommandEvent> addNewCommandEventBinding = new(EnqueueCommand);
         EventBus<AddNewQueuedCommandEvent>.Register(addNewCommandEventBinding);
     }
 
-    private void EnqueueCommand(AddNewQueuedCommandEvent @event)
+    public void EnqueueCommand(AddNewQueuedCommandEvent @event)
     {
-        _queue.Enqueue(@event.Command);
-        Debug.WriteLine($"Command added to queue. New length: {_queue.Count}");
-
-        if (!_isProcessing)
-            _ = ProcessCommands();
+        _commands.Enqueue(@event.Command);
+        _signal.Release();
+        Console.WriteLine($"Command added to queue. New length: {_commands.Count}");
     }
 
-    private async Task ProcessCommands()
+    private async Task ProcessCommandsAsync()
     {
-        _isProcessing = true;
-
-        while (_queue.Count > 0)
+        while (true)
         {
-            IQueuedCommand command = _queue.Dequeue();
-            await Task.Run(command.Execute);
-            Debug.WriteLine($"Command executed. Commands left: {_queue.Count}");
-        }
+            await _signal.WaitAsync();
 
-        _isProcessing = false;
+            if (_commands.TryDequeue(out IQueuedCommand? command))
+            {
+                try
+                {
+                    await Task.Run(command.Execute);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error while executing command '{command.Name}': {ex.Message}");
+                }
+            }
+        }
+    }
+
+    public Task WaitForAllCommandsAsync()
+    {
+        return Task.Run(async () =>
+        {
+            while (!_commands.IsEmpty || _signal.CurrentCount > 0)
+            {
+                await Task.Delay(100);
+            }
+        });
     }
 }
