@@ -1,7 +1,9 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using LogAnalyzer.Core.UI;
 using LogAnalyzer.ViewModels;
 using LogAnalyzer.Views.Views;
 
@@ -28,6 +30,7 @@ public partial class App : Application
             {
                 DataContext = new MainViewModel()
             };
+            TopLevelContext.Initialize(TopLevel.GetTopLevel(desktop.MainWindow));
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
