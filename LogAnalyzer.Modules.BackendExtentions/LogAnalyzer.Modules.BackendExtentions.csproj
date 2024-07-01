@@ -10,6 +10,7 @@
     <ProjectReference Include="..\LogAnalyzer.Core.Repositories\LogAnalyzer.Core.Repositories.csproj" />
     <ProjectReference Include="..\LogAnalyzer.Core\LogAnalyzer.Core.csproj" />
     <ProjectReference Include="..\LogAnalyzer.Models.CommandManagement\LogAnalyzer.Models.CommandQueue.csproj" />
+    <ProjectReference Include="..\LogAnalyzer.Services.IO\LogAnalyzer.Services.IO.csproj" />
   </ItemGroup>
 
 </Project>

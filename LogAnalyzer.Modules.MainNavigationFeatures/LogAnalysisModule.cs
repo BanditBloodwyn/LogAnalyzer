@@ -20,13 +20,14 @@ public class LogAnalysisModule : MainViewModule,
     public override UserControl GetView()
     {
         LogAnalysisModuleView view = new();
-        view.DataContext = new LogAnalysisModuleViewModel(GetDependency<LogAnalysisModel>());
+        view.DataContext = GetDependency<LogAnalysisModuleViewModel>();
         return view;
     }
 
     public void RegisterDependencies(IServiceCollection service)
     {
         service
-            .AddSingleton<LogAnalysisModel>();
+            .AddSingleton<LogAnalysisModel>()
+            .AddSingleton<LogAnalysisModuleViewModel>();
     }
 }

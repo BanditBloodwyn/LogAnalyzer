@@ -6,5 +6,18 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.Modules.LogAnalysisModuleView"
              x:DataType="modules:LogAnalysisModuleViewModel">
-    Log Analysis
+    <Grid RowDefinitions="29,*">
+        <StackPanel Orientation="Horizontal">
+            <Button VerticalAlignment="Top" 
+                    Height="30" Width="30"
+                    Command="{Binding OpenNewLogPanelCommand}">+</Button>
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                BorderBrush="DimGray" BorderThickness="1">
+            <ContentControl x:Name="cc_logsPanel">
+
+            </ContentControl>
+        </Border>
+    </Grid>
 </UserControl>
