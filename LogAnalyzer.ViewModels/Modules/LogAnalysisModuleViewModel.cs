@@ -10,6 +10,11 @@ public class LogAnalysisModuleViewModel(
     IFileDialogService _fileDialogService)
     : ViewModelBase
 {
-    public ICommand OpenNewLogPanelCommand => new OpenNewLogPanelCommand(_model, _fileDialogService);
+    public ICommand OpenNewLogPanelCommand => new OpenNewLogPanelCommand(this);
 
+    public async void OpenNewLogs()
+    {
+        string[] logFilePath = await _fileDialogService.OpenFileDialogAsync();
+        //_model.Analyze
+    }
 }

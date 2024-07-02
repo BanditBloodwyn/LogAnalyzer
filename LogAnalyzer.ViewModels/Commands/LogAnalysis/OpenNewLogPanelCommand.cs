@@ -1,12 +1,10 @@
-﻿using LogAnalyzer.Models.Modules;
-using LogAnalyzer.Services.IO.FileDialog;
+﻿using LogAnalyzer.ViewModels.Modules;
 using System.Windows.Input;
 
 namespace LogAnalyzer.ViewModels.Commands.LogAnalysis;
 
 public class OpenNewLogPanelCommand(
-    LogAnalysisModel _model, 
-    IFileDialogService _fileDialogService) 
+    LogAnalysisModuleViewModel _viewModel)
     : ICommand
 {
     public event EventHandler? CanExecuteChanged;
@@ -16,9 +14,8 @@ public class OpenNewLogPanelCommand(
         return true;
     }
 
-    public async void Execute(object? parameter)
+    public void Execute(object? parameter)
     {
-        string[] logFilePath = await _fileDialogService.OpenFileDialogAsync();
-        //_model.AddNewLogToObserve();
+        _viewModel.OpenNewLogs();
     }
 }
