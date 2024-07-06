@@ -1,9 +1,10 @@
-﻿using LogAnalyzer.Models.Modules;
+﻿using Avalonia.Platform.Storage;
+using LogAnalyzer.Models.Modules;
 using LogAnalyzer.Services.IO.FileDialog;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Windows.Input;
 
-namespace LogAnalyzer.ViewModels.Modules;
+namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
 
 public class LogAnalysisModuleViewModel(
     LogAnalysisModel _model,
@@ -14,7 +15,7 @@ public class LogAnalysisModuleViewModel(
 
     public async void OpenNewLogs()
     {
-        string[] logFilePath = await _fileDialogService.OpenFileDialogAsync();
+        IStorageFile[] logFilePath = await _fileDialogService.OpenFileDialogAsync();
         //_model.Analyze
     }
 }

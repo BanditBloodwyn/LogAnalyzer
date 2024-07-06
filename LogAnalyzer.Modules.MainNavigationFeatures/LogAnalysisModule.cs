@@ -4,7 +4,7 @@ using LogAnalyzer.Core.Modules;
 using LogAnalyzer.Core.Modules.Interfaces;
 using LogAnalyzer.Models.Modules;
 using LogAnalyzer.Resources;
-using LogAnalyzer.ViewModels.Modules;
+using LogAnalyzer.ViewModels.Modules.LogAnalysis;
 using LogAnalyzer.Views.Views.Modules;
 using Microsoft.Extensions.DependencyInjection;
 

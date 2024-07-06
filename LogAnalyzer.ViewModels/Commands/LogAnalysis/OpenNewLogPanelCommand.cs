@@ -1,4 +1,4 @@
-﻿using LogAnalyzer.ViewModels.Modules;
+﻿using LogAnalyzer.ViewModels.Modules.LogAnalysis;
 using System.Windows.Input;
 
 namespace LogAnalyzer.ViewModels.Commands.LogAnalysis;
