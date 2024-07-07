@@ -1,8 +1,8 @@
-﻿using Avalonia.Platform.Storage;
+﻿using LogAnalyzer.Models.Data.Containers;
 
 namespace LogAnalyzer.Services.IO.FileDialog;
 
 public interface IFileDialogService
 {
-    public Task<IEnumerable<IStorageFile>> OpenFileDialogAsync();
+    public Task<IEnumerable<FileInfoModel>> OpenFileDialogAsync();
 }
