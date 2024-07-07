@@ -1,6 +1,6 @@
 ﻿using LogAnalyzer.Core.Repositories;
 
-namespace LogAnalyzer.Models.Data.Entities;
+namespace LogAnalyzer.Models.Data.Savables;
 
 public class Problem : ISavable
 {
