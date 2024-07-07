@@ -14,13 +14,25 @@
 
     <Border BorderBrush="Transparent" BorderThickness="2">
         <Grid RowDefinitions="40, *">
-            <Grid Height="30"
+            <Grid Grid.Row="0" Height="30"
                   ColumnDefinitions="*, 30">
+                <Path Grid.Column="0"
+                      Fill="#292929" Stroke="#292929" StrokeThickness="1">
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="0,0">
+                                <LineSegment Point="130,0"/>
+                                <LineSegment Point="160,35"/>
+                                <LineSegment Point="0,35"/>
+                                <LineSegment Point="0,0"/>
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
                 <Label Grid.Column="0"
                        HorizontalAlignment="Left" VerticalAlignment="Bottom"
                        VerticalContentAlignment="Center"
                        Margin="0,-5" Padding="10,5"
-                       Background="#303030"
                        Content="{Binding File.Name}"/>
                 <Button Grid.Column="1" Content="X"/>
 			</Grid>
