@@ -15,9 +15,24 @@
 
         <Border Grid.Row="1"
                 BorderBrush="DimGray" BorderThickness="1">
-            <ContentControl x:Name="cc_logsPanel">
-
-            </ContentControl>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding OpenedLogPanels}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1" Columns="{Binding OpenedLogPanels.Count}"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding File.Name}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </Border>
     </Grid>
 </UserControl>

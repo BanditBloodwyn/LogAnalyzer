@@ -5,7 +5,7 @@ namespace LogAnalyzer.Services.IO.FileDialog;
 
 public class FileDialogService : IFileDialogService
 {
-    public async Task<IStorageFile[]> OpenFileDialogAsync()
+    public async Task<IEnumerable<IStorageFile>> OpenFileDialogAsync()
     {
         var files = await TopLevelContext.Current
             .StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions

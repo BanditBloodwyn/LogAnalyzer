@@ -4,5 +4,5 @@ namespace LogAnalyzer.Services.IO.FileDialog;
 
 public interface IFileDialogService
 {
-    public Task<IStorageFile[]> OpenFileDialogAsync();
+    public Task<IEnumerable<IStorageFile>> OpenFileDialogAsync();
 }
