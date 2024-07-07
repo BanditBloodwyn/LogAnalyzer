@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LogAnalyzer.ViewModels.Design\LogAnalyzer.ViewModels.Design.csproj" />
     <ProjectReference Include="..\LogAnalyzer.ViewModels\LogAnalyzer.ViewModels.csproj" />
   </ItemGroup>
 </Project>

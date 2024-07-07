@@ -4,7 +4,7 @@ using LogAnalyzer.Core.Modules;
 using LogAnalyzer.Core.Modules.Interfaces;
 using LogAnalyzer.Models.Modules;
 using LogAnalyzer.Resources;
-using LogAnalyzer.ViewModels.Modules;
+using LogAnalyzer.ViewModels.Modules.LogAnalysis;
 using LogAnalyzer.Views.Views.Modules;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,13 +20,14 @@ public class LogAnalysisModule : MainViewModule,
     public override UserControl GetView()
     {
         LogAnalysisModuleView view = new();
-        view.DataContext = new LogAnalysisModuleViewModel(GetDependency<LogAnalysisModel>());
+        view.DataContext = GetDependency<LogAnalysisModuleViewModel>();
         return view;
     }
 
     public void RegisterDependencies(IServiceCollection service)
     {
         service
-            .AddSingleton<LogAnalysisModel>();
+            .AddSingleton<LogAnalysisModel>()
+            .AddSingleton<LogAnalysisModuleViewModel>();
     }
 }

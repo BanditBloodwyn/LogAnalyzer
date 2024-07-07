@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels"
+             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.Views.Views.Modules.LogAnalysis"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             x:Class="LogAnalyzer.Views.Views.Modules.LogAnalysisModuleView"
+             x:DataType="logAnalysis:LogAnalysisModuleViewModel">
+    <Grid RowDefinitions="29,*">
+        <StackPanel Orientation="Horizontal">
+            <Button VerticalAlignment="Top" 
+                    Height="30" Width="30"
+                    Command="{Binding OpenNewLogPanelCommand}">+</Button>
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                BorderBrush="#303030" BorderThickness="0,0,0,0">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding OpenedLogPanels}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1" Columns="{Binding OpenedLogPanels.Count}"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <logAnalysis1:LogPanelView/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>
