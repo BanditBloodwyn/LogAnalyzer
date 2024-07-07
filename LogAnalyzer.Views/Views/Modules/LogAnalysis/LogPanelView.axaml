@@ -12,18 +12,21 @@
 		<logAnalysis1:LogPanelDesignViewModel/>
     </Design.DataContext>
 
-    <Border BorderBrush="Gray" BorderThickness="1">
-        <StackPanel>
-            <Border BorderBrush="#3e3e3e" BorderThickness="1">
-                <Grid Height="30"
-                      ColumnDefinitions="*, 30">
-                    <TextBlock Grid.Column="0" 
-                               VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                               Background="#3e3e3e"
-                               Text="{Binding File.Name}"/>
-                    <Button Grid.Column="1" Content="X"/>
-                </Grid>
-			</Border>
-        </StackPanel>
+    <Border BorderBrush="Transparent" BorderThickness="2">
+        <Grid RowDefinitions="40, *">
+            <Grid Height="30"
+                  ColumnDefinitions="*, 30">
+                <Label Grid.Column="0"
+                       HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                       VerticalContentAlignment="Center"
+                       Margin="0,-5" Padding="10,5"
+                       Background="#303030"
+                       Content="{Binding File.Name}"/>
+                <Button Grid.Column="1" Content="X"/>
+			</Grid>
+            <Border Grid.Row="1"
+                    Background="#303030">
+            </Border>
+        </Grid>
     </Border>
 </UserControl>
