@@ -12,7 +12,7 @@ public class LogAnalysisModuleViewModel(
     IFileDialogService _fileDialogService)
     : ViewModelBase
 {
-    public ObservableCollection<LogPanelViewModel> OpenedLogPanels { get; set; } = new();
+    public ObservableCollection<LogPanelViewModel> OpenedLogPanels { get; } = new();
 
     public ICommand OpenNewLogPanelCommand => new OpenNewLogPanelCommand(this);
 
@@ -21,7 +21,6 @@ public class LogAnalysisModuleViewModel(
         FileInfoModel[] filesToOpen = (await _fileDialogService.OpenFileDialogAsync()).ToArray();
         OpenNewLogPanels(filesToOpen);
         //_model.Analyze
-
     }
 
     private void OpenNewLogPanels(FileInfoModel[] filesToOpen)
@@ -29,6 +28,8 @@ public class LogAnalysisModuleViewModel(
         foreach (FileInfoModel file in filesToOpen)
         {
             LogPanelViewModel logPanelViewModel = new(file);
+            logPanelViewModel.RequestCloseEvent += panel => OpenedLogPanels.Remove(panel);
+
             OpenedLogPanels.Add(logPanelViewModel);
         }
     }

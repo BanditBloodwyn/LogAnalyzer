@@ -34,7 +34,9 @@
                        VerticalContentAlignment="Center"
                        Margin="0,-5" Padding="10,5"
                        Content="{Binding File.Name}"/>
-                <Button Grid.Column="1" Content="X"/>
+                <Button Grid.Column="1" 
+                        Command="{Binding CloseLogPanelCommand}"
+                        Content="X"/>
 			</Grid>
             <Border Grid.Row="1"
                     Background="#303030">
