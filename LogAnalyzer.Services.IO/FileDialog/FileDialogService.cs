@@ -8,7 +8,7 @@ public class FileDialogService : IFileDialogService
 {
     public async Task<IEnumerable<FileInfoModel>> OpenFileDialogAsync()
     {
-        var files = await TopLevelContext.Current
+        IReadOnlyList<IStorageFile> files = await TopLevelContext.Current
             .StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
                 AllowMultiple = true,
