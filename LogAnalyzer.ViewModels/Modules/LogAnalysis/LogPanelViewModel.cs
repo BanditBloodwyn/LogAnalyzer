@@ -13,8 +13,10 @@ public class LogPanelViewModel : ViewModelBase
     private int _analysisProgressPercents;
     private readonly ILogAnalysisModel _logAnalysisModel1;
 
-    public FileInfoModel? File { get; private set; }
-    public ObservableCollection<LogEntryModel> LogEntries { get; } = new();
+    #region GUI Bindings
+
+    public FileInfoModel File { get; protected set; }
+    public ObservableCollection<LogEntryModel> LogEntries { get; } = [];
     public bool IsAnalyzing
     {
         get => _isAnalyzing;
@@ -23,12 +25,18 @@ public class LogPanelViewModel : ViewModelBase
     public int AnalysisProgressPercents
     {
         get => _analysisProgressPercents;
-        private set => SetProperty(ref _analysisProgressPercents, value);
+        protected set => SetProperty(ref _analysisProgressPercents, value);
     }
 
     public ICommand CloseLogPanelCommand { get; init; }
+    
+    #endregion
+
 
     public event Action<LogPanelViewModel>? RequestCloseEvent;
+
+    
+    #region Ctor
 
     public LogPanelViewModel(ILogAnalysisModel _logAnalysisModel)
     {
@@ -36,6 +44,10 @@ public class LogPanelViewModel : ViewModelBase
 
         CloseLogPanelCommand = new CloseLogPanelCommand(this);
     }
+
+    public LogPanelViewModel() { }
+
+    #endregion
 
     public void RequestClose()
     {
