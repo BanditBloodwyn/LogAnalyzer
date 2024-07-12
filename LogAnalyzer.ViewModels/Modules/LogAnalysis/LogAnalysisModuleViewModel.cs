@@ -1,5 +1,4 @@
 ﻿using LogAnalyzer.Models.Data.Containers;
-using LogAnalyzer.Models.Modules;
 using LogAnalyzer.Services.IO.FileDialog;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
@@ -8,7 +7,6 @@ using System.Windows.Input;
 namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
 
 public class LogAnalysisModuleViewModel(
-    LogAnalysisModel _model,
     IFileDialogService _fileDialogService)
     : ViewModelBase
 {
@@ -20,7 +18,6 @@ public class LogAnalysisModuleViewModel(
     {
         FileInfoModel[] filesToOpen = (await _fileDialogService.OpenFileDialogAsync()).ToArray();
         OpenNewLogPanels(filesToOpen);
-        //_model.Analyze
     }
 
     private void OpenNewLogPanels(FileInfoModel[] filesToOpen)
@@ -31,6 +28,8 @@ public class LogAnalysisModuleViewModel(
             logPanelViewModel.RequestCloseEvent += panel => OpenedLogPanels.Remove(panel);
 
             OpenedLogPanels.Add(logPanelViewModel);
+
+            logPanelViewModel.StartLogAnalysisAndDisplay();
         }
     }
 }

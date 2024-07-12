@@ -12,8 +12,13 @@ public class LogPanelViewModel(
    
     public ICommand CloseLogPanelCommand => new CloseLogPanelCommand(this);
 
-    public event Action<LogPanelViewModel>? RequestCloseEvent; 
-    
+    public event Action<LogPanelViewModel>? RequestCloseEvent;
+
+    public void StartLogAnalysisAndDisplay()
+    {
+
+    }
+
     public void RequestClose()
     {
         RequestCloseEvent?.Invoke(this);
