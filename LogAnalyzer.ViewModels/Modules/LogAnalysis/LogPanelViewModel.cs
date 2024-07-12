@@ -9,18 +9,23 @@ namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
 
 public class LogPanelViewModel : ViewModelBase
 {
+    private FileInfoModel _file;
     private bool _isAnalyzing;
     private int _analysisProgressPercents;
     private readonly ILogAnalysisModel _logAnalysisModel1;
 
     #region GUI Bindings
 
-    public FileInfoModel File { get; protected set; }
+    public FileInfoModel File
+    {
+        get => _file;
+        protected set => SetProperty(ref _file, value);
+    }
     public ObservableCollection<LogEntryModel> LogEntries { get; } = [];
     public bool IsAnalyzing
     {
         get => _isAnalyzing;
-        private set => SetProperty(ref _isAnalyzing, value);
+        protected set => SetProperty(ref _isAnalyzing, value);
     }
     public int AnalysisProgressPercents
     {
