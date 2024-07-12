@@ -11,6 +11,6 @@ public class ServicesModule : ModuleBase,
     public void RegisterDependencies(IServiceCollection service)
     {
         service
-            .AddSingleton<IFileDialogService>(static _ => new FileDialogService());
+            .AddSingleton<IFileDialogService, FileDialogService>();
     }
 }

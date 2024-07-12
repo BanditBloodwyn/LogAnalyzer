@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.Modules.LogAnalysis"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.Modules.LogAnalysis.LogPanelView"
              x:DataType="logAnalysis:LogPanelViewModel">
@@ -13,7 +14,8 @@
     </Design.DataContext>
 
     <Border BorderBrush="Transparent" BorderThickness="2">
-        <Grid RowDefinitions="40, *">
+        <Grid RowDefinitions="40, 40, *">
+            <!--Header-->
             <Grid Grid.Row="0" Height="30"
                   ColumnDefinitions="*, 30">
                 <Path Grid.Column="0"
@@ -38,9 +40,29 @@
                         Command="{Binding CloseLogPanelCommand}"
                         Content="X"/>
 			</Grid>
-            <Border Grid.Row="1"
+
+            <!--Progress-->
+            <Grid Grid.Row="1" Background="#303030"
+                  Height="30" ColumnDefinitions="100, *">
+                <Label Grid.Column="0" Content="{Binding AnalysisProgressPercents}"/>
+            </Grid>
+
+            <!--Content-->
+            <Border Grid.Row="2"
                     Background="#303030">
-            </Border>
+                <ItemsControl ItemsSource="{Binding LogEntries}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <logAnalysis2:LogEntryElement/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+			</Border>
         </Grid>
     </Border>
 </UserControl>

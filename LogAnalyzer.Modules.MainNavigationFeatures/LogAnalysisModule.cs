@@ -2,7 +2,7 @@
 using Avalonia.Media.Imaging;
 using LogAnalyzer.Core.Modules;
 using LogAnalyzer.Core.Modules.Interfaces;
-using LogAnalyzer.Models.Modules;
+using LogAnalyzer.Models.Modules.LogAnalysis;
 using LogAnalyzer.Resources;
 using LogAnalyzer.ViewModels.Modules.LogAnalysis;
 using LogAnalyzer.Views.Views.Modules;
@@ -27,7 +27,7 @@ public class LogAnalysisModule : MainViewModule,
     public void RegisterDependencies(IServiceCollection service)
     {
         service
-            .AddSingleton<LogAnalysisModel>()
+            .AddSingleton<ILogAnalysisModel, LogAnalysisModel>()
             .AddSingleton<LogAnalysisModuleViewModel>();
     }
 }

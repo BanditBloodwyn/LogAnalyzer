@@ -25,4 +25,17 @@
     <ProjectReference Include="..\LogAnalyzer.ViewModels.Design\LogAnalyzer.ViewModels.Design.csproj" />
     <ProjectReference Include="..\LogAnalyzer.ViewModels\LogAnalyzer.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Views\Modules\LogAnalysis\LogEntryElement.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Modules\LogAnalysis\LogEntryElement.axaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>LogEntryElement.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
