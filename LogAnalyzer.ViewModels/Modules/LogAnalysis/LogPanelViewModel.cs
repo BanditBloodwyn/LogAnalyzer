@@ -4,29 +4,36 @@ using LogAnalyzer.Models.Modules.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
 
 public class LogPanelViewModel : ViewModelBase
 {
-    private FileInfoModel _file;
-    private bool _isAnalyzing;
-    private int _analysisProgressPercents;
-    private readonly ILogAnalysisModel _logAnalysisModel1;
+    private readonly ILogAnalysisModel _logAnalysisModel;
+
+    private CancellationTokenSource? _fileAnalysisCtSource;
+
 
     #region GUI Bindings
 
-    public FileInfoModel File
+    public ObservableCollection<LogEntry> LogEntries { get; } = [];
+
+    private FileInfo _file;
+    public FileInfo File
     {
         get => _file;
         protected set => SetProperty(ref _file, value);
     }
-    public ObservableCollection<LogEntryModel> LogEntries { get; } = [];
+
+    private bool _isAnalyzing;
     public bool IsAnalyzing
     {
         get => _isAnalyzing;
         protected set => SetProperty(ref _isAnalyzing, value);
     }
+
+    private int _analysisProgressPercents;
     public int AnalysisProgressPercents
     {
         get => _analysisProgressPercents;
@@ -34,18 +41,18 @@ public class LogPanelViewModel : ViewModelBase
     }
 
     public ICommand CloseLogPanelCommand { get; init; }
-    
+
     #endregion
 
 
     public event Action<LogPanelViewModel>? RequestCloseEvent;
 
-    
+
     #region Ctor
 
-    public LogPanelViewModel(ILogAnalysisModel _logAnalysisModel)
+    public LogPanelViewModel(ILogAnalysisModel logAnalysisModel)
     {
-        _logAnalysisModel1 = _logAnalysisModel;
+        _logAnalysisModel = logAnalysisModel;
 
         CloseLogPanelCommand = new CloseLogPanelCommand(this);
     }
@@ -54,37 +61,34 @@ public class LogPanelViewModel : ViewModelBase
 
     #endregion
 
+
     public void RequestClose()
     {
         RequestCloseEvent?.Invoke(this);
+        Reset();
     }
 
-    public async void StartLogAnalysisAndDisplay(FileInfoModel file)
+    public async void StartLogAnalysisAndDisplay(FileInfo file)
     {
         File = file;
         IsAnalyzing = true;
         AnalysisProgressPercents = 0;
 
-        IProgress<LogEntryModel> entryProgress = new Progress<LogEntryModel>(OnLogEntryProcessed);
+        IProgress<LogEntry> entryProgress = new Progress<LogEntry>(OnLogEntryProcessed);
         IProgress<int> percentProgress = new Progress<int>(OnAnalysisProgressUpdated);
 
-        try
-        {
-            await _logAnalysisModel1.AnalyzeAsync(File.Path, entryProgress, percentProgress);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-        finally
-        {
-            IsAnalyzing = false;
-            AnalysisProgressPercents = 100;
-        }
+        _fileAnalysisCtSource = new();
+        CancellationToken ct = _fileAnalysisCtSource.Token;
+
+        await _logAnalysisModel.AnalyzeAsync(File.Path, entryProgress, percentProgress, ct);
+
+        _fileAnalysisCtSource?.Dispose();
+
+        IsAnalyzing = false;
+        AnalysisProgressPercents = 100;
     }
 
-    private void OnLogEntryProcessed(LogEntryModel logEntry)
+    private void OnLogEntryProcessed(LogEntry logEntry)
     {
         Dispatcher.UIThread.Invoke(() =>
         {
@@ -99,5 +103,19 @@ public class LogPanelViewModel : ViewModelBase
         {
             AnalysisProgressPercents = progressPercentage;
         });
+    }
+
+    private void Reset()
+    {
+        LogEntries.Clear();
+        IsAnalyzing = false;
+        AnalysisProgressPercents = 0;
+
+        if (_fileAnalysisCtSource != null)
+        {
+            _fileAnalysisCtSource.Cancel();
+            _fileAnalysisCtSource.Dispose();
+            _fileAnalysisCtSource = null;
+        }
     }
 }

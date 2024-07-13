@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LogAnalyzer.Core\LogAnalyzer.Core.csproj" />
+    <ProjectReference Include="..\LogAnalyzer.Models.Data\LogAnalyzer.Models.Data.csproj" />
   </ItemGroup>
 
 </Project>

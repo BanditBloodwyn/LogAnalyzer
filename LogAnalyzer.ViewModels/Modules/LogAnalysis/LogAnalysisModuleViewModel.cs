@@ -28,13 +28,13 @@ public class LogAnalysisModuleViewModel : ViewModelBase
 
     public async void OpenNewLogs()
     {
-        FileInfoModel[] filesToOpen = (await _fileDialogService1.OpenFileDialogAsync()).ToArray();
+        Models.Data.Containers.FileInfo[] filesToOpen = (await _fileDialogService1.OpenFileDialogAsync()).ToArray();
         OpenNewLogPanels(filesToOpen);
     }
 
-    private void OpenNewLogPanels(FileInfoModel[] filesToOpen)
+    private void OpenNewLogPanels(Models.Data.Containers.FileInfo[] filesToOpen)
     {
-        foreach (FileInfoModel file in filesToOpen)
+        foreach (Models.Data.Containers.FileInfo file in filesToOpen)
         {
             LogPanelViewModel logPanelViewModel = new(_logAnalysisModel1);
             logPanelViewModel.RequestCloseEvent += panel => OpenedLogPanels.Remove(panel);

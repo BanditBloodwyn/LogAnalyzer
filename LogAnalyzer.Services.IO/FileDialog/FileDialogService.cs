@@ -1,12 +1,12 @@
 ﻿using Avalonia.Platform.Storage;
 using LogAnalyzer.Core.UI;
-using LogAnalyzer.Models.Data.Containers;
+using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.Services.IO.FileDialog;
 
 public class FileDialogService : IFileDialogService
 {
-    public async Task<IEnumerable<FileInfoModel>> OpenFileDialogAsync()
+    public async Task<IEnumerable<FileInfo>> OpenFileDialogAsync()
     {
         IReadOnlyList<IStorageFile> files = await TopLevelContext.Current
             .StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
@@ -16,11 +16,7 @@ public class FileDialogService : IFileDialogService
             });
 
         return files
-            .Select(static file => new FileInfoModel
-            {
-                Name = file.Name,
-                Path = file.Path.AbsolutePath,
-            })
+            .Select(static file => new FileInfo(file.Name, file.Path.LocalPath, file.Path.AbsolutePath))
             .ToArray();
     }
 }
