@@ -14,14 +14,14 @@ public class LogPanelDesignViewModel : LogPanelViewModel
             @"C:\Test\2024-07-11_Framework.log");
 
         LogEntries.Add(new LogEntry(
-            new DateTime(2024, 7, 12, 14, 4, 13, 655),
+            "07/12/2024 09:18:21,216",
             "CoreConfigAccessor",
             "Info",
             @"Connection configuration file: 'D:\GIT\DotNet\Products\AtbasNET\Framework\Start\bin\Debug\Atbas.Framework.Connection.cfg'",
             ""
         ));
         LogEntries.Add(new LogEntry(
-            new DateTime(2024, 7, 12, 14, 4, 13, 696),
+            "07/12/2024 09:18:21,392",
             "DatabaseConfiguration",
             "Info",
             "'CommandTimeout' not found for DatabaseConfiguration",
