@@ -1,4 +1,5 @@
-﻿using LogAnalyzer.Models.Data.Containers;
+﻿using System.Diagnostics;
+using LogAnalyzer.Models.Data.Containers;
 
 namespace LogAnalyzer.Models.Modules.LogAnalysis;
 
@@ -28,13 +29,19 @@ public class LogAnalysisModel : ILogAnalysisModel
             if (cancellationToken.IsCancellationRequested) 
                 GC.Collect();
         }
-
     }
 
     private static async Task<LogEntry> ParseLogLine(string line, CancellationToken cancellationToken)
     {
         // REFACTOR: remove and add real functionality
-        await Task.Delay(1, cancellationToken);
+        try
+        {
+            await Task.Delay(1, cancellationToken);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+        }
 
         return new LogEntry(DateTime.Now, "", "", line, "");
     }
