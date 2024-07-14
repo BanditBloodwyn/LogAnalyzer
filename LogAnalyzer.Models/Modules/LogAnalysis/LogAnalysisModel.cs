@@ -34,6 +34,8 @@ public class LogAnalysisModel(
                 int percentComplete = (int)(bytesRead * 100 / fileSize);
                 percentageProgress.Report(percentComplete);
             }
+
+            percentageProgress.Report(100);
         }
         catch (Exception e)
         {

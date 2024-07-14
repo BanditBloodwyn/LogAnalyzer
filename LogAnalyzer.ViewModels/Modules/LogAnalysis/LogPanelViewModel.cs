@@ -4,6 +4,9 @@ using LogAnalyzer.Models.Modules.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using LogAnalyzer.Core.EventBus;
+using LogAnalyzer.Models.CommandQueue.Commands;
+using LogAnalyzer.Models.Events;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
@@ -68,7 +71,7 @@ public class LogPanelViewModel : ViewModelBase
         Reset();
     }
 
-    public async void StartLogAnalysisAndDisplay(FileInfo file)
+    public void StartLogAnalysisAndDisplay(FileInfo file)
     {
         File = file;
         IsAnalyzing = true;
@@ -80,12 +83,10 @@ public class LogPanelViewModel : ViewModelBase
         _fileAnalysisCtSource = new();
         CancellationToken ct = _fileAnalysisCtSource.Token;
 
-        await _logAnalysisModel.AnalyzeAsync(File.Path, entryProgress, percentProgress, ct);
-
-        _fileAnalysisCtSource?.Dispose();
-
-        IsAnalyzing = false;
-        AnalysisProgressPercents = 100;
+        EventBus<AddNewQueuedCommandEvent>.Raise(new AddNewQueuedCommandEvent(
+            new InvokerCommand(
+                "Analyze Log", 
+                () => _logAnalysisModel.AnalyzeAsync(File.Path, entryProgress, percentProgress, ct))));
     }
 
     private void OnLogEntryProcessed(LogEntry logEntry)
