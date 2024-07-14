@@ -14,9 +14,9 @@
 	</Design.DataContext>
 
     <Border BorderBrush="Transparent" BorderThickness="2">
-        <StackPanel >
+        <Grid RowDefinitions="Auto,Auto,*">
             <!--Header-->
-            <Grid Height="30"
+            <Grid Grid.Row="0" Height="30"
                   ColumnDefinitions="*, 30">
                 <Path Grid.Column="0"
                       Fill="#303030" Stroke="#303030" StrokeThickness="1">
@@ -42,27 +42,30 @@
 			</Grid>
 
             <!--Progress-->
-            <Grid Background="#303030"
+            <Grid Grid.Row="1" Background="#303030"
                   Height="30" ColumnDefinitions="100, *">
                 <Label Grid.Column="0" VerticalAlignment="Center"
                        Content="{Binding AnalysisProgressPercents}"/>
             </Grid>
 
             <!--Content-->
-            <Border Background="#202020" Margin="5">
-                <ItemsControl ItemsSource="{Binding LogEntries}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <logAnalysis2:LogEntryElement/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-			</Border>
-        </StackPanel>
+            <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto">
+                <Border Background="#202020" Margin="5">
+                    <ItemsControl ItemsSource="{Binding LogEntries}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <logAnalysis2:LogEntryElement/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+            </ScrollViewer>
+        </Grid>
     </Border>
 </UserControl>
