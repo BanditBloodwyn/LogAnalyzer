@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using LogAnalyzer.Core.Modules;
+using LogAnalyzer.Core.Components;
 
 namespace LogAnalyzer.Models.Framework;
 
@@ -7,20 +7,20 @@ public class FrameworkModel
 {
     private readonly ModuleCache _moduleCache = new();
 
-    public ObservableCollection<MainViewModule> MainViewModules { get; } = [];
+    public ObservableCollection<MainViewComponent> MainViewModules { get; } = [];
 
     public FrameworkModel()
     {
-        ModuleBase[] modules = ModuleInitializer.InitializeModules();
+        ComponentBase[] modules = ModuleInitializer.InitializeModules();
         _moduleCache.AddModules(modules);
 
         FillMainViewModelsCollection(modules);
     }
 
-    private void FillMainViewModelsCollection(ModuleBase[] modules)
+    private void FillMainViewModelsCollection(ComponentBase[] modules)
     {
-        foreach (ModuleBase module in modules)
-            if (module is MainViewModule mvm)
+        foreach (ComponentBase module in modules)
+            if (module is MainViewComponent mvm)
                 MainViewModules.Add(mvm);
     }
 }

@@ -1,17 +1,17 @@
 ﻿using LogAnalyzer.Core;
-using LogAnalyzer.Core.Modules;
-using LogAnalyzer.Core.Modules.Interfaces;
+using LogAnalyzer.Core.Components;
+using LogAnalyzer.Core.Components.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.Models.Framework;
 
 public class ModuleInitializer
 {
-    public static ModuleBase[] InitializeModules()
+    public static ComponentBase[] InitializeModules()
     {
-        ModuleBase[] modules = TypeLoader
-            .LoadAssembliesTypesByBase("LogAnalyzer.Modules", typeof(ModuleBase))
-            .Select(static type => (ModuleBase)Activator.CreateInstance(type)!)
+        ComponentBase[] modules = TypeLoader
+            .LoadAssembliesTypesByBase("LogAnalyzer.Components", typeof(ComponentBase))
+            .Select(static type => (ComponentBase)Activator.CreateInstance(type)!)
             .ToArray();
 
         PerformDependencyInjection(modules);
@@ -20,25 +20,25 @@ public class ModuleInitializer
         return modules;
     }
 
-    private static void PerformDependencyInjection(ModuleBase[] modules)
+    private static void PerformDependencyInjection(ComponentBase[] modules)
     {
         IServiceCollection services = new ServiceCollection();
 
-        foreach (ModuleBase module in modules)
+        foreach (ComponentBase module in modules)
         {
-            if (module is IDependencyInjectionModule dependencyModule)
+            if (module is IDependencyInjectionComponent dependencyModule)
                 dependencyModule.RegisterDependencies(services);
         }
 
-        foreach (ModuleBase module in modules)
+        foreach (ComponentBase module in modules)
             module.SetServiceProvider(services.BuildServiceProvider(true));
     }
 
-    private static void ReactToDependencyInjection(ModuleBase[] modules)
+    private static void ReactToDependencyInjection(ComponentBase[] modules)
     {
-        foreach (ModuleBase module in modules)
+        foreach (ComponentBase module in modules)
         {
-            if (module is IReactToDIModule reactToDiModule)
+            if (module is IReactToDIComponent reactToDiModule)
                 reactToDiModule.OnDIFinished();
         }
     }

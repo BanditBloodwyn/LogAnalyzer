@@ -27,15 +27,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C7965DA4-1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Core", "LogAnalyzer.Core\LogAnalyzer.Core.csproj", "{4CC038DB-0A9E-4E1D-82A3-2DBE53A4EFBA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Modules.BackendExtentions", "LogAnalyzer.Modules.BackendExtentions\LogAnalyzer.Modules.BackendExtentions.csproj", "{C7A3F3F7-3584-4778-AB48-02FF96AAE4B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Components.BackendExtentions", "LogAnalyzer.Modules.BackendExtentions\LogAnalyzer.Components.BackendExtentions.csproj", "{C7A3F3F7-3584-4778-AB48-02FF96AAE4B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Models.Events", "LogAnalyzer.Models.Events\LogAnalyzer.Models.Events.csproj", "{C07689A0-CF8E-44C8-B51D-CF831CC00559}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Resources", "LogAnalyzer.Resources\LogAnalyzer.Resources.csproj", "{F3EAD8CF-AD93-4D7F-8CA3-C65A6F0930EB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{1DD8A009-4A4F-4494-A13A-F80D023ED7BA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{1DD8A009-4A4F-4494-A13A-F80D023ED7BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Modules.MainNavigationFeatures", "LogAnalyzer.Modules.MainNavigationFeatures\LogAnalyzer.Modules.MainNavigationFeatures.csproj", "{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Components.MainNavigationFeatures", "LogAnalyzer.Modules.MainNavigationFeatures\LogAnalyzer.Components.MainNavigationFeatures.csproj", "{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Models.CommandQueue", "LogAnalyzer.Models.CommandManagement\LogAnalyzer.Models.CommandQueue.csproj", "{A9D45098-6F86-4BE0-A29C-C673F0162E50}"
 EndProject
@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{4B62DA39-BC34-4C2F-A205-FEEC991A3FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogAnalyzer.ViewModels.Design", "LogAnalyzer.ViewModels.Design\LogAnalyzer.ViewModels.Design.csproj", "{F1BE3799-875A-4709-A008-A0087CAC23CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.ViewModels.Design", "LogAnalyzer.ViewModels.Design\LogAnalyzer.ViewModels.Design.csproj", "{F1BE3799-875A-4709-A008-A0087CAC23CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

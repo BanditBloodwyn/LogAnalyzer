@@ -1,7 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media.Imaging;
-using LogAnalyzer.Core.Modules;
-using LogAnalyzer.Core.Modules.Interfaces;
+using LogAnalyzer.Core.Components;
+using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Models.Modules.LogAnalysis;
 using LogAnalyzer.Models.Strategies.LogStringFinding;
 using LogAnalyzer.Models.Strategies.LogStringParsing;
@@ -10,10 +10,10 @@ using LogAnalyzer.ViewModels.Modules.LogAnalysis;
 using LogAnalyzer.Views.Views.Modules.LogAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LogAnalyzer.Modules.MainNavigationFeatures;
+namespace LogAnalyzer.Components.MainNavigationFeatures;
 
-public class LogAnalysisModule : MainViewModule,
-    IDependencyInjectionModule
+public class LogAnalysisComponent : MainViewComponent,
+    IDependencyInjectionComponent
 {
     public override int NavigationIndex => 0;
     public override string ModuleHeader => "Log Analysis";

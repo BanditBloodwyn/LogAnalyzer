@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
 using LogAnalyzer.Core;
-using LogAnalyzer.Core.Modules;
-using LogAnalyzer.Core.Modules.Interfaces;
+using LogAnalyzer.Core.Components;
+using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Core.Repositories.Json;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LogAnalyzer.Modules.BackendExtentions;
+namespace LogAnalyzer.Components.BackendExtentions;
 
-public class RepositoryModule : ModuleBase,
-    IDependencyInjectionModule, IReactToDIModule
+public class RepositoryComponent : ComponentBase,
+    IDependencyInjectionComponent, IReactToDIComponent
 {
     private Type[]? _repoTypes;
 

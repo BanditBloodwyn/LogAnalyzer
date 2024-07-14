@@ -1,9 +1,9 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 
-namespace LogAnalyzer.Core.Modules;
+namespace LogAnalyzer.Core.Components;
 
-public abstract class MainViewModule : ModuleBase
+public abstract class MainViewComponent : ComponentBase
 {
     public abstract int NavigationIndex { get; }
     public abstract string ModuleHeader { get; }

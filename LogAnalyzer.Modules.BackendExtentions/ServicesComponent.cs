@@ -1,12 +1,12 @@
-﻿using LogAnalyzer.Core.Modules.Interfaces;
-using LogAnalyzer.Core.Modules;
+﻿using LogAnalyzer.Core.Components;
+using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Services.IO.FileDialog;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LogAnalyzer.Modules.BackendExtentions;
+namespace LogAnalyzer.Components.BackendExtentions;
 
-public class ServicesModule : ModuleBase,
-    IDependencyInjectionModule
+public class ServicesComponent : ComponentBase,
+    IDependencyInjectionComponent
 {
     public void RegisterDependencies(IServiceCollection service)
     {

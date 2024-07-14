@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Avalonia.Controls;
+using LogAnalyzer.Core.Components;
+using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Core.EventBus;
-using LogAnalyzer.Core.Modules;
-using LogAnalyzer.Core.Modules.Interfaces;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Events;
 using LogAnalyzer.Models.Framework;
@@ -17,7 +17,7 @@ public class MainViewModel : ViewModelBase
 
     private UserControl? _currentModuleView;
 
-    public ObservableCollection<MainViewModule> MainViewModules => _frameworkModel.MainViewModules;
+    public ObservableCollection<MainViewComponent> MainViewModules => _frameworkModel.MainViewModules;
 
     public ICommand OpenModuleCommand => new OpenModuleCommand();
 
@@ -39,12 +39,12 @@ public class MainViewModel : ViewModelBase
 
     private void ChangeOpenedModule(ChangeOpenedModuleEvent @event)
     {
-        if (@event.Module is IReactToPreOpeningModule preOpeningModule)
+        if (@event.Module is IReactToPreOpeningComponent preOpeningModule)
             preOpeningModule.OnPreShown();
 
         CurrentModuleView = @event.Module.GetView();
 
-        if (@event.Module is IReactToPostOpeningModule postOpeningModule)
+        if (@event.Module is IReactToPostOpeningComponent postOpeningModule)
             postOpeningModule.OnShown();
 
         if (CurrentModuleView.DataContext is IReactToOpeningViewModel reactToOpeningVM)

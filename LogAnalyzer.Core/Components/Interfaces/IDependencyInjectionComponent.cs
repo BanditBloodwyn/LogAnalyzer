@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace LogAnalyzer.Core.Modules.Interfaces;
+namespace LogAnalyzer.Core.Components.Interfaces;
 
-public interface IDependencyInjectionModule
+public interface IDependencyInjectionComponent
 {
     public void RegisterDependencies(IServiceCollection service);
 }

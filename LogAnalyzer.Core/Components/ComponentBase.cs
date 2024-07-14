@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace LogAnalyzer.Core.Modules;
+namespace LogAnalyzer.Core.Components;
 
-public abstract class ModuleBase
+public abstract class ComponentBase
 {
     private IServiceProvider? _serviceProvider;
 
