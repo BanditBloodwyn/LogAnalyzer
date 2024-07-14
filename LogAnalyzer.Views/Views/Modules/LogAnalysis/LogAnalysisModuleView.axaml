@@ -5,7 +5,7 @@
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.Views.Views.Modules.LogAnalysis"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
-             x:Class="LogAnalyzer.Views.Views.Modules.LogAnalysisModuleView"
+             x:Class="LogAnalyzer.Views.Views.Modules.LogAnalysis.LogAnalysisModuleView"
              x:DataType="logAnalysis:LogAnalysisModuleViewModel">
     <Grid RowDefinitions="29,*">
         <StackPanel Orientation="Horizontal">

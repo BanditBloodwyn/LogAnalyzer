@@ -16,4 +16,8 @@
     <ProjectReference Include="..\LogAnalyzer.Models.Data\LogAnalyzer.Models.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Strategies\LogStringParsing\" />
+  </ItemGroup>
+
 </Project>

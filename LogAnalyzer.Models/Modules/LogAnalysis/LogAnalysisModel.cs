@@ -1,9 +1,15 @@
-﻿using System.Diagnostics;
-using LogAnalyzer.Models.Data.Containers;
+﻿using LogAnalyzer.Models.Data.Containers;
+using LogAnalyzer.Models.Strategies.LogStringFinding;
+using LogAnalyzer.Models.Strategies.LogStringParsing;
+using System.Diagnostics;
+using FileInfo = System.IO.FileInfo;
 
 namespace LogAnalyzer.Models.Modules.LogAnalysis;
 
-public class LogAnalysisModel : ILogAnalysisModel
+public class LogAnalysisModel(
+    ILogStringFindingStrategy _logFinder,
+    ILogStringParsingStrategy _logParser)
+    : ILogAnalysisModel
 {
     public async Task AnalyzeAsync(
         string filePath,
@@ -11,38 +17,28 @@ public class LogAnalysisModel : ILogAnalysisModel
         IProgress<int> percentageProgress,
         CancellationToken cancellationToken)
     {
-        long fileSize = new System.IO.FileInfo(filePath).Length;
-        long bytesRead = 0;
-
-        await using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true);
-        using StreamReader streamReader = new(fileStream);
-
-        while (await streamReader.ReadLineAsync(cancellationToken) is { } line)
-        {
-            LogEntry logEntry = await ParseLogLine(line, cancellationToken);
-            logEntryProgress.Report(logEntry);
-
-            bytesRead += line.Length + Environment.NewLine.Length;
-            int percentComplete = (int)((bytesRead * 100) / fileSize);
-            percentageProgress.Report(percentComplete);
-            
-            if (cancellationToken.IsCancellationRequested) 
-                GC.Collect();
-        }
-    }
-
-    private static async Task<LogEntry> ParseLogLine(string line, CancellationToken cancellationToken)
-    {
-        // REFACTOR: remove and add real functionality
         try
         {
-            await Task.Delay(1, cancellationToken);
+            long fileSize = new FileInfo(filePath).Length;
+            long bytesRead = 0;
+
+            await using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true);
+            using StreamReader streamReader = new(fileStream);
+
+            while(await _logFinder.FindLogEntries(streamReader, cancellationToken) is {} logEntryString)
+            {
+                LogEntry logEntry = await _logParser.ParseLogString(logEntryString, cancellationToken);
+                logEntryProgress.Report(logEntry);
+
+                bytesRead += logEntryString.Length + Environment.NewLine.Length;
+                int percentComplete = (int)(bytesRead * 100 / fileSize);
+                percentageProgress.Report(percentComplete);
+            }
         }
         catch (Exception e)
         {
             Debug.WriteLine(e.Message);
+            GC.Collect();
         }
-
-        return new LogEntry(DateTime.Now, "", "", line, "");
     }
 }
