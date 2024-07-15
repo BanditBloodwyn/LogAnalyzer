@@ -1,5 +1,6 @@
 ﻿using LogAnalyzer.Models.Data.Containers;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace LogAnalyzer.Models.Strategies.LogStringParsing;
@@ -20,27 +21,30 @@ public class ClassicATBASLogStringParsing : ILogStringParsingStrategy
         }
 
         return new LogEntry(
-            GetTimetamp(logString), 
-            GetSource(logString), 
-            "", 
-            logString, 
+            GetTimetamp(logString),
+            GetSource(logString),
+            "",
+            logString,
             "");
     }
 
     private static string GetTimetamp(string logString)
     {
-        return DateTime.TryParse(ExtractTimestamp(logString), out DateTime timeStamp) 
-            ? timeStamp.ToLongTimeString() 
-            : string.Empty;
+        string timestampString = ExtractTimestampString(logString);
+        return DateTime.ParseExact(
+                timestampString,
+                "MM/dd/yyyy HH:mm:ss,fff",
+                CultureInfo.InvariantCulture)
+            .ToString(CultureInfo.CurrentCulture) + "," + timestampString.Split(',').Last();
     }
 
-    private static string ExtractTimestamp(string line)
+    private static string ExtractTimestampString(string line)
     {
         string pattern = @"^\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2},\d{3}";
         Match match = Regex.Match(line, pattern);
 
-        return match.Success 
-            ? match.Value 
+        return match.Success
+            ? match.Value
             : string.Empty;
     }
 
