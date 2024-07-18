@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="LogAnalyzer.Views.Views.Navigation.ModuleButtonsPanel"
+             x:DataType="navigation:ModuleButtonsPanelViewModel">
+   
+    <ItemsControl ItemsSource="{Binding MainViewModules}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Button
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                    CommandParameter="{Binding RelativeSource={RelativeSource DataContext}}"
+                    Command="{Binding ((navigation:ModuleButtonsPanelViewModel)DataContext).OpenModuleCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
+                    <Grid ColumnDefinitions="*,*" MaxHeight="30">
+                        <Image Grid.Column="0" Source="{Binding ModuleIcon}"
+                               HorizontalAlignment="Right"
+                               Margin="0,0,30,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ModuleHeader}"
+                                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Margin="-20,0,0,0"/>
+                    </Grid>
+                </Button>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>
