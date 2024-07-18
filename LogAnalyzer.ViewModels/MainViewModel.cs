@@ -1,25 +1,14 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Avalonia.Controls;
-using LogAnalyzer.Core.Components;
+﻿using Avalonia.Controls;
 using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Events;
-using LogAnalyzer.Models.Framework;
-using LogAnalyzer.ViewModels.Commands;
 
 namespace LogAnalyzer.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private readonly FrameworkModel _frameworkModel = new();
-
     private UserControl? _currentModuleView;
-
-    public ObservableCollection<MainViewComponent> MainViewModules => _frameworkModel.MainViewModules;
-
-    public ICommand OpenModuleCommand => new OpenModuleCommand();
 
     public UserControl? CurrentModuleView
     {
