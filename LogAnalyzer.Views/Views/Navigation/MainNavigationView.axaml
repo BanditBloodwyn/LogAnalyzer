@@ -8,7 +8,8 @@
     
     <Border BorderThickness="0,0,2,0" BorderBrush="#303030">
         <Grid RowDefinitions="*, *">
-			<navigation1:ModuleButtonsPanel Grid.Row="0" />
+			<navigation1:ModuleButtonsPanel Grid.Row="0"/>
+            <navigation1:CommandsPanel Grid.Row="1"/>
         </Grid>
     </Border>
 </UserControl>
