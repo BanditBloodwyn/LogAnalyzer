@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using LogAnalyzer.Components.BackendExtentions;
 using LogAnalyzer.Core.Components;
+using LogAnalyzer.Core.Components.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace LogAnalyzer.Models.Framework;
 
@@ -17,6 +19,8 @@ public class Framework
 
     public ObservableCollection<MainViewComponent> MainViewModules { get; } = [];
 
+    public ICommandCreator CommandCreator { get; set; }
+
     private Framework()
     {
         ComponentBase[] modules = ModuleInitializer.InitializeModules();
@@ -28,7 +32,11 @@ public class Framework
     private void FillMainViewModelsCollection(ComponentBase[] modules)
     {
         foreach (ComponentBase module in modules)
+        {
             if (module is MainViewComponent mvm)
                 MainViewModules.Add(mvm);
+            if (module is CommandInvokationComponent cic)
+                CommandCreator = cic;
+        }
     }
 }
