@@ -16,7 +16,7 @@
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Border BorderBrush="DimGray" BorderThickness="1">
-                    <TextBox Text="{Binding}"/>
+                    <TextBox Text="{Binding Name}"/>
                 </Border>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
