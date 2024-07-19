@@ -3,13 +3,21 @@ using LogAnalyzer.Core.Components;
 
 namespace LogAnalyzer.Models.Framework;
 
-public class FrameworkModel
+public class Framework
 {
     private readonly ModuleCache _moduleCache = new();
 
+    #region Singleton
+
+    private static readonly Lazy<Framework> lazy =
+        new Lazy<Framework>(() => new Framework());
+    public static Framework Instance => lazy.Value;
+
+    #endregion
+
     public ObservableCollection<MainViewComponent> MainViewModules { get; } = [];
 
-    public FrameworkModel()
+    private Framework()
     {
         ComponentBase[] modules = ModuleInitializer.InitializeModules();
         _moduleCache.AddModules(modules);
