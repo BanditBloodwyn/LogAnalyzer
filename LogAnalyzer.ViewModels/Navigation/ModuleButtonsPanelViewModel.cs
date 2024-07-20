@@ -8,7 +8,10 @@ namespace LogAnalyzer.ViewModels.Navigation;
 
 public class ModuleButtonsPanelViewModel : ViewModelBase
 {
-    public ObservableCollection<MainViewComponent> MainViewModules => Framework.Instance.MainViewModules;
+    private readonly FrameworkModel _frameworkModel = new();
+
+    public ObservableCollection<MainViewComponent> MainViewModules => _frameworkModel.MainViewModules;
 
     public ICommand OpenModuleCommand => new OpenModuleCommand();
+
 }
