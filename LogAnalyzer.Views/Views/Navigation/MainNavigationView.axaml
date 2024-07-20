@@ -2,14 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:navigation1="clr-namespace:LogAnalyzer.Views.Views.Navigation"
+             xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
-             x:Class="LogAnalyzer.Views.Views.Navigation.MainNavigationView">
+             x:Class="LogAnalyzer.Views.Views.Navigation.MainNavigationView"
+             x:DataType="navigation:MainNavigationViewModel">
     
     <Border BorderThickness="0,0,2,0" BorderBrush="#303030">
         <Grid RowDefinitions="*, *">
-			<navigation1:ModuleButtonsPanel Grid.Row="0"/>
-            <navigation1:CommandsPanel Grid.Row="1"/>
+
+            <ContentControl Grid.Row="0" Content="{Binding ModuleButtonsPanelVM}"/> 
+            <ContentControl Grid.Row="1" Content="{Binding CommandsPanelVM}"/> 
         </Grid>
     </Border>
 </UserControl>

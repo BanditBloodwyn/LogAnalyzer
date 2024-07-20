@@ -21,5 +21,13 @@
                  <DataTemplate DataType="{x:Type navigation:MainNavigationViewModel}">
                      <navigation1:MainNavigationView/>
                  </DataTemplate>
+
+                 <DataTemplate DataType="{x:Type navigation:ModuleButtonsPanelViewModel}">
+                     <navigation1:ModuleButtonsPanel/>
+				 </DataTemplate>
+                
+                 <DataTemplate DataType="{x:Type navigation:CommandsPanelViewModel}">
+					 <navigation1:CommandsPanel/>
+				 </DataTemplate>
              </Application.DataTemplates>
 </Application>
