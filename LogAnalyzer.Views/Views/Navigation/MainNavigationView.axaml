@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:navigation1="clr-namespace:LogAnalyzer.Views.Views.Navigation"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             x:Class="LogAnalyzer.Views.Views.Navigation.MainNavigationView">
+    
+    <Border BorderThickness="0,0,2,0" BorderBrush="#303030">
+        <Grid RowDefinitions="*, *">
+			<navigation1:ModuleButtonsPanel Grid.Row="0"/>
+            <navigation1:CommandsPanel Grid.Row="1"/>
+        </Grid>
+    </Border>
+</UserControl>

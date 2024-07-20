@@ -3,40 +3,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:LogAnalyzer.ViewModels;assembly=LogAnalyzer.ViewModels"
+             xmlns:navigation="clr-namespace:LogAnalyzer.Views.Views.Navigation"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.MainView" 
-             x:DataType="viewModels:MainViewModel"
-			 x:Name ="MainViewControl">
+             x:DataType="viewModels:MainViewModel">
 
 	<Design.DataContext>
 		<viewModels:MainViewModel/>
 	</Design.DataContext>
 	
 	<Grid ColumnDefinitions="200, *" Margin="0,5,0,0">
-		<Border Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="#303030">
-			<StackPanel x:Name="pnl_ModuleButtons" >
-                <ItemsControl ItemsSource="{Binding MainViewModules}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button 
-                                HorizontalAlignment="Stretch" 
-                                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                CommandParameter="{Binding RelativeSource={RelativeSource DataContext}}"
-                                Command="{Binding ((viewModels:MainViewModel)DataContext).OpenModuleCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
-                                <Grid ColumnDefinitions="*,*" MaxHeight="30">
-                                    <Image Grid.Column="0" Source="{Binding ModuleIcon}"
-                                           HorizontalAlignment="Right"
-                                           Margin="0,0,30,0"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding ModuleHeader}"
-                                               HorizontalAlignment="Left" VerticalAlignment="Center"
-                                               Margin="-20,0,0,0"/>
-                                </Grid>
-							</Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-			</StackPanel>
-		</Border>
+		<navigation:MainNavigationView Grid.Column="0"/>
 		<ContentControl Grid.Column="1" Content="{Binding CurrentModuleView}"/>
 	</Grid>
 </UserControl>

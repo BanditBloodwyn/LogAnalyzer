@@ -38,4 +38,8 @@
       <DependentUpon>LogEntryElement.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Navigation\ModuleButtonsPanel.axaml" />
+  </ItemGroup>
 </Project>
