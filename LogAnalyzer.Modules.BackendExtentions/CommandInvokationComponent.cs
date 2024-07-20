@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using LogAnalyzer.Core.Components;
+﻿using LogAnalyzer.Core.Components;
 using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Models.CommandQueue;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace LogAnalyzer.Components.BackendExtentions;
 
 public class CommandInvokationComponent : ComponentBase,
-    IDependencyInjectionComponent, IReactToDIComponent, ICommandCreator
+    IDependencyInjectionComponent, IReactToDIComponent
 {
     public void RegisterDependencies(IServiceCollection service)
     {
@@ -18,10 +17,5 @@ public class CommandInvokationComponent : ComponentBase,
     public void OnDIFinished()
     {
         GetDependency<CommandQueue>();
-    }
-
-    public ICommand? CreateCommand(Type commandType)
-    {
-        return GetDependency(commandType) as ICommand;
     }
 }
