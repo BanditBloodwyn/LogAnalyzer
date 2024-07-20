@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using LogAnalyzer.Core.Components.Interfaces;
+﻿using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Events;
@@ -10,14 +9,14 @@ namespace LogAnalyzer.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private UserControl? _currentModuleView;
+    private MainModuleViewModelBase? _currentModule;
 
-    public UserControl? CurrentModuleView
+    public MainModuleViewModelBase? CurrentModule
     {
-        get => _currentModuleView;
+        get => _currentModule;
         set
         {
-            _currentModuleView = value;
+            _currentModule = value;
             OnPropertyChanged();
         }
     }
@@ -37,12 +36,12 @@ public class MainViewModel : ViewModelBase
         if (@event.Module is IReactToPreOpeningComponent preOpeningModule)
             preOpeningModule.OnPreShown();
 
-        CurrentModuleView = @event.Module.GetView();
+        CurrentModule = @event.Module;
 
         if (@event.Module is IReactToPostOpeningComponent postOpeningModule)
             postOpeningModule.OnShown();
 
-        if (CurrentModuleView.DataContext is IReactToOpeningViewModel reactToOpeningVM)
+        if (CurrentModule is IReactToOpeningViewModel reactToOpeningVM)
             reactToOpeningVM.OnShown();
     }
 }

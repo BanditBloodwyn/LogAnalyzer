@@ -5,6 +5,7 @@ using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using LogAnalyzer.Core.EventBus;
+using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.CommandQueue.Commands;
 using LogAnalyzer.Models.Events;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;

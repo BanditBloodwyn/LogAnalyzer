@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace LogAnalyzer.ViewModels;
+namespace LogAnalyzer.Core.ViewsModels;
 
 public class ViewModelBase : ObservableObject;

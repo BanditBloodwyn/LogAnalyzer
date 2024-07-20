@@ -1,9 +1,9 @@
-﻿using LogAnalyzer.Core.Components;
-using LogAnalyzer.Core.EventBus;
+﻿using LogAnalyzer.Core.EventBus;
+using LogAnalyzer.Core.ViewsModels;
 
 namespace LogAnalyzer.Models.Events;
 
-public struct ChangeOpenedModuleEvent(MainViewComponent module) : IEvent
+public struct ChangeOpenedModuleEvent(MainModuleViewModelBase module) : IEvent
 {
-    public MainViewComponent Module = module;
+    public MainModuleViewModelBase Module = module;
 }

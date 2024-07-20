@@ -1,4 +1,6 @@
-﻿namespace LogAnalyzer.ViewModels.Navigation;
+﻿using LogAnalyzer.Core.ViewsModels;
+
+namespace LogAnalyzer.ViewModels.Navigation;
 
 public class MainNavigationViewModel(
     ModuleButtonsPanelViewModel moduleButtonsPanelVM,
