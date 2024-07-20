@@ -1,13 +1,13 @@
 ﻿using Avalonia.Threading;
+using LogAnalyzer.Core.EventBus;
+using LogAnalyzer.Core.ViewsModels;
+using LogAnalyzer.Models.CommandQueue.Commands;
 using LogAnalyzer.Models.Data.Containers;
+using LogAnalyzer.Models.Events;
 using LogAnalyzer.Models.Modules.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using LogAnalyzer.Core.EventBus;
-using LogAnalyzer.Core.ViewsModels;
-using LogAnalyzer.Models.CommandQueue.Commands;
-using LogAnalyzer.Models.Events;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
@@ -61,7 +61,7 @@ public class LogPanelViewModel : ViewModelBase
         CloseLogPanelCommand = new CloseLogPanelCommand(this);
     }
 
-    public LogPanelViewModel() { }
+    protected LogPanelViewModel() { }
 
     #endregion
 
@@ -86,7 +86,7 @@ public class LogPanelViewModel : ViewModelBase
 
         EventBus<AddNewQueuedCommandEvent>.Raise(new AddNewQueuedCommandEvent(
             new InvokerCommand(
-                "Analyze Log", 
+                "Analyze Log",
                 () => _logAnalysisModel.AnalyzeAsync(File.Path, entryProgress, percentProgress, ct))));
     }
 

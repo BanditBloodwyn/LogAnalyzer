@@ -42,5 +42,9 @@
 					 <logAnalysis1:LogAnalysisModuleView/>
                  </DataTemplate>
 
+                 <DataTemplate DataType="{x:Type logAnalysis:LogPanelViewModel}">
+					 <logAnalysis1:LogPanelView/>
+                 </DataTemplate>
+
 			 </Application.DataTemplates>
 </Application>

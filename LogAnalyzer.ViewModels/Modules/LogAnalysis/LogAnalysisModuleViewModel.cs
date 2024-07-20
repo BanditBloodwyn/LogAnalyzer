@@ -11,8 +11,8 @@ namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
 
 public class LogAnalysisModuleViewModel : MainModuleViewModelBase
 {
-    private readonly ILogAnalysisModel _logAnalysisModel1;
-    private readonly IFileDialogService _fileDialogService1;
+    private readonly ILogAnalysisModel _logAnalysisModel;
+    private readonly IFileDialogService _fileDialogService;
 
     public override int NavigationIndex => 0;
     public override string ModuleHeader => "Log Analysis";
@@ -26,15 +26,15 @@ public class LogAnalysisModuleViewModel : MainModuleViewModelBase
         ILogAnalysisModel logAnalysisModel,
         IFileDialogService fileDialogService)
     {
-        _logAnalysisModel1 = logAnalysisModel;
-        _fileDialogService1 = fileDialogService;
+        _logAnalysisModel = logAnalysisModel;
+        _fileDialogService = fileDialogService;
 
         OpenNewLogPanelCommand = new OpenNewLogPanelCommand(this);
     }
 
     public async void OpenNewLogs()
     {
-        Models.Data.Containers.FileInfo[] filesToOpen = (await _fileDialogService1.OpenFileDialogAsync()).ToArray();
+        Models.Data.Containers.FileInfo[] filesToOpen = (await _fileDialogService.OpenFileDialogAsync()).ToArray();
         OpenNewLogPanels(filesToOpen);
     }
 
@@ -42,7 +42,7 @@ public class LogAnalysisModuleViewModel : MainModuleViewModelBase
     {
         foreach (Models.Data.Containers.FileInfo file in filesToOpen)
         {
-            LogPanelViewModel logPanelViewModel = new(_logAnalysisModel1);
+            LogPanelViewModel logPanelViewModel = new(_logAnalysisModel);
             logPanelViewModel.RequestCloseEvent += panel => OpenedLogPanels.Remove(panel);
 
             OpenedLogPanels.Add(logPanelViewModel);
