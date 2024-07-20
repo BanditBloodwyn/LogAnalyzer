@@ -30,7 +30,7 @@ public partial class App : Application
         
         IServiceCollection services = new ServiceCollection();
 
-        ComponenntInitializer.InitializeComponents(services);
+        ComponentInitializer.InitializeComponents(services);
 
         IServiceProvider serviceProvider = services.BuildServiceProvider();
 
