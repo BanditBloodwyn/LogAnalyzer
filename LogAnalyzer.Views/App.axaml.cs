@@ -1,11 +1,15 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using LogAnalyzer.Core.Components;
 using LogAnalyzer.Core.UI;
+using LogAnalyzer.Models.Framework;
 using LogAnalyzer.ViewModels;
 using LogAnalyzer.Views.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.Views;
 
@@ -23,12 +27,18 @@ public partial class App : Application
         // Line below is needed to remove Avalonia data validation.
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
+        
+        IServiceCollection services = new ServiceCollection();
+
+        ComponenntInitializer.InitializeComponents(services);
+
+        IServiceProvider serviceProvider = services.BuildServiceProvider();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(serviceProvider)
             };
             TopLevelContext.Initialize(TopLevel.GetTopLevel(desktop.MainWindow));
         }
@@ -36,7 +46,7 @@ public partial class App : Application
         {
             singleViewPlatform.MainView = new MainView
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(serviceProvider)
             };
         }
 

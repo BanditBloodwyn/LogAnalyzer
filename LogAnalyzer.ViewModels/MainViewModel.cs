@@ -3,6 +3,8 @@ using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Events;
+using LogAnalyzer.ViewModels.Navigation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.ViewModels;
 
@@ -20,8 +22,12 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public MainViewModel()
+    public ViewModelBase NavigationViewModel { get; set; }
+
+    public MainViewModel(IServiceProvider serviceProvider)
     {
+        NavigationViewModel = serviceProvider.GetRequiredService<MainNavigationViewModel>();
+
         EventBinding<ChangeOpenedModuleEvent> changeOpenedModuleEventBinding = new(ChangeOpenedModule);
         EventBus<ChangeOpenedModuleEvent>.Register(changeOpenedModuleEventBinding);
     }

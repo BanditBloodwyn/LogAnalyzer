@@ -1,5 +1,9 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:LogAnalyzer.ViewModels;assembly=LogAnalyzer.ViewModels"
+             xmlns:views="clr-namespace:LogAnalyzer.Views.Views"
+             xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
+             xmlns:navigation1="clr-namespace:LogAnalyzer.Views.Views.Navigation"
              x:Class="LogAnalyzer.Views.App"
              RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -7,4 +11,15 @@
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
+
+             <Application.DataTemplates>
+
+                 <DataTemplate DataType="{x:Type viewModels:MainViewModel}">
+                     <views:MainView/>
+                 </DataTemplate>
+
+                 <DataTemplate DataType="{x:Type navigation:MainNavigationViewModel}">
+                     <navigation1:MainNavigationView/>
+                 </DataTemplate>
+             </Application.DataTemplates>
 </Application>
