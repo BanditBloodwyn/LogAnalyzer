@@ -13,6 +13,7 @@ public class LogAnalysisModuleViewModel : MainModuleViewModelBase
 {
     private readonly ILogAnalysisModel _logAnalysisModel;
     private readonly IFileDialogService _fileDialogService;
+    private readonly ViewModelFactory.CreateLogPanel _logPanelFactory;
 
     public override int NavigationIndex => 0;
     public override string ModuleHeader => "Log Analysis";
@@ -24,10 +25,12 @@ public class LogAnalysisModuleViewModel : MainModuleViewModelBase
 
     public LogAnalysisModuleViewModel(
         ILogAnalysisModel logAnalysisModel,
-        IFileDialogService fileDialogService)
+        IFileDialogService fileDialogService, 
+        ViewModelFactory.CreateLogPanel logPanelFactory)
     {
         _logAnalysisModel = logAnalysisModel;
         _fileDialogService = fileDialogService;
+        _logPanelFactory = logPanelFactory;
 
         OpenNewLogPanelCommand = new OpenNewLogPanelCommand(this);
     }
@@ -42,7 +45,7 @@ public class LogAnalysisModuleViewModel : MainModuleViewModelBase
     {
         foreach (Models.Data.Containers.FileInfo file in filesToOpen)
         {
-            LogPanelViewModel logPanelViewModel = new(_logAnalysisModel);
+            LogPanelViewModel logPanelViewModel = _logPanelFactory();
             logPanelViewModel.RequestCloseEvent += panel => OpenedLogPanels.Remove(panel);
 
             OpenedLogPanels.Add(logPanelViewModel);
