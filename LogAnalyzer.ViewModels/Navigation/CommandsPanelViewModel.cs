@@ -2,6 +2,7 @@
 using LogAnalyzer.Models.Data.BaseTypes.Commands;
 using LogAnalyzer.Models.Events;
 using System.Collections.ObjectModel;
+using LogAnalyzer.Core.ViewsModels;
 
 namespace LogAnalyzer.ViewModels.Navigation;
 

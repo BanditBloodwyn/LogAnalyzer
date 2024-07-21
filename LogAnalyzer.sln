@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Views", "LogAna
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Desktop", "LogAnalyzer.Desktop\LogAnalyzer.Desktop.csproj", "{8524BA7B-57D6-41CA-BA13-A8F6DC4DE5C7}"
 	ProjectSection(ProjectDependencies) = postProject
+		{4AD02FE5-689C-46FC-851F-C199A5C80C93} = {4AD02FE5-689C-46FC-851F-C199A5C80C93}
 		{C7A3F3F7-3584-4778-AB48-02FF96AAE4B2} = {C7A3F3F7-3584-4778-AB48-02FF96AAE4B2}
 		{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77} = {FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}
 	EndProjectSection
@@ -50,6 +51,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{4B62DA39-BC34-4C2F-A205-FEEC991A3FC5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.ViewModels.Design", "LogAnalyzer.ViewModels.Design\LogAnalyzer.ViewModels.Design.csproj", "{F1BE3799-875A-4709-A008-A0087CAC23CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogAnalyzer.Components.UIFeatures", "LogAnalyzer.Components.UIFeatures\LogAnalyzer.Components.UIFeatures.csproj", "{4AD02FE5-689C-46FC-851F-C199A5C80C93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +116,10 @@ Global
 		{F1BE3799-875A-4709-A008-A0087CAC23CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1BE3799-875A-4709-A008-A0087CAC23CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1BE3799-875A-4709-A008-A0087CAC23CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AD02FE5-689C-46FC-851F-C199A5C80C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AD02FE5-689C-46FC-851F-C199A5C80C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AD02FE5-689C-46FC-851F-C199A5C80C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AD02FE5-689C-46FC-851F-C199A5C80C93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +145,7 @@ Global
 		{9837CB05-9EEB-49E2-B04A-4920A313EE46} = {F772124A-71A7-430A-8325-D68CBBE04872}
 		{4B62DA39-BC34-4C2F-A205-FEEC991A3FC5} = {F772124A-71A7-430A-8325-D68CBBE04872}
 		{F1BE3799-875A-4709-A008-A0087CAC23CD} = {9837CB05-9EEB-49E2-B04A-4920A313EE46}
+		{4AD02FE5-689C-46FC-851F-C199A5C80C93} = {1DD8A009-4A4F-4494-A13A-F80D023ED7BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F374DC6E-3A7E-4FEB-B081-2231B552DC44}

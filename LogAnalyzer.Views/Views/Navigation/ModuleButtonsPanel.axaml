@@ -7,7 +7,7 @@
              x:Class="LogAnalyzer.Views.Views.Navigation.ModuleButtonsPanel"
              x:DataType="navigation:ModuleButtonsPanelViewModel">
    
-    <ItemsControl ItemsSource="{Binding MainViewModules}">
+    <ItemsControl ItemsSource="{Binding Modules}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel/>

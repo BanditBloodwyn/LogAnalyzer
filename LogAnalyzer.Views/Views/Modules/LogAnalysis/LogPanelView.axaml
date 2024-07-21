@@ -3,14 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels"
-             xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.Modules.LogAnalysis"
-             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.Views.Views.Modules.LogAnalysis"
+             xmlns:design="clr-namespace:LogAnalyzer.ViewModels.Design.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.Modules.LogAnalysis.LogPanelView"
              x:DataType="logAnalysis:LogPanelViewModel">
     
     <Design.DataContext>
-		<logAnalysis1:LogPanelDesignViewModel/>
+		<design:LogPanelDesignViewModel/>
 	</Design.DataContext>
 
     <Border BorderBrush="Transparent" BorderThickness="2">
@@ -60,7 +60,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <logAnalysis2:LogEntryElement/>
+                                <logAnalysis1:LogEntryElement/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

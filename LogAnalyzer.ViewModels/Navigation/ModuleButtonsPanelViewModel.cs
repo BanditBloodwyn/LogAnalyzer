@@ -1,17 +1,19 @@
-﻿using LogAnalyzer.Core.Components;
-using LogAnalyzer.Models.Framework;
+﻿using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.ViewModels.Commands;
+using LogAnalyzer.ViewModels.Modules;
+using LogAnalyzer.ViewModels.Modules.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace LogAnalyzer.ViewModels.Navigation;
 
-public class ModuleButtonsPanelViewModel : ViewModelBase
+public class ModuleButtonsPanelViewModel(
+    LogAnalysisModuleViewModel logAnalysisModule,
+    SettingsModuleViewModel settingsModule)
+    : ViewModelBase
 {
-    private readonly FrameworkModel _frameworkModel = new();
-
-    public ObservableCollection<MainViewComponent> MainViewModules => _frameworkModel.MainViewModules;
+    public ObservableCollection<MainModuleViewModelBase> Modules { get; set; } =
+        [logAnalysisModule, settingsModule];
 
     public ICommand OpenModuleCommand => new OpenModuleCommand();
-
 }

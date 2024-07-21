@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using LogAnalyzer.ViewModels.Navigation;
 
 namespace LogAnalyzer.Views.Views.Navigation
 {
@@ -8,8 +7,6 @@ namespace LogAnalyzer.Views.Views.Navigation
         public ModuleButtonsPanel()
         {
             InitializeComponent();
-
-            DataContext = new ModuleButtonsPanelViewModel();
         }
     }
 }

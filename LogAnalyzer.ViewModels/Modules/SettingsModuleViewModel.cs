@@ -1,13 +1,13 @@
-﻿using LogAnalyzer.Core.ViewsModels;
+﻿using Avalonia.Media.Imaging;
+using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Modules;
+using LogAnalyzer.Resources;
 
 namespace LogAnalyzer.ViewModels.Modules;
 
-public class SettingsModuleViewModel(SettingsModel _model) : ViewModelBase,
-    IReactToOpeningViewModel
+public class SettingsModuleViewModel(SettingsModel _model) : MainModuleViewModelBase
 {
-    public void OnShown()
-    {
-        ;
-    }
+    public override int NavigationIndex => 1;
+    public override string ModuleHeader => "Settings";
+    public override Bitmap ModuleIcon => DefaultIcons.SettingsIcon;
 }

@@ -1,19 +1,20 @@
 ﻿using Avalonia.Threading;
+using LogAnalyzer.Core.EventBus;
+using LogAnalyzer.Core.ViewsModels;
+using LogAnalyzer.Models.CommandQueue.Commands;
 using LogAnalyzer.Models.Data.Containers;
+using LogAnalyzer.Models.Events;
 using LogAnalyzer.Models.Modules.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using LogAnalyzer.Core.EventBus;
-using LogAnalyzer.Models.CommandQueue.Commands;
-using LogAnalyzer.Models.Events;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
 
-public class LogPanelViewModel : ViewModelBase
+public class LogPanelViewModel(ILogAnalysisModel _logAnalysisModel) : ViewModelBase
 {
-    private readonly ILogAnalysisModel _logAnalysisModel;
+    public LogPanelViewModel() : this(null!) { }
 
     private CancellationTokenSource? _fileAnalysisCtSource;
 
@@ -43,27 +44,13 @@ public class LogPanelViewModel : ViewModelBase
         protected set => SetProperty(ref _analysisProgressPercents, value);
     }
 
-    public ICommand CloseLogPanelCommand { get; init; }
+    private ICommand? _closeLogPanelCommand;
+    public ICommand CloseLogPanelCommand => _closeLogPanelCommand ??= new CloseLogPanelCommand(this);
 
     #endregion
 
 
     public event Action<LogPanelViewModel>? RequestCloseEvent;
-
-
-    #region Ctor
-
-    public LogPanelViewModel(ILogAnalysisModel logAnalysisModel)
-    {
-        _logAnalysisModel = logAnalysisModel;
-
-        CloseLogPanelCommand = new CloseLogPanelCommand(this);
-    }
-
-    public LogPanelViewModel() { }
-
-    #endregion
-
 
     public void RequestClose()
     {
@@ -85,7 +72,7 @@ public class LogPanelViewModel : ViewModelBase
 
         EventBus<AddNewQueuedCommandEvent>.Raise(new AddNewQueuedCommandEvent(
             new InvokerCommand(
-                "Analyze Log", 
+                "Analyze Log",
                 () => _logAnalysisModel.AnalyzeAsync(File.Path, entryProgress, percentProgress, ct))));
     }
 

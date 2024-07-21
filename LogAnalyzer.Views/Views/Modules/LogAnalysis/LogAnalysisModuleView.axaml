@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels"
-             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.Views.Views.Modules.LogAnalysis"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.Modules.LogAnalysis.LogAnalysisModuleView"
              x:DataType="logAnalysis:LogAnalysisModuleViewModel">
@@ -24,8 +23,8 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <logAnalysis1:LogPanelView
-                            MaxWidth="{Binding $parent[ItemsControl].Bounds.Width}"/>
+                        <ContentControl Content="{Binding}"
+                                        MaxWidth="{Binding $parent[ItemsControl].Bounds.Width}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

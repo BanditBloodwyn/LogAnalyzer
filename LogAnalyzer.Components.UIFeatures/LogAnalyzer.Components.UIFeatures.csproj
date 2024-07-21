@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LogAnalyzer.Core\LogAnalyzer.Core.csproj" />
-    <ProjectReference Include="..\LogAnalyzer.Models\LogAnalyzer.Models.csproj" />
-    <ProjectReference Include="..\LogAnalyzer.Resources\LogAnalyzer.Resources.csproj" />
     <ProjectReference Include="..\LogAnalyzer.ViewModels\LogAnalyzer.ViewModels.csproj" />
   </ItemGroup>
 

@@ -5,25 +5,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.Models.Framework;
 
-public class ModuleInitializer
+public class ComponentInitializer
 {
-    public static ComponentBase[] InitializeModules()
+    public static ComponentBase[] InitializeComponents(IServiceCollection services)
     {
         ComponentBase[] modules = TypeLoader
             .LoadAssembliesTypesByBase("LogAnalyzer.Components", typeof(ComponentBase))
             .Select(static type => (ComponentBase)Activator.CreateInstance(type)!)
             .ToArray();
 
-        PerformDependencyInjection(modules);
+        PerformDependencyInjection(modules, services);
         ReactToDependencyInjection(modules);
 
         return modules;
     }
 
-    private static void PerformDependencyInjection(ComponentBase[] modules)
+    private static void PerformDependencyInjection(ComponentBase[] modules, IServiceCollection services)
     {
-        IServiceCollection services = new ServiceCollection();
-
         foreach (ComponentBase module in modules)
         {
             if (module is IDependencyInjectionComponent dependencyModule)

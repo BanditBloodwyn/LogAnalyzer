@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:LogAnalyzer.ViewModels;assembly=LogAnalyzer.ViewModels"
-             xmlns:navigation="clr-namespace:LogAnalyzer.Views.Views.Navigation"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.MainView" 
              x:DataType="viewModels:MainViewModel">
@@ -13,7 +12,7 @@
 	</Design.DataContext>
 	
 	<Grid ColumnDefinitions="200, *" Margin="0,5,0,0">
-		<navigation:MainNavigationView Grid.Column="0"/>
-		<ContentControl Grid.Column="1" Content="{Binding CurrentModuleView}"/>
+        <ContentControl Grid.Column="0" Content="{Binding NavigationViewModel}"/>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentModule}"/>
 	</Grid>
 </UserControl>
