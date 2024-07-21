@@ -9,32 +9,23 @@ using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
 
-public class LogAnalysisModuleViewModel : MainModuleViewModelBase
+public class LogAnalysisModuleViewModel(
+    IFileDialogService fileDialogService,
+    ViewModelFactory.CreateLogPanel logPanelFactory)
+    : MainModuleViewModelBase
 {
-    private readonly IFileDialogService _fileDialogService;
-    private readonly ViewModelFactory.CreateLogPanel _logPanelFactory;
-
     public override int NavigationIndex => 0;
     public override string ModuleHeader => "Log Analysis";
     public override Bitmap ModuleIcon => DefaultIcons.LogAnalysisIcon;
 
     public ObservableCollection<LogPanelViewModel> OpenedLogPanels { get; } = [];
 
-    public ICommand OpenNewLogPanelCommand { get; init; }
-
-    public LogAnalysisModuleViewModel(
-        IFileDialogService fileDialogService,
-        ViewModelFactory.CreateLogPanel logPanelFactory)
-    {
-        _fileDialogService = fileDialogService;
-        _logPanelFactory = logPanelFactory;
-
-        OpenNewLogPanelCommand = new OpenNewLogPanelCommand(this);
-    }
+    private ICommand? _openNewLogPanelCommand;
+    public ICommand OpenNewLogPanelCommand => _openNewLogPanelCommand ??= new OpenNewLogPanelCommand(this);
 
     public async void OpenNewLogs()
     {
-        FileInfo[] filesToOpen = (await _fileDialogService.OpenFileDialogAsync()).ToArray();
+        FileInfo[] filesToOpen = (await fileDialogService.OpenFileDialogAsync()).ToArray();
         OpenNewLogPanels(filesToOpen);
     }
 
@@ -42,7 +33,7 @@ public class LogAnalysisModuleViewModel : MainModuleViewModelBase
     {
         foreach (FileInfo file in filesToOpen)
         {
-            LogPanelViewModel logPanelViewModel = _logPanelFactory();
+            LogPanelViewModel logPanelViewModel = logPanelFactory();
             logPanelViewModel.RequestCloseEvent += panel => OpenedLogPanels.Remove(panel);
 
             OpenedLogPanels.Add(logPanelViewModel);
