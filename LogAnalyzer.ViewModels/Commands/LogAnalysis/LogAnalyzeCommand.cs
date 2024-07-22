@@ -8,9 +8,10 @@ public class LogAnalyzeCommand() : ProgressCommand("Analyze log file")
     {
         for (int i = 0; i < 100; i += 10)
         {
-            await Task.Delay(500);
             PercentsProgress?.Report(i);
             MessageProgress?.Report("Trying to get the command queue done");
+
+            await Task.Delay(500);
 
             if (CancellationToken.IsCancellationRequested)
                 return;
