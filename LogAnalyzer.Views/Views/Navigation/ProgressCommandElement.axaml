@@ -3,16 +3,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="50"
+             xmlns:navigation1="clr-namespace:LogAnalyzer.ViewModels.Design.Navigation;assembly=LogAnalyzer.ViewModels.Design"
+             mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="50"
              x:Class="LogAnalyzer.Views.Views.Navigation.ProgressCommandElement"
-             x:DataType="navigation:ProgressCommandViewModel">
-    
-    <Border BorderBrush="DimGray" BorderThickness="1">
+             x:DataType="navigation:ProgressCommandViewModel"
+             MaxHeight="50">
+
+	<Design.DataContext>
+		<navigation1:ProgressCommandDesignViewModel/>
+	</Design.DataContext>
+
+    <Border BorderBrush="DimGray" BorderThickness="2" CornerRadius="7">
         <Grid>
-            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                Text="{Binding Name}"/>
             <ProgressBar VerticalAlignment="Stretch"
-                Value="{Binding PercentsDone}"/>
+                         Foreground="Green"
+                         Value="{Binding PercentsDone}"/>
+            <Grid RowDefinitions="*,*">
+                <Label Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       FontWeight="Bold"
+                       Content="{Binding Name}"/>
+				<Label Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                       FontSize="12"
+                       Content="{Binding CurrentTaskText}"/>
+			</Grid>
 		</Grid>
 	</Border>
 </UserControl>

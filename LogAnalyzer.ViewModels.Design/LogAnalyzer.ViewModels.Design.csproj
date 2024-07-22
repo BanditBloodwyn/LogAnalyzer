@@ -10,4 +10,8 @@
     <ProjectReference Include="..\LogAnalyzer.ViewModels\LogAnalyzer.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Navigation\" />
+  </ItemGroup>
+
 </Project>

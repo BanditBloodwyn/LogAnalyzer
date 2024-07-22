@@ -8,7 +8,16 @@ public class ProgressCommandViewModel(ProgressCommand _command)
 {
     public event Action<ProgressCommandViewModel>? ProgressFinished;
 
-    public string Name => _command.Name;
+    private string _name = _command.Name;
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            _name = value;
+            OnPropertyChanged();
+        }
+    }
 
     private int _percentsDone;
     public int PercentsDone
