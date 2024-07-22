@@ -9,5 +9,7 @@ public abstract class ProgressCommand(string name) : IQueuedCommand
     public IProgress<int>? PercentsProgress { get; set; }
     public IProgress<string>? MessageProgress { get; set; }
 
+    public CancellationToken CancellationToken { get; set; }
+
     public abstract Task Execute();
 }

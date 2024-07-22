@@ -11,6 +11,9 @@ public class LogAnalyzeCommand() : ProgressCommand("Analyze log file")
             await Task.Delay(500);
             PercentsProgress?.Report(i);
             MessageProgress?.Report("Trying to get the command queue done");
+
+            if (CancellationToken.IsCancellationRequested)
+                return;
         }
     }
 }
