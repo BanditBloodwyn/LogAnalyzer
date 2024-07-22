@@ -37,7 +37,10 @@ public class ProgressCommandViewModel(ProgressCommand _command)
         _command.PercentsProgress = percents;
         _command.MessageProgress = currentTask;
 
-        await _command.Execute();
-        ProgressFinished?.Invoke(this);
+        await Task.Factory.StartNew(async () =>
+        {
+            await _command.Execute();
+            ProgressFinished?.Invoke(this);
+        });
     }
 }
