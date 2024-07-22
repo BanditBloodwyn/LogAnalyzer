@@ -74,11 +74,7 @@ public class LogPanelViewModel(
 
     private void OnLogEntryProcessed(LogEntry logEntry)
     {
-        Dispatcher.UIThread.Invoke(() =>
-        {
-            LogEntries.Add(logEntry);
-            OnPropertyChanged(nameof(LogEntries));
-        });
+        Dispatcher.UIThread.Invoke(() => LogEntries.Add(logEntry));
     }
 
     private void Reset()

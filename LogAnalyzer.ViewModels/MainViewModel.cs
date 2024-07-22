@@ -14,11 +14,7 @@ public class MainViewModel : ViewModelBase
     public MainModuleViewModelBase? CurrentModule
     {
         get => _currentModule;
-        set
-        {
-            _currentModule = value;
-            OnPropertyChanged();
-        }
+        set => SetProperty(ref _currentModule, value);
     }
 
     public ViewModelBase NavigationViewModel { get; set; }

@@ -12,33 +12,21 @@ public class ProgressCommandViewModel(ProgressCommand _command)
     public string Name
     {
         get => _name;
-        set
-        {
-            _name = value;
-            OnPropertyChanged();
-        }
+        set => SetProperty(ref _name, value);
     }
 
     private int _percentsDone;
     public int PercentsDone
     {
         get => _percentsDone;
-        set
-        {
-            _percentsDone = value;
-            OnPropertyChanged();
-        }
+        set => SetProperty(ref _percentsDone, value);
     }
 
     private string _currentTaskText = string.Empty;
     public string CurrentTaskText
     {
         get => _currentTaskText;
-        set
-        {
-            _currentTaskText = value;
-            OnPropertyChanged();
-        }
+        set => SetProperty(ref _currentTaskText, value);
     }
 
     public async void Start()
