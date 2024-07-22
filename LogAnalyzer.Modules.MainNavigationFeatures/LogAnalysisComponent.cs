@@ -1,6 +1,5 @@
 ﻿using LogAnalyzer.Core.Components;
 using LogAnalyzer.Core.Components.Interfaces;
-using LogAnalyzer.Models.Modules.LogAnalysis;
 using LogAnalyzer.Models.Strategies.LogStringFinding;
 using LogAnalyzer.Models.Strategies.LogStringParsing;
 using LogAnalyzer.ViewModels.Modules.LogAnalysis;
@@ -16,7 +15,6 @@ public class LogAnalysisComponent : ComponentBase,
         service
             .AddSingleton<ILogStringFindingStrategy, ClassicATBASLogStringFinding>()
             .AddSingleton<ILogStringParsingStrategy, ClassicATBASLogStringParsing>()
-            .AddSingleton<ILogAnalysisModel, LogAnalysisModel>()
             .AddSingleton<LogAnalysisModuleViewModel>();
     }
 }
