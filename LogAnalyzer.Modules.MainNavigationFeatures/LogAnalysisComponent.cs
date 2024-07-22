@@ -13,8 +13,8 @@ public class LogAnalysisComponent : ComponentBase,
     public void RegisterDependencies(IServiceCollection service)
     {
         service
-            .AddSingleton<ILogStringFindingStrategy, ClassicATBASLogStringFinding>()
-            .AddSingleton<ILogStringParsingStrategy, ClassicATBASLogStringParsing>()
+            .AddTransient<ILogStringFindingStrategy, ClassicATBASLogStringFinding>()
+            .AddTransient<ILogStringParsingStrategy, ClassicATBASLogStringParsing>()
             .AddSingleton<LogAnalysisModuleViewModel>();
     }
 }
