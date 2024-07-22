@@ -28,7 +28,5 @@ public class LogPanelDesignViewModel : LogPanelViewModel
             "Writing back '' as default value."
         ));
         OnPropertyChanged(nameof(LogEntries));
-
-        AnalysisProgressPercents = 50;
     }
 }

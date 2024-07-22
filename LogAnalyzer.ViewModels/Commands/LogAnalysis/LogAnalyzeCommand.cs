@@ -1,20 +1,49 @@
 ﻿using LogAnalyzer.Models.Data.BaseTypes.Commands;
+using LogAnalyzer.Models.Data.Containers;
+using LogAnalyzer.Models.Strategies.LogStringFinding;
+using LogAnalyzer.Models.Strategies.LogStringParsing;
+using System.Diagnostics;
+using FileInfo = System.IO.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Commands.LogAnalysis;
 
-public class LogAnalyzeCommand() : ProgressCommand("Analyze log file")
+public class LogAnalyzeCommand(
+    ILogStringFindingStrategy _logFinder,
+    ILogStringParsingStrategy _logParser)
+    : ProgressCommand("Analyze log file")
 {
+    public string? FilePath { get; set; }
+    public IProgress<LogEntry>? LogEntryProgress { get; set; }
+
     public override async Task Execute()
     {
-        for (int i = 0; i < 100; i += 10)
+        if (FilePath == null || LogEntryProgress == null)
+            return;
+
+        try
         {
-            PercentsProgress?.Report(i);
-            MessageProgress?.Report("Trying to get the command queue done");
+            long fileSize = new FileInfo(FilePath).Length;
+            long bytesRead = 0;
 
-            await Task.Delay(500);
+            await using FileStream fileStream = new(FilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true);
+            using StreamReader streamReader = new(fileStream);
 
-            if (CancellationToken.IsCancellationRequested)
-                return;
+            while (await _logFinder.FindLogEntries(streamReader, CancellationToken) is { } logEntryString)
+            {
+                LogEntry logEntry = await _logParser.ParseLogString(logEntryString, CancellationToken);
+                LogEntryProgress.Report(logEntry);
+
+                bytesRead += logEntryString.Length + Environment.NewLine.Length;
+                int percentComplete = (int)(bytesRead * 100 / fileSize);
+                PercentsProgress?.Report(percentComplete);
+            }
+
+            PercentsProgress?.Report(100);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e.Message);
+            GC.Collect();
         }
     }
 }

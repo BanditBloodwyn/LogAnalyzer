@@ -39,13 +39,6 @@ public class LogPanelViewModel(
         protected set => SetProperty(ref _isAnalyzing, value);
     }
 
-    private int _analysisProgressPercents;
-    public int AnalysisProgressPercents
-    {
-        get => _analysisProgressPercents;
-        protected set => SetProperty(ref _analysisProgressPercents, value);
-    }
-
     private ICommand? _closeLogPanelCommand;
     public ICommand CloseLogPanelCommand => _closeLogPanelCommand ??= new CloseLogPanelCommand(this);
 
@@ -64,13 +57,16 @@ public class LogPanelViewModel(
     {
         File = file;
         IsAnalyzing = true;
-        AnalysisProgressPercents = 0;
 
         _fileAnalysisCtSource = new();
         CancellationToken ct = _fileAnalysisCtSource.Token;
 
+        IProgress<LogEntry> entryProgress = new Progress<LogEntry>(OnLogEntryProcessed);
+
         LogAnalyzeCommand logAnalyzeCommand = _commandFactory();
         logAnalyzeCommand.CancellationToken = ct;
+        logAnalyzeCommand.FilePath = file.FullName;
+        logAnalyzeCommand.LogEntryProgress = entryProgress;
 
         EventBus<AddNewProgressCommandEvent>.Raise(
             new AddNewProgressCommandEvent(logAnalyzeCommand));
@@ -85,19 +81,10 @@ public class LogPanelViewModel(
         });
     }
 
-    private void OnAnalysisProgressUpdated(int progressPercentage)
-    {
-        Dispatcher.UIThread.Invoke(() =>
-        {
-            AnalysisProgressPercents = progressPercentage;
-        });
-    }
-
     private void Reset()
     {
         LogEntries.Clear();
         IsAnalyzing = false;
-        AnalysisProgressPercents = 0;
 
         if (_fileAnalysisCtSource != null)
         {

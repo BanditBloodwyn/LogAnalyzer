@@ -14,7 +14,7 @@
 	</Design.DataContext>
 
     <Border BorderBrush="Transparent" BorderThickness="2">
-        <Grid RowDefinitions="Auto,Auto,*">
+        <Grid RowDefinitions="Auto,*">
             <!--Header-->
             <Grid Grid.Row="0" Height="30"
                   ColumnDefinitions="*, 30">
@@ -41,15 +41,8 @@
                         Content="X"/>
 			</Grid>
 
-            <!--Progress-->
-            <Grid Grid.Row="1" Background="#303030"
-                  Height="30" ColumnDefinitions="100, *">
-                <Label Grid.Column="0" VerticalAlignment="Center"
-                       Content="{Binding AnalysisProgressPercents}"/>
-            </Grid>
-
             <!--Content-->
-            <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled"
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Auto">
                 <Border Background="#202020" Margin="5">
                     <ItemsControl ItemsSource="{Binding LogEntries}">
