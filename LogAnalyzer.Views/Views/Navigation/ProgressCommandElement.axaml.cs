@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace LogAnalyzer.Views.Views.Navigation
 {
-    public partial class CommandsPanel : UserControl
+    public partial class ProgressCommandElement : UserControl
     {
-        public CommandsPanel()
+        public ProgressCommandElement()
         {
             InitializeComponent();
         }

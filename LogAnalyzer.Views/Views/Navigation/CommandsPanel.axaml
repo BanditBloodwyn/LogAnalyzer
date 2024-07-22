@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
+             xmlns:navigation1="clr-namespace:LogAnalyzer.Views.Views.Navigation"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.Navigation.CommandsPanel"
              x:DataType="navigation:CommandsPanelViewModel">
@@ -15,9 +16,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Border BorderBrush="DimGray" BorderThickness="1">
-                    <TextBox Text="{Binding Name}"/>
-                </Border>
+				<navigation1:ProgressCommandElement/>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

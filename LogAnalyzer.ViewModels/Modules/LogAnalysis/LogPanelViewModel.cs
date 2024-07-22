@@ -1,10 +1,9 @@
 ﻿using Avalonia.Threading;
 using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
-using LogAnalyzer.Models.CommandQueue.Commands;
 using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.Models.Events;
-using LogAnalyzer.Models.Modules.LogAnalysis;
+using LogAnalyzer.ViewModels.Commands;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -12,8 +11,11 @@ using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
 
-public class LogPanelViewModel(ILogAnalysisModel _logAnalysisModel) : ViewModelBase
+public class LogPanelViewModel(
+    CommandFactory.CreateLogAnalyzeCommand _commandFactory)
+    : ViewModelBase
 {
+    // used for design víew model
     public LogPanelViewModel() : this(null!) { }
 
     private CancellationTokenSource? _fileAnalysisCtSource;
@@ -64,16 +66,11 @@ public class LogPanelViewModel(ILogAnalysisModel _logAnalysisModel) : ViewModelB
         IsAnalyzing = true;
         AnalysisProgressPercents = 0;
 
-        IProgress<LogEntry> entryProgress = new Progress<LogEntry>(OnLogEntryProcessed);
-        IProgress<int> percentProgress = new Progress<int>(OnAnalysisProgressUpdated);
-
         _fileAnalysisCtSource = new();
         CancellationToken ct = _fileAnalysisCtSource.Token;
 
-        EventBus<AddNewQueuedCommandEvent>.Raise(new AddNewQueuedCommandEvent(
-            new InvokerCommand(
-                "Analyze Log",
-                () => _logAnalysisModel.AnalyzeAsync(File.Path, entryProgress, percentProgress, ct))));
+        EventBus<AddNewProgressCommandEvent>.Raise(
+            new AddNewProgressCommandEvent(_commandFactory()));
     }
 
     private void OnLogEntryProcessed(LogEntry logEntry)

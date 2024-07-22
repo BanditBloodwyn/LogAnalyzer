@@ -37,6 +37,9 @@
       <SubType>Code</SubType>
       <DependentUpon>LogEntryElement.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Navigation\ProgressCommandElement.axaml.cs">
+      <DependentUpon>ProgressCommandElement.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

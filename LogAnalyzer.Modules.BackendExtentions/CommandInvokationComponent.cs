@@ -6,16 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 namespace LogAnalyzer.Components.BackendExtentions;
 
 public class CommandInvokationComponent : ComponentBase,
-    IDependencyInjectionComponent, IReactToDIComponent
+    IDependencyInjectionComponent
 {
     public void RegisterDependencies(IServiceCollection service)
     {
         service
             .AddSingleton<CommandQueue>();
-    }
-
-    public void OnDIFinished()
-    {
-        GetDependency<CommandQueue>();
     }
 }

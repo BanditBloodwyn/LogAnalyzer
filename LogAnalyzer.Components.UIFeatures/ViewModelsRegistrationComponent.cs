@@ -5,7 +5,6 @@ using LogAnalyzer.ViewModels.Modules;
 using LogAnalyzer.ViewModels.Modules.LogAnalysis;
 using LogAnalyzer.ViewModels.Navigation;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace LogAnalyzer.Components.UIFeatures
 {
@@ -15,15 +14,18 @@ namespace LogAnalyzer.Components.UIFeatures
         public void RegisterDependencies(IServiceCollection service)
         {
             service
-                .AddTransient<ViewModelFactory.CreateLogPanel>(static serviceProvider => serviceProvider.GetRequiredService<LogPanelViewModel>)
                 .AddTransient<MainViewModel>()
                 .AddTransient<MainNavigationViewModel>()
                 .AddTransient<ModuleButtonsPanelViewModel>()
                 .AddTransient<CommandsPanelViewModel>()
-                
+
                 .AddTransient<LogAnalysisModuleViewModel>()
                 .AddTransient<LogPanelViewModel>()
-                .AddTransient<SettingsModuleViewModel>();
+                .AddTransient<SettingsModuleViewModel>()
+
+                .AddTransient<ViewModelFactory.CreateLogPanel>(static serviceProvider =>
+                    serviceProvider.GetRequiredService<LogPanelViewModel>);
+
         }
     }
 }

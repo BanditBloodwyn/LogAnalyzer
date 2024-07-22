@@ -1,14 +1,13 @@
 ﻿using LogAnalyzer.Core.EventBus;
-using LogAnalyzer.Models.Data.BaseTypes.Commands;
+using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Events;
 using System.Collections.ObjectModel;
-using LogAnalyzer.Core.ViewsModels;
 
 namespace LogAnalyzer.ViewModels.Navigation;
 
 public class CommandsPanelViewModel : ViewModelBase
 {
-    public ObservableCollection<ProgressCommand> Commands { get; set; } = [];
+    public ObservableCollection<ProgressCommandViewModel> Commands { get; set; } = [];
 
     public CommandsPanelViewModel()
     {
@@ -18,6 +17,11 @@ public class CommandsPanelViewModel : ViewModelBase
 
     private void OnAddCommand(AddNewProgressCommandEvent @event)
     {
-        Commands.Add(@event.Command);
+        ProgressCommandViewModel commandVM = new(@event.Command);
+        commandVM.ProgressFinished += vm => Commands.Remove(vm);
+        
+        Commands.Add(commandVM);
+
+        commandVM.Start();
     }
 }

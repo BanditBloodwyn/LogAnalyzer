@@ -1,26 +1,23 @@
-﻿using LogAnalyzer.Core.EventBus;
-using LogAnalyzer.Models.Data.Interfaces;
-using LogAnalyzer.Models.Events;
+﻿using LogAnalyzer.Models.Data.BaseTypes.Commands;
 using System.Collections.Concurrent;
 
 namespace LogAnalyzer.Models.CommandQueue;
 
 public class CommandQueue
 {
-    private readonly ConcurrentQueue<IQueuedCommand> _commands = new();
+    private readonly ConcurrentQueue<ProgressCommand> _commands = new();
     private readonly SemaphoreSlim _signal = new(0);
+
+    public event Action<ProgressCommand>? CommandFinished;
 
     public CommandQueue()
     {
         Task.Run(ProcessCommandsAsync);
-
-        EventBinding<AddNewQueuedCommandEvent> addNewCommandEventBinding = new(EnqueueCommand);
-        EventBus<AddNewQueuedCommandEvent>.Register(addNewCommandEventBinding);
     }
 
-    public void EnqueueCommand(AddNewQueuedCommandEvent @event)
+    public void EnqueueCommand(ProgressCommand command)
     {
-        _commands.Enqueue(@event.Command);
+        _commands.Enqueue(command);
         _signal.Release();
         Console.WriteLine($"Command added to queue. New length: {_commands.Count}");
     }
@@ -31,11 +28,12 @@ public class CommandQueue
         {
             await _signal.WaitAsync();
 
-            if (_commands.TryDequeue(out IQueuedCommand? command))
+            if (_commands.TryDequeue(out ProgressCommand? command))
             {
                 try
                 {
                     await Task.Run(command.Execute);
+                    CommandFinished?.Invoke(command);
                 }
                 catch (Exception ex)
                 {
