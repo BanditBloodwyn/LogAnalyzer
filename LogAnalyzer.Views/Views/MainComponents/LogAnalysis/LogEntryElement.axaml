@@ -10,11 +10,12 @@
 
     <UserControl.Resources>
 		<logAnalysis:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
+		<logAnalysis:LogInnerMessageHeightConverter x:Key="LogInnerMessageHeightConverter"/>
     </UserControl.Resources>
 
     <Border BorderBrush="Black" BorderThickness="1">
         <StackPanel Background="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}}">
-            <Grid ColumnDefinitions="170,250,100,*">
+            <Grid ColumnDefinitions="170,270,*,100">
                 <Label Grid.Column="0" 
                        FontWeight="ExtraLight"
                        VerticalContentAlignment="Center"
@@ -22,11 +23,16 @@
                 <Label Grid.Column="1" 
                        FontWeight="Heavy"
                        Content="{Binding Source}"/>
-                <Label Grid.Column="2" Content="{Binding LogType}"/>
-                <Label Grid.Column="3" Content="{Binding Message}"/>
+                <Label Grid.Column="2" Content="{Binding Message}"/>
+                <Label Grid.Column="3"
+                       FontWeight="ExtraLight" FontSize="11"
+                       HorizontalContentAlignment="Right"
+                       Content="{Binding LogType}"/>
             </Grid>
-            <Grid ColumnDefinitions="170, *">
-                <Label Grid.Column="1" FontSize="11"
+            <Grid ColumnDefinitions="173, *" 
+                  Height="{Binding InnerMessage, Converter={StaticResource LogInnerMessageHeightConverter}}">
+                <Label Grid.Column="1" 
+                       FontSize="11"
                        Content="{Binding InnerMessage}"/>
             </Grid>
 		</StackPanel>
