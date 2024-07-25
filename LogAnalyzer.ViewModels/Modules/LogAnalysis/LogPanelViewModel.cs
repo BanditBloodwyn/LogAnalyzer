@@ -7,6 +7,7 @@ using LogAnalyzer.ViewModels.Commands;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using LogAnalyzer.Models.LogAnalysis;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;

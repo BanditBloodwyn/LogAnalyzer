@@ -1,5 +1,6 @@
 ﻿using LogAnalyzer.Core.Components;
 using LogAnalyzer.Core.Components.Interfaces;
+using LogAnalyzer.Models.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using Microsoft.Extensions.DependencyInjection;
