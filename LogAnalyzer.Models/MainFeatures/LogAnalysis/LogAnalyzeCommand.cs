@@ -20,6 +20,8 @@ public class LogAnalyzeCommand(
         if (FilePath == null || LogEntryProgress == null)
             return;
 
+        MessageProgress?.Report(Path.GetFileName(FilePath));
+        
         try
         {
             long fileSize = new FileInfo(FilePath).Length;
