@@ -12,11 +12,11 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 public class LogAnalysisMainViewModel(
     IFileDialogService fileDialogService,
     ViewModelFactory.CreateLogPanel logPanelFactory)
-    : MainModuleViewModelBase
+    : MainFeatureViewModelBase
 {
     public override int NavigationIndex => 0;
-    public override string ModuleHeader => "Log Analysis";
-    public override Bitmap ModuleIcon => DefaultIcons.LogAnalysisIcon;
+    public override string FeatureHeader => "Log Analysis";
+    public override Bitmap FeatureIcon => DefaultIcons.LogAnalysisIcon;
 
     public ObservableCollection<LogPanelViewModel> OpenedLogPanels { get; } = [];
 

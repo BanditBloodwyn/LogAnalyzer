@@ -26,7 +26,7 @@
                      <navigation1:MainNavigationView/>
                  </DataTemplate>
 
-                 <DataTemplate DataType="{x:Type navigation:ModuleButtonsPanelViewModel}">
+                 <DataTemplate DataType="{x:Type navigation:FeatureButtonsPanelViewModel}">
                      <navigation1:ModuleButtonsPanel/>
 				 </DataTemplate>
                 

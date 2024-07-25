@@ -9,12 +9,12 @@ namespace LogAnalyzer.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private MainModuleViewModelBase? _currentModule;
+    private MainFeatureViewModelBase? _currentFeature;
 
-    public MainModuleViewModelBase? CurrentModule
+    public MainFeatureViewModelBase? CurrentFeature
     {
-        get => _currentModule;
-        set => SetProperty(ref _currentModule, value);
+        get => _currentFeature;
+        set => SetProperty(ref _currentFeature, value);
     }
 
     public ViewModelBase NavigationViewModel { get; set; }
@@ -23,21 +23,21 @@ public class MainViewModel : ViewModelBase
     {
         NavigationViewModel = serviceProvider.GetRequiredService<MainNavigationViewModel>();
 
-        EventBinding<ChangeOpenedModuleEvent> changeOpenedModuleEventBinding = new(ChangeOpenedModule);
-        EventBus<ChangeOpenedModuleEvent>.Register(changeOpenedModuleEventBinding);
+        EventBinding<ChangeOpenedFeatureEvent> changeOpenedFeatureEventBinding = new(ChangeOpenedFeature);
+        EventBus<ChangeOpenedFeatureEvent>.Register(changeOpenedFeatureEventBinding);
     }
 
-    private void ChangeOpenedModule(ChangeOpenedModuleEvent @event)
+    private void ChangeOpenedFeature(ChangeOpenedFeatureEvent @event)
     {
-        if (@event.Module is IReactToPreOpeningComponent preOpeningModule)
-            preOpeningModule.OnPreShown();
+        if (@event.Feature is IReactToPreOpeningComponent preOpeningComponent)
+            preOpeningComponent.OnPreShown();
 
-        CurrentModule = @event.Module;
+        CurrentFeature = @event.Feature;
 
-        if (@event.Module is IReactToPostOpeningComponent postOpeningModule)
-            postOpeningModule.OnShown();
+        if (@event.Feature is IReactToPostOpeningComponent postOpeningComponent)
+            postOpeningComponent.OnShown();
 
-        if (CurrentModule is IReactToOpeningViewModel reactToOpeningVM)
+        if (CurrentFeature is IReactToOpeningViewModel reactToOpeningVM)
             reactToOpeningVM.OnShown();
     }
 }

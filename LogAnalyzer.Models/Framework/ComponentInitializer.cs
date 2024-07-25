@@ -9,35 +9,35 @@ public class ComponentInitializer
 {
     public static ComponentBase[] InitializeComponents(IServiceCollection services)
     {
-        ComponentBase[] modules = TypeLoader
+        ComponentBase[] components = TypeLoader
             .LoadAssembliesTypesByBase("LogAnalyzer.Components", typeof(ComponentBase))
             .Select(static type => (ComponentBase)Activator.CreateInstance(type)!)
             .ToArray();
 
-        PerformDependencyInjection(modules, services);
-        ReactToDependencyInjection(modules);
+        PerformDependencyInjection(components, services);
+        ReactToDependencyInjection(components);
 
-        return modules;
+        return components;
     }
 
-    private static void PerformDependencyInjection(ComponentBase[] modules, IServiceCollection services)
+    private static void PerformDependencyInjection(ComponentBase[] components, IServiceCollection services)
     {
-        foreach (ComponentBase module in modules)
+        foreach (ComponentBase component in components)
         {
-            if (module is IDependencyInjectionComponent dependencyModule)
-                dependencyModule.RegisterDependencies(services);
+            if (component is IDependencyInjectionComponent dependencyComponent)
+                dependencyComponent.RegisterDependencies(services);
         }
 
-        foreach (ComponentBase module in modules)
-            module.SetServiceProvider(services.BuildServiceProvider(true));
+        foreach (ComponentBase component in components)
+            component.SetServiceProvider(services.BuildServiceProvider(true));
     }
 
-    private static void ReactToDependencyInjection(ComponentBase[] modules)
+    private static void ReactToDependencyInjection(ComponentBase[] components)
     {
-        foreach (ComponentBase module in modules)
+        foreach (ComponentBase component in components)
         {
-            if (module is IReactToDIComponent reactToDiModule)
-                reactToDiModule.OnDIFinished();
+            if (component is IReactToDIComponent reactToDiComponent)
+                reactToDiComponent.OnDIFinished();
         }
     }
 }

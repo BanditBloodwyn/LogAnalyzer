@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace LogAnalyzer.ViewModels.Commands;
 
-public class OpenModuleCommand : ICommand
+public class OpenFeatureCommand : ICommand
 {
     public event EventHandler? CanExecuteChanged;
 
@@ -16,7 +16,7 @@ public class OpenModuleCommand : ICommand
 
     public void Execute(object? parameter)
     {
-        if (parameter is MainModuleViewModelBase module)
-            EventBus<ChangeOpenedModuleEvent>.Raise(new ChangeOpenedModuleEvent(module));
+        if (parameter is MainFeatureViewModelBase feature)
+            EventBus<ChangeOpenedFeatureEvent>.Raise(new ChangeOpenedFeatureEvent(feature));
     }
 }

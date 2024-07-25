@@ -16,7 +16,7 @@ namespace LogAnalyzer.Components.UIFeatures
             service
                 .AddTransient<MainViewModel>()
                 .AddTransient<MainNavigationViewModel>()
-                .AddTransient<ModuleButtonsPanelViewModel>()
+                .AddTransient<FeatureButtonsPanelViewModel>()
                 .AddTransient<CommandsPanelViewModel>()
 
                 .AddTransient<LogAnalysisMainViewModel>()

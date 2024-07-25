@@ -5,9 +5,9 @@
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.Navigation.ModuleButtonsPanel"
-             x:DataType="navigation:ModuleButtonsPanelViewModel">
+             x:DataType="navigation:FeatureButtonsPanelViewModel">
    
-    <ItemsControl ItemsSource="{Binding Modules}">
+    <ItemsControl ItemsSource="{Binding Features}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel/>
@@ -19,12 +19,12 @@
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                     CommandParameter="{Binding RelativeSource={RelativeSource DataContext}}"
-                    Command="{Binding ((navigation:ModuleButtonsPanelViewModel)DataContext).OpenModuleCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
+                    Command="{Binding ((navigation:FeatureButtonsPanelViewModel)DataContext).OpenFeatureCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
                     <Grid ColumnDefinitions="*,*" MaxHeight="30">
-                        <Image Grid.Column="0" Source="{Binding ModuleIcon}"
+                        <Image Grid.Column="0" Source="{Binding FeatureIcon}"
                                HorizontalAlignment="Right"
                                Margin="0,0,30,0"/>
-                        <TextBlock Grid.Column="1" Text="{Binding ModuleHeader}"
+                        <TextBlock Grid.Column="1" Text="{Binding FeatureHeader}"
                                    HorizontalAlignment="Left" VerticalAlignment="Center"
                                    Margin="-20,0,0,0"/>
                     </Grid>

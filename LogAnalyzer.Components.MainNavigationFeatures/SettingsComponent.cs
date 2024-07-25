@@ -1,6 +1,6 @@
 ﻿using LogAnalyzer.Core.Components;
 using LogAnalyzer.Core.Components.Interfaces;
-using LogAnalyzer.Models.Modules;
+using LogAnalyzer.Models.MainFeatures;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.Components.MainNavigationFeatures;
