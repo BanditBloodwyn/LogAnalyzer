@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace LogAnalyzer.Views.Views.Modules
+namespace LogAnalyzer.Views.Views.MainComponents
 {
     public partial class SettingsModuleView : UserControl
     {

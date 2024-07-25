@@ -3,7 +3,7 @@ using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Modules;
 using LogAnalyzer.Resources;
 
-namespace LogAnalyzer.ViewModels.Modules;
+namespace LogAnalyzer.ViewModels.MainComponents;
 
 public class SettingsModuleViewModel(SettingsModel _model) : MainModuleViewModelBase
 {

@@ -1,7 +1,7 @@
 ﻿using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.ViewModels.Commands;
-using LogAnalyzer.ViewModels.Modules;
-using LogAnalyzer.ViewModels.Modules.LogAnalysis;
+using LogAnalyzer.ViewModels.MainComponents;
+using LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 

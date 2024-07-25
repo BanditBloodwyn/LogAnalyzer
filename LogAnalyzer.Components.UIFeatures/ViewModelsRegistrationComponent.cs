@@ -1,8 +1,8 @@
 ﻿using LogAnalyzer.Core.Components;
 using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.ViewModels;
-using LogAnalyzer.ViewModels.Modules;
-using LogAnalyzer.ViewModels.Modules.LogAnalysis;
+using LogAnalyzer.ViewModels.MainComponents;
+using LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
 using LogAnalyzer.ViewModels.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 

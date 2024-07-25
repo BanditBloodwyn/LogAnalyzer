@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
-namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
+namespace LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
 
 public class LogAnalysisModuleViewModel(
     IFileDialogService fileDialogService,

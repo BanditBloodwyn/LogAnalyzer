@@ -4,10 +4,10 @@
              xmlns:views="clr-namespace:LogAnalyzer.Views.Views"
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
              xmlns:navigation1="clr-namespace:LogAnalyzer.Views.Views.Navigation"
-             xmlns:modules="clr-namespace:LogAnalyzer.ViewModels.Modules;assembly=LogAnalyzer.ViewModels"
-             xmlns:modules1="clr-namespace:LogAnalyzer.Views.Views.Modules"
-             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels"
-             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.Views.Views.Modules.LogAnalysis"
+             xmlns:mainComponents="clr-namespace:LogAnalyzer.Views.Views.MainComponents"
+             xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
+             xmlns:modules="clr-namespace:LogAnalyzer.ViewModels.MainComponents;assembly=LogAnalyzer.ViewModels"
+             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainComponents.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              x:Class="LogAnalyzer.Views.App"
              RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -35,15 +35,15 @@
 				 </DataTemplate>
 				 
                  <DataTemplate DataType="{x:Type modules:SettingsModuleViewModel}">
-					 <modules1:SettingsModuleView/>
+					 <mainComponents:SettingsModuleView/>
 				 </DataTemplate>
 				
                  <DataTemplate DataType="{x:Type logAnalysis:LogAnalysisModuleViewModel}">
-					 <logAnalysis1:LogAnalysisModuleView/>
+					 <logAnalysis2:LogAnalysisModuleView/>
                  </DataTemplate>
 
                  <DataTemplate DataType="{x:Type logAnalysis:LogPanelViewModel}">
-					 <logAnalysis1:LogPanelView/>
+					 <logAnalysis2:LogPanelView/>
                  </DataTemplate>
 
 			 </Application.DataTemplates>

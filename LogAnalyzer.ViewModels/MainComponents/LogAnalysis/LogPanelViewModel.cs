@@ -3,14 +3,14 @@ using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.Models.Events;
+using LogAnalyzer.Models.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using LogAnalyzer.Models.LogAnalysis;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
-namespace LogAnalyzer.ViewModels.Modules.LogAnalysis;
+namespace LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
 
 public class LogPanelViewModel(
     CommandFactory.CreateLogAnalyzeCommand _commandFactory)

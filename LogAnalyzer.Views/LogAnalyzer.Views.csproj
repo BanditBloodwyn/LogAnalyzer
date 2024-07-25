@@ -27,13 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaXaml Update="Views\Modules\LogAnalysis\LogEntryElement.axaml">
+    <AvaloniaXaml Update="Views\MainComponents\LogAnalysis\LogEntryElement.axaml">
       <SubType>Designer</SubType>
     </AvaloniaXaml>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Modules\LogAnalysis\LogEntryElement.axaml.cs">
+    <Compile Update="Views\MainComponents\LogAnalysis\LogEntryElement.axaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>LogEntryElement.axaml</DependentUpon>
     </Compile>

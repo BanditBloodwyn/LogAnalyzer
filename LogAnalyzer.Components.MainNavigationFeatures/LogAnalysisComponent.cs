@@ -2,7 +2,7 @@
 using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Models.Strategies.LogStringFinding;
 using LogAnalyzer.Models.Strategies.LogStringParsing;
-using LogAnalyzer.ViewModels.Modules.LogAnalysis;
+using LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.Components.MainNavigationFeatures;

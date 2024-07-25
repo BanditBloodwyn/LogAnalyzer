@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
-             x:Class="LogAnalyzer.Views.Views.Modules.LogAnalysis.LogEntryElement"
+             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement"
              x:DataType="containers:LogEntry">
 
 
