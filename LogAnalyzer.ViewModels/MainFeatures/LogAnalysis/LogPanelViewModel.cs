@@ -5,7 +5,7 @@ using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.Models.Events;
-using LogAnalyzer.Models.LogAnalysis;
+using LogAnalyzer.Models.MainFeatures.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;

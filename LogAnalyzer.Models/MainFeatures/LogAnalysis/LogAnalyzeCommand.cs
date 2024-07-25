@@ -5,7 +5,7 @@ using LogAnalyzer.Models.Strategies.LogStringFinding;
 using LogAnalyzer.Models.Strategies.LogStringParsing;
 using FileInfo = System.IO.FileInfo;
 
-namespace LogAnalyzer.Models.LogAnalysis;
+namespace LogAnalyzer.Models.MainFeatures.LogAnalysis;
 
 public class LogAnalyzeCommand(
     ILogStringFindingStrategy _logFinder,
