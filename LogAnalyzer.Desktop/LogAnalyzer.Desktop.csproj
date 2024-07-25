@@ -26,8 +26,8 @@
 
 	<Target Name="CopyModulesDependencies" AfterTargets="Build">
 		<ItemGroup>
-			<ModulesDependencies Include="$(SolutionDir)LogAnalyzer.Modules.BackendExtentions\bin\$(Configuration)\$(TargetFramework)\*.dll" />
-			<ModulesDependencies Include="$(SolutionDir)LogAnalyzer.Modules.MainNavigationFeatures\bin\$(Configuration)\$(TargetFramework)\*.dll" />
+			<ModulesDependencies Include="$(SolutionDir)LogAnalyzer.Components.BackendExtentions\bin\$(Configuration)\$(TargetFramework)\*.dll" />
+			<ModulesDependencies Include="$(SolutionDir)LogAnalyzer.Components.MainNavigationFeatures\bin\$(Configuration)\$(TargetFramework)\*.dll" />
 			<ModulesDependencies Include="$(SolutionDir)LogAnalyzer.Components.UIFeatures\bin\$(Configuration)\$(TargetFramework)\*.dll" />
 		</ItemGroup>
 		<Copy SourceFiles="@(ModulesDependencies)" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="false" />

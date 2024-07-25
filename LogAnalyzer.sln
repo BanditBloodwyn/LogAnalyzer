@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C7965DA4-1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Core", "LogAnalyzer.Core\LogAnalyzer.Core.csproj", "{4CC038DB-0A9E-4E1D-82A3-2DBE53A4EFBA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Components.BackendExtentions", "LogAnalyzer.Modules.BackendExtentions\LogAnalyzer.Components.BackendExtentions.csproj", "{C7A3F3F7-3584-4778-AB48-02FF96AAE4B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Components.BackendExtentions", "LogAnalyzer.Components.BackendExtentions\LogAnalyzer.Components.BackendExtentions.csproj", "{C7A3F3F7-3584-4778-AB48-02FF96AAE4B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Models.Events", "LogAnalyzer.Models.Events\LogAnalyzer.Models.Events.csproj", "{C07689A0-CF8E-44C8-B51D-CF831CC00559}"
 EndProject
@@ -36,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Resources", "Lo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{1DD8A009-4A4F-4494-A13A-F80D023ED7BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Components.MainNavigationFeatures", "LogAnalyzer.Modules.MainNavigationFeatures\LogAnalyzer.Components.MainNavigationFeatures.csproj", "{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogAnalyzer.Components.MainNavigationFeatures", "LogAnalyzer.Components.MainNavigationFeatures\LogAnalyzer.Components.MainNavigationFeatures.csproj", "{FF6B31C9-D2AD-45A0-98A9-97057E2B2A77}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4E4ABA1B-3D1C-414A-89D1-82D4431EECD7}"
 EndProject
