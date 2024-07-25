@@ -40,18 +40,16 @@ public class TypeLoader
         }
     }
 
-    private static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
+    private static bool IsSubclassOfRawGeneric(Type generic, Type? toCheck)
     {
         while (toCheck != null && toCheck != typeof(object))
         {
-            if (toCheck.IsGenericType)
-            {
+            if (toCheck.IsGenericType) 
                 toCheck = toCheck.GetGenericTypeDefinition();
-            }
+          
             if (generic == toCheck)
-            {
                 return true;
-            }
+          
             toCheck = toCheck.BaseType;
         }
         return false;
