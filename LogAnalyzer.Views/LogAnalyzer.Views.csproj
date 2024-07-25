@@ -43,12 +43,11 @@
     <Compile Update="Views\MainComponents\SettingsMainView.axaml.cs">
       <DependentUpon>SettingsMainView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Navigation\FeatureButtonsPanel.axaml.cs">
+      <DependentUpon>FeatureButtonsPanel.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Navigation\ProgressCommandElement.axaml.cs">
       <DependentUpon>ProgressCommandElement.axaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Navigation\ModuleButtonsPanel.axaml" />
   </ItemGroup>
 </Project>

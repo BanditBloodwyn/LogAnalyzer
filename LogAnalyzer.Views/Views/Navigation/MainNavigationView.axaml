@@ -10,7 +10,7 @@
     <Border BorderThickness="0,0,2,0" BorderBrush="#303030">
         <Grid RowDefinitions="*, *">
 
-            <ContentControl Grid.Row="0" Content="{Binding ModuleButtonsPanelVM}"/> 
+            <ContentControl Grid.Row="0" Content="{Binding FeatureButtonsPanelVm}"/> 
             <ContentControl Grid.Row="1" Content="{Binding CommandsPanelVM}"/> 
         </Grid>
     </Border>

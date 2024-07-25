@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
-             x:Class="LogAnalyzer.Views.Views.Navigation.ModuleButtonsPanel"
+             x:Class="LogAnalyzer.Views.Views.Navigation.FeatureButtonsPanel"
              x:DataType="navigation:FeatureButtonsPanelViewModel">
    
     <ItemsControl ItemsSource="{Binding Features}">

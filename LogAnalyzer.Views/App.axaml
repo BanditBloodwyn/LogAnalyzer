@@ -6,8 +6,8 @@
              xmlns:navigation1="clr-namespace:LogAnalyzer.Views.Views.Navigation"
              xmlns:mainComponents="clr-namespace:LogAnalyzer.Views.Views.MainComponents"
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
-             xmlns:modules="clr-namespace:LogAnalyzer.ViewModels.MainFeatures;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
+             xmlns:mainFeatures="clr-namespace:LogAnalyzer.ViewModels.MainFeatures;assembly=LogAnalyzer.ViewModels"
              x:Class="LogAnalyzer.Views.App"
              RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -27,14 +27,14 @@
                  </DataTemplate>
 
                  <DataTemplate DataType="{x:Type navigation:FeatureButtonsPanelViewModel}">
-                     <navigation1:ModuleButtonsPanel/>
+					 <navigation1:FeatureButtonsPanel/>
 				 </DataTemplate>
                 
                  <DataTemplate DataType="{x:Type navigation:CommandsPanelViewModel}">
 					 <navigation1:CommandsPanel/>
 				 </DataTemplate>
 				 
-                 <DataTemplate DataType="{x:Type modules:SettingsMainViewModel}">
+                 <DataTemplate DataType="{x:Type mainFeatures:SettingsMainViewModel}">
 					 <mainComponents:SettingsMainView/>
 				 </DataTemplate>
 				

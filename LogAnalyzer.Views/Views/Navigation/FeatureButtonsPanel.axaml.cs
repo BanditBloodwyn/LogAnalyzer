@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace LogAnalyzer.Views.Views.Navigation
 {
-    public partial class ModuleButtonsPanel : UserControl
+    public partial class FeatureButtonsPanel : UserControl
     {
-        public ModuleButtonsPanel()
+        public FeatureButtonsPanel()
         {
             InitializeComponent();
         }

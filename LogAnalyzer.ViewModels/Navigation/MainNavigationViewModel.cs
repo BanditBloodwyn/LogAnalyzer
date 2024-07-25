@@ -3,9 +3,9 @@
 namespace LogAnalyzer.ViewModels.Navigation;
 
 public class MainNavigationViewModel(
-    FeatureButtonsPanelViewModel moduleButtonsPanelVM,
+    FeatureButtonsPanelViewModel featureButtonsPanelVM,
     CommandsPanelViewModel commandsPanelVM) : ViewModelBase
 {
-    public FeatureButtonsPanelViewModel ModuleButtonsPanelVM { get; set; } = moduleButtonsPanelVM;
+    public FeatureButtonsPanelViewModel FeatureButtonsPanelVm { get; set; } = featureButtonsPanelVM;
     public CommandsPanelViewModel CommandsPanelVM { get; set; } = commandsPanelVM;
 }

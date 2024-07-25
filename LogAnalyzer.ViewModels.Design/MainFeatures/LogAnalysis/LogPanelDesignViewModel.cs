@@ -2,7 +2,7 @@
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
-namespace LogAnalyzer.ViewModels.Design.Modules.LogAnalysis;
+namespace LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;
 
 public class LogPanelDesignViewModel : LogPanelViewModel
 {

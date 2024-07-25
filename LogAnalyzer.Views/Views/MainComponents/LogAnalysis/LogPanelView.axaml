@@ -2,16 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.Views.Views.Modules.LogAnalysis"
-             xmlns:design="clr-namespace:LogAnalyzer.ViewModels.Design.Modules.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
+             xmlns:logAnalysis3="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogPanelView"
              x:DataType="logAnalysis:LogPanelViewModel">
     
     <Design.DataContext>
-		<design:LogPanelDesignViewModel/>
+		<logAnalysis3:LogPanelDesignViewModel/>
 	</Design.DataContext>
 
     <Border BorderBrush="Transparent" BorderThickness="2">
