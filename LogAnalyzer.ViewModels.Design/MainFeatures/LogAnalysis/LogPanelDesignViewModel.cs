@@ -30,6 +30,13 @@ public class LogPanelDesignViewModel : LogPanelViewModel
         LogEntries.Add(new LogEntry(
             "07/12/2024 09:18:21,392",
             "DatabaseConfiguration",
+            "Debug",
+            "'CommandTimeout' not found for DatabaseConfiguration",
+            "Writing back '' as default value."
+        ));
+        LogEntries.Add(new LogEntry(
+            "07/12/2024 09:18:21,392",
+            "DatabaseConfiguration",
             "Error",
             "'CommandTimeout' not found for DatabaseConfiguration",
             "Writing back '' as default value."

@@ -4,6 +4,8 @@ using Avalonia.Media;
 using LogAnalyzer.Core.Extentions;
 using System;
 using System.Globalization;
+using Avalonia.Controls;
+using Avalonia.Controls.Converters;
 
 namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis;
 
@@ -13,10 +15,10 @@ public class LogTypeToBrushConverter : IValueConverter
     {
         return (value as string)?.ToLower() switch
         {
-            "error" => CreateGradientBrush(Colors.LightPink),
-            "warning" => CreateGradientBrush(Colors.LightYellow),
-            "info" => CreateGradientBrush(Colors.LightBlue),
-            _ => new SolidColorBrush(Colors.Transparent)
+            "error" => CreateGradientBrush(Colors.LightPink, parameter),
+            "warning" => CreateGradientBrush(Colors.LightYellow, parameter),
+            "info" => CreateGradientBrush(Colors.LightBlue, parameter),
+            _ => CreateGradientBrush(ColorToHexConverter.ParseHexString("#404040", AlphaComponentPosition.Leading).Value, parameter)
         };
     }
 
@@ -25,8 +27,11 @@ public class LogTypeToBrushConverter : IValueConverter
         throw new NotImplementedException();
     }
 
-    private static IBrush CreateGradientBrush(Color color)
+    private static IBrush? CreateGradientBrush(Color color, object? parameter)
     {
+        if (parameter is not string targetOpacity)
+            targetOpacity = "40";
+
         return new LinearGradientBrush
         {
             StartPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
@@ -34,7 +39,7 @@ public class LogTypeToBrushConverter : IValueConverter
             GradientStops = new GradientStops
             {
                 new(color.WithOpacity(0.1), 0),
-                new(color.WithOpacity(0.4), 1)
+                new(color.WithOpacity(int.Parse(targetOpacity) / 100.0), 1)
             }
         };
     }

@@ -13,8 +13,22 @@
 		<logAnalysis:LogInnerMessageHeightConverter x:Key="LogInnerMessageHeightConverter"/>
     </UserControl.Resources>
 
-    <Border BorderBrush="Black" BorderThickness="1">
-        <StackPanel Background="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}}">
+    <UserControl.Styles>
+        <Style Selector="Border">
+            <Setter Property="Background" Value="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}, ConverterParameter=40}"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+			</Setter>
+		</Style>
+        <Style Selector="Border:pointerover">
+            <Setter Property="Background" Value="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}, ConverterParameter=60}"/>
+		</Style>
+    </UserControl.Styles>
+
+    <Border BorderBrush="Transparent" BorderThickness="1">
+        <StackPanel>
             <Grid ColumnDefinitions="170,270,*,100">
                 <Label Grid.Column="0" 
                        FontWeight="ExtraLight"
