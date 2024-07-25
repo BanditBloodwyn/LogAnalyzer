@@ -3,9 +3,9 @@ using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Modules;
 using LogAnalyzer.Resources;
 
-namespace LogAnalyzer.ViewModels.MainComponents;
+namespace LogAnalyzer.ViewModels.MainFeatures;
 
-public class SettingsModuleViewModel(SettingsModel _model) : MainModuleViewModelBase
+public class SettingsMainViewModel(SettingsModel _model) : MainModuleViewModelBase
 {
     public override int NavigationIndex => 1;
     public override string ModuleHeader => "Settings";

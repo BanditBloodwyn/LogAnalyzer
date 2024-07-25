@@ -5,8 +5,8 @@ namespace LogAnalyzer.Resources;
 
 public static class DefaultIcons
 {
-    public static Bitmap SettingsIcon => GetBitmapFromBytes(IconsResource.module_settings);
-    public static Bitmap LogAnalysisIcon => GetBitmapFromBytes(IconsResource.module_loganalysis);
+    public static Bitmap SettingsIcon => GetBitmapFromBytes(IconsResource.feature_settings);
+    public static Bitmap LogAnalysisIcon => GetBitmapFromBytes(IconsResource.feature_loganalysis);
 
     private static Bitmap GetBitmapFromBytes(byte[] bytes)
     {

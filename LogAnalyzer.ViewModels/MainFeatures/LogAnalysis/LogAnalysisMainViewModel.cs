@@ -1,15 +1,15 @@
-﻿using Avalonia.Media.Imaging;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Avalonia.Media.Imaging;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Resources;
 using LogAnalyzer.Services.IO.FileDialog;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
-namespace LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 
-public class LogAnalysisModuleViewModel(
+public class LogAnalysisMainViewModel(
     IFileDialogService fileDialogService,
     ViewModelFactory.CreateLogPanel logPanelFactory)
     : MainModuleViewModelBase

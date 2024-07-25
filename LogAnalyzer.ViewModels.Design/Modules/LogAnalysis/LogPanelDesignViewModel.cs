@@ -1,5 +1,5 @@
 ﻿using LogAnalyzer.Models.Data.Containers;
-using LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Design.Modules.LogAnalysis;

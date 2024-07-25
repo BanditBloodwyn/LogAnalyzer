@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Icons\module_settings.png" />
+    <None Remove="Icons\feature_settings.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Icons\module_settings.png" />
+    <Content Include="Icons\feature_settings.png" />
   </ItemGroup>
 
   <ItemGroup>

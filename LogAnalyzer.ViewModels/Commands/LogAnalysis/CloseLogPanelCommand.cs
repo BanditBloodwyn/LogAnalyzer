@@ -1,5 +1,5 @@
-﻿using LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 
 namespace LogAnalyzer.ViewModels.Commands.LogAnalysis;
 

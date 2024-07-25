@@ -1,8 +1,8 @@
 ﻿using LogAnalyzer.Core.Components;
 using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.ViewModels;
-using LogAnalyzer.ViewModels.MainComponents;
-using LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 using LogAnalyzer.ViewModels.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,9 +19,9 @@ namespace LogAnalyzer.Components.UIFeatures
                 .AddTransient<ModuleButtonsPanelViewModel>()
                 .AddTransient<CommandsPanelViewModel>()
 
-                .AddTransient<LogAnalysisModuleViewModel>()
+                .AddTransient<LogAnalysisMainViewModel>()
                 .AddTransient<LogPanelViewModel>()
-                .AddTransient<SettingsModuleViewModel>()
+                .AddTransient<SettingsMainViewModel>()
 
                 .AddTransient<ViewModelFactory.CreateLogPanel>(static serviceProvider =>
                     serviceProvider.GetRequiredService<LogPanelViewModel>);

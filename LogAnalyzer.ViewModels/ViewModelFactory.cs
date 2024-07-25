@@ -1,4 +1,4 @@
-﻿using LogAnalyzer.ViewModels.MainComponents.LogAnalysis;
+﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 
 namespace LogAnalyzer.ViewModels;
 

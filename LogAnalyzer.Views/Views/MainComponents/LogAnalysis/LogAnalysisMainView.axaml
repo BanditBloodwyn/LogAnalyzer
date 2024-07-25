@@ -2,10 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainComponents.LogAnalysis;assembly=LogAnalyzer.ViewModels"
+             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
-             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogAnalysisModuleView"
-             x:DataType="logAnalysis:LogAnalysisModuleViewModel">
+             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogAnalysisMainView"
+             x:DataType="logAnalysis:LogAnalysisMainViewModel">
     <Grid RowDefinitions="29,*">
         <StackPanel Orientation="Horizontal">
             <Button VerticalAlignment="Top" 

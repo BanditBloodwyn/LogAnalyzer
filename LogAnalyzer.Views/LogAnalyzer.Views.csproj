@@ -33,9 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\MainComponents\LogAnalysis\LogAnalysisMainView.axaml.cs">
+      <DependentUpon>LogAnalysisMainView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MainComponents\LogAnalysis\LogEntryElement.axaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>LogEntryElement.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainComponents\SettingsMainView.axaml.cs">
+      <DependentUpon>SettingsMainView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Navigation\ProgressCommandElement.axaml.cs">
       <DependentUpon>ProgressCommandElement.axaml</DependentUpon>

@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace LogAnalyzer.Views.Views.MainComponents
 {
-    public partial class SettingsModuleView : UserControl
+    public partial class SettingsMainView : UserControl
     {
-        public SettingsModuleView()
+        public SettingsMainView()
         {
             InitializeComponent();
         }
