@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using LogAnalyzer.Models.Data.BaseTypes.Commands;
+﻿using LogAnalyzer.Models.Data.BaseTypes.Commands;
 using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.Models.Strategies.LogStringFinding;
 using LogAnalyzer.Models.Strategies.LogStringParsing;
+using System.Diagnostics;
 using FileInfo = System.IO.FileInfo;
 
 namespace LogAnalyzer.Models.MainFeatures.LogAnalysis;

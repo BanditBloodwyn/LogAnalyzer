@@ -20,12 +20,18 @@ public class ClassicATBASLogStringParsing : ILogStringParsingStrategy
             Debug.WriteLine(e.Message);
         }
 
+        string timeStamp = GetTimetamp(logString);
+        string source = GetSource(logString);
+        string type = GetLogType(logString);
+        string message = GetMessage(logString);
+        string innerMessage = GetInnerMessage(logString);
+
         return new LogEntry(
-            GetTimetamp(logString),
-            GetSource(logString),
-            "",
-            logString,
-            "");
+            timeStamp,
+            source,
+            type,
+            message,
+            innerMessage);
     }
 
     private static string GetTimetamp(string logString)
@@ -53,5 +59,31 @@ public class ClassicATBASLogStringParsing : ILogStringParsingStrategy
         return logString
             .Split(':')[3]
             .Split(',')[0];
+    }
+
+    private static string GetLogType(string logString)
+    {
+        return logString
+            .Split(',')[2]
+            .Split('-')[0]
+            .Trim();
+    }
+
+    private static string GetMessage(string logString)
+    {
+        return logString
+            .Split('\n')[0]
+            .Split('-')[1]
+            .Trim();
+    }
+
+    private static string GetInnerMessage(string logString)
+    {
+        string[] innerMessageLines = logString
+            .Split('\n')
+            .Skip(1)
+            .ToArray();
+
+        return string.Join("", innerMessageLines);
     }
 }
