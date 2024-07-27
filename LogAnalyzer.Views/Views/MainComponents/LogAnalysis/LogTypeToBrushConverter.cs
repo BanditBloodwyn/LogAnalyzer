@@ -4,8 +4,6 @@ using Avalonia.Media;
 using LogAnalyzer.Core.Extentions;
 using System;
 using System.Globalization;
-using Avalonia.Controls;
-using Avalonia.Controls.Converters;
 
 namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis;
 
@@ -18,7 +16,7 @@ public class LogTypeToBrushConverter : IValueConverter
             "error" => CreateGradientBrush(Colors.LightPink, parameter),
             "warning" => CreateGradientBrush(Colors.LightYellow, parameter),
             "info" => CreateGradientBrush(Colors.LightBlue, parameter),
-            _ => CreateGradientBrush(ColorToHexConverter.ParseHexString("#404040", AlphaComponentPosition.Leading).Value, parameter)
+            _ => CreateGradientBrush(Color.Parse("#404040"), parameter)
         };
     }
 
