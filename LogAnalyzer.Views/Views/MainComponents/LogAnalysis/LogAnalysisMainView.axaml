@@ -15,19 +15,7 @@
 
         <Border Grid.Row="1"
                 BorderBrush="#303030" BorderThickness="0,0,0,0">
-            <ItemsControl ItemsSource="{Binding OpenedLogPanels}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Rows="1"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl Content="{Binding}"
-                                        MaxWidth="{Binding $parent[ItemsControl].Bounds.Width}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Border>
+            <ContentControl Content="{Binding MergedLogPanel}"/>
+		</Border>
     </Grid>
 </UserControl>

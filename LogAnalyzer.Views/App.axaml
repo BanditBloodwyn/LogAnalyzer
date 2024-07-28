@@ -8,6 +8,7 @@
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:mainFeatures="clr-namespace:LogAnalyzer.ViewModels.MainFeatures;assembly=LogAnalyzer.ViewModels"
+             xmlns:views1="clr-namespace:LogAnalyzer.Views"
              x:Class="LogAnalyzer.Views.App"
              RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -44,6 +45,10 @@
 
                  <DataTemplate DataType="{x:Type logAnalysis:LogPanelViewModel}">
 					 <logAnalysis2:LogPanelView/>
+                 </DataTemplate>             
+                 
+                 <DataTemplate DataType="{x:Type logAnalysis:MergedLogPanelViewModel}">
+					 <logAnalysis2:MergedLogPanel/>
                  </DataTemplate>
 
 			 </Application.DataTemplates>

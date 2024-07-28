@@ -15,6 +15,7 @@ public class LogAnalysisComponent : ComponentBase,
         service
             .AddTransient<ILogStringFindingStrategy, ClassicATBASLogStringFinding>()
             .AddTransient<ILogStringParsingStrategy, ClassicATBASLogStringParsing>()
+            .AddTransient<MergedLogPanelViewModel>()
             .AddSingleton<LogAnalysisMainViewModel>();
     }
 }
