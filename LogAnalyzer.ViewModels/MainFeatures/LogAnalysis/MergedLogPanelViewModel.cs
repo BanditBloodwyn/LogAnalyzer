@@ -22,6 +22,7 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
     public void OpenFiles(FileInfo[] filesToOpen)
     {
         OpenedFiles.Clear();
+        LogEntries.Clear();
         
         _logEntryOffsets.Clear();
         _logEntryOffsets.AddRange(DistributePositions(-50, 50, filesToOpen.Length));
@@ -57,19 +58,15 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
         Dispatcher.UIThread.Invoke(() => LogEntries.AddTimeSorted(logEntry));
     }
 
-    private static List<double> DistributePositions(double min, double max, int count)
+    private static IEnumerable<double> DistributePositions(double min, double max, int count)
     {
         if (count < 2)
-            throw new ArgumentException("Count must be at least 2", nameof(count));
-
-        List<double> positions = new();
-
-        for (int i = 0; i < count; i++)
         {
-            double position = min + (max - min) * i / (count - 1);
-            positions.Add(position);
+            yield return 0;
+            yield break;
         }
-
-        return positions;
+        
+        for (int i = 0; i < count; i++)
+            yield return min + (max - min) * i / (count - 1);
     }
 }
