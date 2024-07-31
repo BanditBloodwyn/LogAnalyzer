@@ -59,7 +59,7 @@ public class LogPanelViewModel(
         File = file;
         IsAnalyzing = true;
 
-        _fileAnalysisCtSource = new();
+        _fileAnalysisCtSource = new CancellationTokenSource();
         CancellationToken ct = _fileAnalysisCtSource.Token;
 
         IProgress<LogEntry> entryProgress = new Progress<LogEntry>(OnLogEntryProcessed);
