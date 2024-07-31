@@ -1,7 +1,8 @@
 ﻿namespace LogAnalyzer.Models.Data.Containers;
 
-public readonly struct LogEntry(string timeStamp, string source, string logType, string message, string innerMessage)
+public struct LogEntry(string timeStamp, string source, string logType, string message, string innerMessage)
 {
+    public int? FileIndex { get; set; }
     public string TimeStamp { get; } = timeStamp;
     public string Source { get; } = source;
     public string LogType { get; } = logType;

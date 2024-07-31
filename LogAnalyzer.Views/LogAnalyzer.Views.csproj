@@ -54,4 +54,8 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\MainComponents\LogAnalysis\MergedLogPanel.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\MainComponents\LogAnalysis\LogFileHeaderElement.axaml" />
+  </ItemGroup>
 </Project>
