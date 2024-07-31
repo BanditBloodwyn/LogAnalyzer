@@ -27,7 +27,8 @@
 		</Style>
     </UserControl.Styles>
 
-    <Border BorderBrush="Transparent" BorderThickness="1">
+    <Border BorderBrush="Transparent" BorderThickness="1" 
+            CornerRadius="7">
         <StackPanel>
             <Grid ColumnDefinitions="170,270,*,100">
                 <Label Grid.Column="0" 

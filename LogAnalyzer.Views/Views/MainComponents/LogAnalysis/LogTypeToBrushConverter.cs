@@ -16,7 +16,7 @@ public class LogTypeToBrushConverter : IValueConverter
             "error" => CreateGradientBrush(Colors.LightPink, parameter),
             "warning" => CreateGradientBrush(Colors.LightYellow, parameter),
             "info" => CreateGradientBrush(Colors.LightBlue, parameter),
-            _ => CreateGradientBrush(Color.Parse("#404040"), parameter)
+            _ => CreateGradientBrush(Color.Parse("#606060"), parameter)
         };
     }
 
