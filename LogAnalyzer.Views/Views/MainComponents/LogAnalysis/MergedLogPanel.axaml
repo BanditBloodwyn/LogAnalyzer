@@ -4,29 +4,51 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="250"
+             xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="300"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedLogPanel"
              x:DataType="logAnalysis:MergedLogPanelViewModel">
 
     <Design.DataContext>
         <logAnalysis1:MergedLogPanelDesignViewModel/>
     </Design.DataContext>
+   
+    <UserControl.Resources>
+        <logAnalysis2:LogFileOffsetToPaddingConverter x:Key="LogFileOffsetToPaddingConverter"/>
+    </UserControl.Resources>
 
-    <Grid RowDefinitions="30,*">
+	<Grid RowDefinitions="30,2,*">
         <ItemsControl Grid.Row="0"
                       ItemsSource="{Binding OpenedFiles}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Rows="1" Background="DarkBlue"/>
+                    <UniformGrid Rows="1"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                           Padding="0" VerticalAlignment="Stretch"
-                           Content="{Binding NameWithoutExtention}"/>
+					<logAnalysis2:LogFileHeaderElement/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <Border Grid.Row="1"
+                BorderBrush="#303030" BorderThickness="1"/>
+
+        <ScrollViewer Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding LogEntries}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Margin="50,0"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <logAnalysis2:LogEntryElement
+                            Margin="{Binding Offset, Converter={StaticResource LogFileOffsetToPaddingConverter}}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+		</ScrollViewer>
     </Grid>
 </UserControl>

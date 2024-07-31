@@ -17,9 +17,14 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
     public ObservableCollection<FileInfo> OpenedFiles { get; } = [];
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
 
+    private readonly List<double> _logEntryOffsets = [];
+
     public void OpenFiles(FileInfo[] filesToOpen)
     {
         OpenedFiles.Clear();
+        
+        _logEntryOffsets.Clear();
+        _logEntryOffsets.AddRange(DistributePositions(-50, 50, filesToOpen.Length));
 
         for (int index = 0; index < filesToOpen.Length; index++)
         {
@@ -27,7 +32,6 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
             fileInfo.Index = index;
 
             OpenedFiles.Add(fileInfo);
-
             CreateLogAnalyzeCommand(fileInfo);
         }
     }
@@ -47,7 +51,25 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
 
     private void OnLogEntryProcessed(int? index, LogEntry logEntry)
     {
-        logEntry.FileIndex = index;
+        if(index.HasValue) 
+            logEntry.Offset = _logEntryOffsets[index.Value];
+
         Dispatcher.UIThread.Invoke(() => LogEntries.AddTimeSorted(logEntry));
+    }
+
+    private static List<double> DistributePositions(double min, double max, int count)
+    {
+        if (count < 2)
+            throw new ArgumentException("Count must be at least 2", nameof(count));
+
+        List<double> positions = new();
+
+        for (int i = 0; i < count; i++)
+        {
+            double position = min + (max - min) * i / (count - 1);
+            positions.Add(position);
+        }
+
+        return positions;
     }
 }
