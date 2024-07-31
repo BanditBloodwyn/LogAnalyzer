@@ -32,7 +32,7 @@ public class LogTypeToBrushConverter : IValueConverter
 
         return new LinearGradientBrush
         {
-            StartPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
+            StartPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
             EndPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
             GradientStops = new GradientStops
             {
