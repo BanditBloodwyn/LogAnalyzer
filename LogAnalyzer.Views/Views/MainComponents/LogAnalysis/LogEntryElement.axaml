@@ -23,7 +23,7 @@
             </Setter>
         </Style>
         <Style Selector="Border:pointerover">
-            <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
+            <Setter Property="Background" Value="{StaticResource Accent3Brush}"/>
         </Style>
     </UserControl.Styles>
 
