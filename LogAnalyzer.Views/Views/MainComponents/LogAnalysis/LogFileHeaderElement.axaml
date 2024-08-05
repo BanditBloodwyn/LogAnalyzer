@@ -9,10 +9,10 @@
 
     <Grid>
         <Path Grid.Column="0" HorizontalAlignment="Center"
-              Fill="#303030" Stroke="#303030" StrokeThickness="1">
+              Fill="LightGray" Stroke="LightGray" StrokeThickness="1">
             <Path.Data>
                 <PathGeometry>
-                    <PathFigure StartPoint="0,0">
+                    <PathFigure StartPoint="30,0">
                         <LineSegment Point="230,0"/>
                         <LineSegment Point="260,27"/>
                         <LineSegment Point="0,27"/>

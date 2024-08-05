@@ -10,11 +10,12 @@
         <StackPanel Orientation="Horizontal">
             <Button VerticalAlignment="Top" 
                     Height="30" Width="30"
+                    Background="#09899f" Foreground="White"
                     Command="{Binding OpenNewLogPanelCommand}">+</Button>
         </StackPanel>
 
         <Border Grid.Row="1"
-                BorderBrush="#303030" BorderThickness="0,0,0,0">
+                BorderBrush="LightGray" BorderThickness="0,0,0,0">
             <ContentControl Content="{Binding MergedLogPanel}"/>
 		</Border>
     </Grid>

@@ -44,7 +44,7 @@
             <!--Content-->
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Auto">
-                <Border Background="#202020" Margin="5">
+                <Border Margin="5">
                     <ItemsControl ItemsSource="{Binding LogEntries}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

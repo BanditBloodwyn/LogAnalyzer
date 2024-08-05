@@ -17,7 +17,7 @@
         <logAnalysis2:LogFileOffsetToPaddingConverter x:Key="LogFileOffsetToPaddingConverter"/>
     </UserControl.Resources>
 
-	<Grid RowDefinitions="30,2,*">
+	<Grid RowDefinitions="30,5,*">
         <ItemsControl Grid.Row="0"
                       ItemsSource="{Binding OpenedFiles}">
             <ItemsControl.ItemsPanel>
@@ -32,8 +32,9 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Border Grid.Row="1"
-                BorderBrush="#303030" BorderThickness="1"/>
+        <Border Grid.Row="0"
+                BorderBrush="LightGray" BorderThickness="0,0,0,1" 
+                Margin="0,2"/>
 
         <ScrollViewer Grid.Row="2">
             <ItemsControl ItemsSource="{Binding LogEntries}">

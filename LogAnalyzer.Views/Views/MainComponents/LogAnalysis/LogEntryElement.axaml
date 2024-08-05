@@ -15,7 +15,7 @@
 
     <UserControl.Styles>
         <Style Selector="Border">
-            <Setter Property="Background" Value="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}, ConverterParameter=40}"/>
+            <Setter Property="Background" Value="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}, ConverterParameter=80}"/>
             <Setter Property="Transitions">
                 <Transitions>
                     <BrushTransition Property="Background" Duration="0:0:0.2"/>
@@ -23,7 +23,7 @@
 			</Setter>
 		</Style>
         <Style Selector="Border:pointerover">
-            <Setter Property="Background" Value="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}, ConverterParameter=60}"/>
+            <Setter Property="Background" Value="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}, ConverterParameter=100}"/>
 		</Style>
     </UserControl.Styles>
 

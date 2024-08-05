@@ -16,6 +16,7 @@
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <Button
+                    Background="Transparent"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                     CommandParameter="{Binding RelativeSource={RelativeSource DataContext}}"

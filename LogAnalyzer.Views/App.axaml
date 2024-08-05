@@ -10,7 +10,7 @@
              xmlns:mainFeatures="clr-namespace:LogAnalyzer.ViewModels.MainFeatures;assembly=LogAnalyzer.ViewModels"
              xmlns:views1="clr-namespace:LogAnalyzer.Views"
              x:Class="LogAnalyzer.Views.App"
-             RequestedThemeVariant="Dark">
+             RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
              <Application.Styles>

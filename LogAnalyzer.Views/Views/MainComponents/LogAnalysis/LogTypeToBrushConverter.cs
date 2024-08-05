@@ -13,9 +13,9 @@ public class LogTypeToBrushConverter : IValueConverter
     {
         return (value as string)?.ToLower() switch
         {
-            "error" => CreateGradientBrush(Colors.LightPink, parameter),
-            "warning" => CreateGradientBrush(Colors.LightYellow, parameter),
-            "info" => CreateGradientBrush(Colors.LightBlue, parameter),
+            "error" => CreateGradientBrush(Colors.DeepPink, parameter),
+            "warning" => CreateGradientBrush(Colors.Yellow, parameter),
+            "info" => CreateGradientBrush(Colors.DeepSkyBlue, parameter),
             _ => CreateGradientBrush(Color.Parse("#606060"), parameter)
         };
     }
@@ -32,12 +32,12 @@ public class LogTypeToBrushConverter : IValueConverter
 
         return new LinearGradientBrush
         {
-            StartPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
-            EndPoint = new RelativePoint(0, 1, RelativeUnit.Relative),
+            StartPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
+            EndPoint = new RelativePoint(0, 0, RelativeUnit.Relative),
             GradientStops = new GradientStops
             {
-                new(color.WithOpacity(0.1), 0),
-                new(color.WithOpacity(int.Parse(targetOpacity) / 100.0), 1)
+                new(color.WithOpacity(int.Parse(targetOpacity) / 100.0), 0),
+                new(color.WithOpacity(int.Parse(targetOpacity)), 1)
             }
         };
     }
