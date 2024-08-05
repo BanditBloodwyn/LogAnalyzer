@@ -8,10 +8,15 @@
              x:DataType="logAnalysis:LogAnalysisMainViewModel">
     <Grid RowDefinitions="29,*">
         <StackPanel Orientation="Horizontal">
-            <Button VerticalAlignment="Top" 
-                    Height="30" Width="30"
-                    Background="#09899f" Foreground="White"
-                    Command="{Binding OpenNewLogPanelCommand}">+</Button>
+            <Border BoxShadow="3 3 3 0 DarkGray"
+                    CornerRadius="5" 
+                    Height="30" Width="30" 
+                    Background="#09899f">
+                <Button VerticalAlignment="Top"
+                        Height="30" Width="30"
+                        Background="#09899f" Foreground="White"
+                        Command="{Binding OpenNewLogPanelCommand}">+</Button>
+			</Border>
         </StackPanel>
 
         <Border Grid.Row="1"

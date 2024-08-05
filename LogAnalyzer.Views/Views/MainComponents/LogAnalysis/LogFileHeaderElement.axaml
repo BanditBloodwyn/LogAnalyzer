@@ -9,7 +9,7 @@
 
     <Grid>
         <Path Grid.Column="0" HorizontalAlignment="Center"
-              Fill="LightGray" Stroke="LightGray" StrokeThickness="1">
+              Fill="#eeeeee" Stroke="#eeeeee" StrokeThickness="1">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="30,0">
@@ -23,6 +23,7 @@
         </Path>
 		<Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                Padding="0" VerticalAlignment="Stretch"
+               FontWeight="Bold"
                Content="{Binding NameWithoutExtention}"/>
     </Grid>
 </UserControl>
