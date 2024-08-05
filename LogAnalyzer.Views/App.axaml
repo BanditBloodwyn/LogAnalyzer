@@ -52,4 +52,12 @@
                  </DataTemplate>
 
 			 </Application.DataTemplates>
+
+             <Application.Resources>
+                 <ResourceDictionary>
+                     <ResourceDictionary.MergedDictionaries>
+                         <ResourceInclude Source="avares://LogAnalyzer.Resources/ColorResources.axaml"/>
+                     </ResourceDictionary.MergedDictionaries>
+                 </ResourceDictionary>
+             </Application.Resources>
 </Application>

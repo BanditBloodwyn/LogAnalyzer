@@ -17,7 +17,8 @@
             CornerRadius="7">
         <Grid>
             <ProgressBar VerticalAlignment="Stretch"
-                         Foreground="LawnGreen"
+                         Foreground="{StaticResource SuccessBrush}"
+                         Background="{StaticResource LightBrush}"
                          Value="{Binding PercentsDone}"/>
             <Grid RowDefinitions="*,*">
                 <Label Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"

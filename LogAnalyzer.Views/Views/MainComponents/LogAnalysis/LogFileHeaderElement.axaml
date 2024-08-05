@@ -9,7 +9,8 @@
 
     <Grid>
         <Path Grid.Column="0" HorizontalAlignment="Center"
-              Fill="#eeeeee" Stroke="#eeeeee" StrokeThickness="1">
+              Fill="{StaticResource LightBrush}" 
+              Stroke="{Binding Source={StaticResource LightBrush}}" StrokeThickness="1">
             <Path.Data>
                 <PathGeometry>
                     <PathFigure StartPoint="30,0">
@@ -24,6 +25,7 @@
 		<Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                Padding="0" VerticalAlignment="Stretch"
                FontWeight="Bold"
+		   Foreground="{StaticResource Accent3Brush}"
                Content="{Binding NameWithoutExtention}"/>
     </Grid>
 </UserControl>

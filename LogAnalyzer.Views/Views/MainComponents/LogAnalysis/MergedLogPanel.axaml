@@ -33,7 +33,7 @@
         </ItemsControl>
 
         <Border Grid.Row="0"
-                BorderBrush="#eeeeee" BorderThickness="0,0,0,1" 
+                BorderBrush="{StaticResource LightBrush}" BorderThickness="0,0,0,1" 
                 Margin="0,2"/>
 
         <ScrollViewer Grid.Row="2">

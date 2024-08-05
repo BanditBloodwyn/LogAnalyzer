@@ -11,16 +11,16 @@
             <Border BoxShadow="3 3 3 0 DarkGray"
                     CornerRadius="5" 
                     Height="30" Width="30" 
-                    Background="#09899f">
+                    Background="{StaticResource Accent1Brush}">
                 <Button VerticalAlignment="Top"
                         Height="30" Width="30"
-                        Background="#09899f" Foreground="White"
+                        Background="{StaticResource Accent1Brush}" Foreground="White"
                         Command="{Binding OpenNewLogPanelCommand}">+</Button>
 			</Border>
         </StackPanel>
 
         <Border Grid.Row="1"
-                BorderBrush="LightGray" BorderThickness="0,0,0,0">
+                BorderBrush="{StaticResource LightBrush}" BorderThickness="0,0,0,0">
             <ContentControl Content="{Binding MergedLogPanel}"/>
 		</Border>
     </Grid>
