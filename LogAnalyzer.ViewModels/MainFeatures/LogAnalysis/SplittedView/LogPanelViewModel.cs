@@ -71,7 +71,7 @@ public class LogPanelViewModel(
 
         LogAnalyzeCommand logAnalyzeCommand = _commandFactory();
         logAnalyzeCommand.CancellationToken = ct;
-        logAnalyzeCommand.FilePath = fileInfo.FullName;
+        logAnalyzeCommand.FileInfo = fileInfo;
         logAnalyzeCommand.LogEntryProgress = entryProgress;
 
         EventBus<AddNewProgressCommandEvent>.Raise(

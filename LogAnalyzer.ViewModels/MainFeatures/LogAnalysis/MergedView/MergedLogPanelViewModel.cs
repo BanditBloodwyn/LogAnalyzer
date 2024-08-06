@@ -14,20 +14,21 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _commandFactory)
     : ViewModelBase, ILogPanel
 {
-    public ObservableCollection<FileInfo> OpenedFiles { get; } = [];
-    public ObservableCollection<LogEntry> LogEntries { get; } = [];
+    private LogAnalysisCache _cache = new();
+
+    public ObservableCollection<FileInfo> OpenedFiles => _cache.OpenedFiles;
+    public ObservableCollection<LogEntry> LogEntries => _cache.LogEntries;
 
     public void OpenFiles(FileInfo[] filesToOpen)
     {
-        OpenedFiles.Clear();
-        LogEntries.Clear();
+        _cache.Reset();
 
         for (int index = 0; index < filesToOpen.Length; index++)
         {
             FileInfo fileInfo = filesToOpen[index];
             fileInfo.Assignment = new FileAssignment(index, filesToOpen.Length);
 
-            OpenedFiles.Add(fileInfo);
+            _cache.OpenedFiles.Add(fileInfo);
 
             CreateLogAnalyzeCommand(fileInfo);
         }
@@ -39,7 +40,7 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
             logEntry => OnLogEntryProcessed(fileInfo.Assignment, logEntry));
 
         LogAnalyzeCommand logAnalyzeCommand = _commandFactory();
-        logAnalyzeCommand.FilePath = fileInfo.FullName;
+        logAnalyzeCommand.FileInfo = fileInfo;
         logAnalyzeCommand.LogEntryProgress = entryProgress;
 
         EventBus<AddNewProgressCommandEvent>.Raise(
@@ -51,6 +52,6 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
         if (fileAssignment.HasValue)
             logEntry.FileAssignment = fileAssignment.Value;
 
-        Dispatcher.UIThread.Invoke(() => LogEntries.AddTimeSorted(logEntry));
+        Dispatcher.UIThread.Invoke(() => _cache.LogEntries.AddTimeSorted(logEntry));
     }
 }

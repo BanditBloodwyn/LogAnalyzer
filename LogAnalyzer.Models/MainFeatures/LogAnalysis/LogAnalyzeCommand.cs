@@ -12,27 +12,27 @@ public class LogAnalyzeCommand(
     ILogStringParsingStrategy _logParser)
     : ProgressCommand("Analyze log file")
 {
-    public string? FilePath { get; set; }
+    public Data.Containers.FileInfo? FileInfo { get; set; }
     public IProgress<LogEntry>? LogEntryProgress { get; set; }
 
     public override async Task Execute()
     {
-        if (FilePath == null || LogEntryProgress == null)
+        if (FileInfo?.Path == null || LogEntryProgress == null)
             return;
 
-        MessageProgress?.Report(Path.GetFileName(FilePath));
+        MessageProgress?.Report(Path.GetFileName(FileInfo.Path));
         
         try
         {
-            long fileSize = new FileInfo(FilePath).Length;
+            long fileSize = new FileInfo(FileInfo.Path).Length;
             long bytesRead = 0;
 
-            await using FileStream fileStream = new(FilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true);
+            await using FileStream fileStream = new(FileInfo.Path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true);
             using StreamReader streamReader = new(fileStream);
 
             while (await _logFinder.FindLogEntries(streamReader, CancellationToken) is { } logEntryString)
             {
-                LogEntry logEntry = await _logParser.ParseLogString(logEntryString, CancellationToken);
+                LogEntry logEntry = await _logParser.ParseLogString(logEntryString, CancellationToken, FileInfo.FileIndex);
                 LogEntryProgress.Report(logEntry);
 
                 bytesRead += logEntryString.Length + Environment.NewLine.Length;

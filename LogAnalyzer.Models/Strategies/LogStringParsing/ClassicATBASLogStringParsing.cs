@@ -9,7 +9,8 @@ public class ClassicATBASLogStringParsing : ILogStringParsingStrategy
 {
     public async Task<LogEntry> ParseLogString(
         string logString,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        int fileIndex)
     {
         try
         {
@@ -31,7 +32,8 @@ public class ClassicATBASLogStringParsing : ILogStringParsingStrategy
             source,
             type,
             message,
-            innerMessage);
+            innerMessage,
+            fileIndex);
     }
 
     private static string GetTimetamp(string logString)

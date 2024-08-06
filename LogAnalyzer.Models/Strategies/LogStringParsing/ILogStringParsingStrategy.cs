@@ -6,5 +6,6 @@ public interface ILogStringParsingStrategy
 {
     public Task<LogEntry> ParseLogString(
         string logString,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken,
+        int fileIndex);
 }

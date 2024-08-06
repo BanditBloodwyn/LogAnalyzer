@@ -15,8 +15,13 @@ public class FileDialogService : IFileDialogService
                 Title = "Open log files",
             });
 
-        return files
-            .Select(static file => new FileInfo(file.Name, file.Path.LocalPath, file.Path.AbsolutePath))
-            .ToArray();
+        List<FileInfo> fileInfos = [];
+        for (int i = 0; i < files.Count; i++)
+        {
+            IStorageFile file = files[i];
+            fileInfos.Add(new FileInfo(i, file.Name, file.Path.LocalPath, file.Path.AbsolutePath));
+        }
+
+        return fileInfos;
     }
 }
