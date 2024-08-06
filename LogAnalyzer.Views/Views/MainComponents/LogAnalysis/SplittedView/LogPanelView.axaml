@@ -16,33 +16,22 @@
     <Border BorderBrush="Transparent" BorderThickness="2">
         <Grid RowDefinitions="Auto,*">
             <!--Header-->
-            <Grid Grid.Row="0" Height="30"
-                  ColumnDefinitions="*, 30">
-                <Path Grid.Column="0"
-                      Fill="{StaticResource LightBrush}" 
-                      Stroke="{StaticResource LightBrush}" StrokeThickness="1">
-                    <Path.Data>
-                        <PathGeometry>
-                            <PathFigure StartPoint="0,0">
-                                <LineSegment Point="230,0"/>
-                                <LineSegment Point="260,27"/>
-                                <LineSegment Point="0,27"/>
-                                <LineSegment Point="0,0"/>
-                            </PathFigure>
-                        </PathGeometry>
-                    </Path.Data>
-                </Path>
-                <Label Grid.Column="0"
-                       HorizontalAlignment="Left"
-                       VerticalContentAlignment="Center"
-                       Margin="0,-5" Padding="10,0"
-                       Content="{Binding File.Name}"/>
-                <Button Grid.Column="1"
-                        Command="{Binding CloseLogPanelCommand}"
-                        Content="X"/>
+			<Grid Grid.Row="0" Height="30"
+                  ColumnDefinitions="*, 50">
+				<ContentControl Grid.Column="0"
+								Content="{Binding File}"
+								HorizontalAlignment="Left"/>
+				<Button Grid.Column="1"
+						Command="{Binding CloseLogPanelCommand}"
+						Content="X"
+                        HorizontalAlignment="Right"
+                        Margin="0,-5,-2,0"/>
 			</Grid>
+            <Border Grid.Row="0"
+                    BorderBrush="{StaticResource LightBrush}" BorderThickness="0,0,0,1"
+                    Margin="0,2"/>
 
-            <!--Content-->
+			<!--Content-->
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Auto">
                 <Border Margin="5">

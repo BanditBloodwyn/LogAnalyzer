@@ -12,6 +12,7 @@ public class LogPanelDesignViewModel : LogPanelViewModel
             "2024-07-11_Framework.log",
             @"C:\Test\",
             @"C:\Test\2024-07-11_Framework.log");
+        OnPropertyChanged(nameof(File));
 
         LogEntries.Add(new LogEntry(
             "07/12/2024 09:18:21,392",
