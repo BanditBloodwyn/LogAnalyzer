@@ -17,20 +17,15 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
     public ObservableCollection<FileInfo> OpenedFiles { get; } = [];
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
 
-    private readonly List<double> _logEntryOffsets = [];
-
     public void OpenFiles(FileInfo[] filesToOpen)
     {
         OpenedFiles.Clear();
         LogEntries.Clear();
 
-        _logEntryOffsets.Clear();
-        _logEntryOffsets.AddRange(DistributePositions(-50, 50, filesToOpen.Length));
-
         for (int index = 0; index < filesToOpen.Length; index++)
         {
             FileInfo fileInfo = filesToOpen[index];
-            fileInfo.Index = index;
+            fileInfo.Assignment = new FileAssignment(index, filesToOpen.Length);
 
             OpenedFiles.Add(fileInfo);
             CreateLogAnalyzeCommand(fileInfo);
@@ -40,7 +35,7 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
     private void CreateLogAnalyzeCommand(FileInfo fileInfo)
     {
         IProgress<LogEntry> entryProgress = new Progress<LogEntry>(
-            logEntry => OnLogEntryProcessed(fileInfo.Index, logEntry));
+            logEntry => OnLogEntryProcessed(fileInfo.Assignment, logEntry));
 
         LogAnalyzeCommand logAnalyzeCommand = _commandFactory();
         logAnalyzeCommand.FilePath = fileInfo.FullName;
@@ -50,23 +45,11 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
             new AddNewProgressCommandEvent(logAnalyzeCommand));
     }
 
-    private void OnLogEntryProcessed(int? index, LogEntry logEntry)
+    private void OnLogEntryProcessed(FileAssignment? fileAssignment, LogEntry logEntry)
     {
-        if (index.HasValue)
-            logEntry.Offset = _logEntryOffsets[index.Value];
+        if (fileAssignment.HasValue)
+            logEntry.FileAssignment = fileAssignment.Value;
 
         Dispatcher.UIThread.Invoke(() => LogEntries.AddTimeSorted(logEntry));
-    }
-
-    private static IEnumerable<double> DistributePositions(double min, double max, int count)
-    {
-        if (count < 2)
-        {
-            yield return 0;
-            yield break;
-        }
-
-        for (int i = 0; i < count; i++)
-            yield return min + (max - min) * i / (count - 1);
     }
 }

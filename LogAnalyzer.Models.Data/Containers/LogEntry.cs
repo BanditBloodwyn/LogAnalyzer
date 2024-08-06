@@ -7,5 +7,5 @@ public struct LogEntry(string timeStamp, string source, string logType, string m
     public string LogType { get; } = logType;
     public string Message { get; } = message;
     public string InnerMessage { get; } = innerMessage;
-    public double? Offset { get; set; }
+    public FileAssignment? FileAssignment { get; set; }
 }

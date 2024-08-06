@@ -46,7 +46,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <logAnalysis2:LogEntryElement
-                            Margin="{Binding Offset, Converter={StaticResource LogFileOffsetToPaddingConverter}}"/>
+                            Margin="{Binding FileAssignment, Converter={StaticResource LogFileOffsetToPaddingConverter}}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
