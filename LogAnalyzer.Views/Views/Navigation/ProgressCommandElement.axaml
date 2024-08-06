@@ -13,10 +13,12 @@
 		<navigation1:ProgressCommandDesignViewModel/>
 	</Design.DataContext>
 
-    <Border BorderBrush="DimGray" BorderThickness="2" CornerRadius="7">
+    <Border BorderBrush="Transparent" BorderThickness="2" 
+            CornerRadius="7">
         <Grid>
             <ProgressBar VerticalAlignment="Stretch"
-                         Foreground="Green"
+                         Foreground="{StaticResource SuccessBrush}"
+                         Background="{StaticResource LightBrush}"
                          Value="{Binding PercentsDone}"/>
             <Grid RowDefinitions="*,*">
                 <Label Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"

@@ -1,44 +1,57 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Avalonia.Media.Imaging;
+﻿using Avalonia.Media.Imaging;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Resources;
 using LogAnalyzer.Services.IO.FileDialog;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
+using System.Windows.Input;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 
 public class LogAnalysisMainViewModel(
-    IFileDialogService fileDialogService,
-    ViewModelFactory.CreateLogPanel logPanelFactory)
+    IFileDialogService _fileDialogService,
+    SplittedLogPanelViewModel _splittedLogPanelVM,
+    MergedLogPanelViewModel _mergedLogPanelVM)
     : MainFeatureViewModelBase
 {
     public override int NavigationIndex => 0;
     public override string FeatureHeader => "Log Analysis";
     public override Bitmap FeatureIcon => DefaultIcons.LogAnalysisIcon;
 
-    public ObservableCollection<LogPanelViewModel> OpenedLogPanels { get; } = [];
+    #region GUI Bindings
+
+    private ILogPanel _logPanel = _mergedLogPanelVM;
+
+    public ILogPanel LogPanel
+    {
+        get => _logPanel;
+        set => SetProperty(ref _logPanel, value);
+    }
+
 
     private ICommand? _openNewLogPanelCommand;
     public ICommand OpenNewLogPanelCommand => _openNewLogPanelCommand ??= new OpenNewLogPanelCommand(this);
 
+    private ICommand? _switchViewCommand;
+    public ICommand SwitchViewCommand => _switchViewCommand ??= new SwitchViewCommand(this);
+
+    #endregion
+
     public async void OpenNewLogs()
     {
-        FileInfo[] filesToOpen = (await fileDialogService.OpenFileDialogAsync()).ToArray();
-        OpenNewLogPanels(filesToOpen);
+        FileInfo[] filesToOpen = (await _fileDialogService.OpenFileDialogAsync()).ToArray();
+        LogPanel.OpenFiles(filesToOpen);
     }
 
-    private void OpenNewLogPanels(FileInfo[] filesToOpen)
+    public void SwitchView()
     {
-        foreach (FileInfo file in filesToOpen)
+        LogPanel = LogPanel switch
         {
-            LogPanelViewModel logPanelViewModel = logPanelFactory();
-            logPanelViewModel.RequestCloseEvent += panel => OpenedLogPanels.Remove(panel);
-
-            OpenedLogPanels.Add(logPanelViewModel);
-
-            logPanelViewModel.StartLogAnalysisAndDisplay(file);
-        }
+            SplittedLogPanelViewModel => _mergedLogPanelVM,
+            MergedLogPanelViewModel => _splittedLogPanelVM,
+            _ => LogPanel
+        };
     }
 }

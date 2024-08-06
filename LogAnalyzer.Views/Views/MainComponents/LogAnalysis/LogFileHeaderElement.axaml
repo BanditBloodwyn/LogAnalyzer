@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
+             mc:Ignorable="d" d:DesignWidth="260" d:DesignHeight="30"
+             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogFileHeaderElement"
+             x:DataType="containers:FileInfo">
+
+    <Grid>
+        <Path Grid.Column="0" HorizontalAlignment="Center"
+              Fill="{StaticResource LightBrush}" 
+              Stroke="{Binding Source={StaticResource LightBrush}}" StrokeThickness="1">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="30,0">
+                        <LineSegment Point="230,0"/>
+                        <LineSegment Point="260,27"/>
+                        <LineSegment Point="0,27"/>
+                        <LineSegment Point="30,0"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+		<Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+               Padding="0" VerticalAlignment="Stretch"
+               FontWeight="Bold"
+		   Foreground="{StaticResource Accent3Brush}"
+               Content="{Binding NameWithoutExtention}"/>
+    </Grid>
+</UserControl>

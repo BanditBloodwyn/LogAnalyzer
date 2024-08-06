@@ -7,7 +7,7 @@
              x:Class="LogAnalyzer.Views.Views.Navigation.MainNavigationView"
              x:DataType="navigation:MainNavigationViewModel">
     
-    <Border BorderThickness="0,0,2,0" BorderBrush="#303030">
+    <Border BorderThickness="0,0,1,0" BorderBrush="{StaticResource LightBrush}">
         <Grid RowDefinitions="*, *">
 
             <ContentControl Grid.Row="0" Content="{Binding FeatureButtonsPanelVm}"/> 

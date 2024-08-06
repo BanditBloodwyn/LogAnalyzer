@@ -8,7 +8,7 @@
         x:Class="LogAnalyzer.Views.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="LogAnalyzer"
-        Background="#202020"
+
         WindowState="Maximized">
     <views1:MainView />
 </Window>

@@ -8,26 +8,32 @@
              x:DataType="logAnalysis:LogAnalysisMainViewModel">
     <Grid RowDefinitions="29,*">
         <StackPanel Orientation="Horizontal">
-            <Button VerticalAlignment="Top" 
+            <Border BoxShadow="3 3 3 0 DarkGray"
+                    CornerRadius="5" 
+                    Height="30" Width="30" 
+                    Background="{StaticResource Accent1Brush}">
+                <Button VerticalAlignment="Top"
+                        HorizontalContentAlignment="Center"
+                        Height="30" Width="30"
+                        Background="{StaticResource Accent1Brush}" Foreground="White"
+                        Command="{Binding OpenNewLogPanelCommand}">+</Button>
+			</Border>
+            <Border BoxShadow="3 3 3 0 DarkGray"
+                    CornerRadius="5"
                     Height="30" Width="30"
-                    Command="{Binding OpenNewLogPanelCommand}">+</Button>
+                    Margin="30,0,0,0"
+                    Background="{StaticResource Accent1Brush}">
+                <Button VerticalAlignment="Top"
+                        HorizontalContentAlignment="Center"
+                        Height="30" Width="30"
+                        Background="{StaticResource Accent1Brush}" Foreground="White"
+                        Command="{Binding SwitchViewCommand}">|</Button>
+            </Border>
         </StackPanel>
 
         <Border Grid.Row="1"
-                BorderBrush="#303030" BorderThickness="0,0,0,0">
-            <ItemsControl ItemsSource="{Binding OpenedLogPanels}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Rows="1"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl Content="{Binding}"
-                                        MaxWidth="{Binding $parent[ItemsControl].Bounds.Width}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Border>
+                BorderBrush="{StaticResource LightBrush}" BorderThickness="0,0,0,0">
+            <ContentControl Content="{Binding LogPanel}"/>
+		</Border>
     </Grid>
 </UserControl>

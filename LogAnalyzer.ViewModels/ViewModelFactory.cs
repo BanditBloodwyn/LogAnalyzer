@@ -1,4 +1,4 @@
-﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
 
 namespace LogAnalyzer.ViewModels;
 

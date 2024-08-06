@@ -11,7 +11,8 @@
     <ItemsControl ItemsSource="{Binding Commands}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom"/>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom"
+                            Margin="5"/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>

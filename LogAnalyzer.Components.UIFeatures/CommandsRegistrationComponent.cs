@@ -2,7 +2,6 @@
 using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Models.MainFeatures.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands;
-using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.Components.UIFeatures;

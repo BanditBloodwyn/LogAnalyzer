@@ -1,10 +1,10 @@
-﻿using System.Windows.Input;
-using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
+﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+using System.Windows.Input;
 
 namespace LogAnalyzer.ViewModels.Commands.LogAnalysis;
 
-public class CloseLogPanelCommand(
-    LogPanelViewModel _viewModel)
+public class SwitchViewCommand(
+    LogAnalysisMainViewModel _viewModel)
     : ICommand
 {
     public event EventHandler? CanExecuteChanged;
@@ -16,6 +16,7 @@ public class CloseLogPanelCommand(
 
     public void Execute(object? parameter)
     {
-        _viewModel.RequestClose();
+        _viewModel.SwitchView();
     }
+
 }

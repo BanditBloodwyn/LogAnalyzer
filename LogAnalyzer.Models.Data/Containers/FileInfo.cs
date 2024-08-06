@@ -1,8 +1,10 @@
 ﻿namespace LogAnalyzer.Models.Data.Containers;
 
-public readonly struct FileInfo(string name, string path, string fullName)
+public class FileInfo(string name, string path, string fullName)
 {
+    public FileAssignment? Assignment { get; set; }
     public string Name { get; } = name;
+    public string NameWithoutExtention => System.IO.Path.GetFileNameWithoutExtension(Name);
     public string Path { get; } = path;
     public string FullName { get; } = fullName;
 }

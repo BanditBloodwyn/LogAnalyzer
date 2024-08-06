@@ -1,0 +1,17 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:LogAnalyzer.Resources">
+
+    <SolidColorBrush x:Key="LightBrush" Color="{Binding Light, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="{Binding White, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="DarkBrush" Color="{Binding Dark, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{Binding Primary, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{Binding Secondary, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="Accent1Brush" Color="{Binding Accent1, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="Accent2Brush" Color="{Binding Accent2, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="Accent3Brush" Color="{Binding Accent3, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="{Binding Success, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{Binding Warning, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{Binding Danger, Source={x:Static local:DefaultColors.Instance}}"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="{Binding Info, Source={x:Static local:DefaultColors.Instance}}"/>
+</ResourceDictionary>

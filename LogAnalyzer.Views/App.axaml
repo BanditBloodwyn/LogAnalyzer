@@ -8,8 +8,14 @@
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:mainFeatures="clr-namespace:LogAnalyzer.ViewModels.MainFeatures;assembly=LogAnalyzer.ViewModels"
+             xmlns:mergedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;assembly=LogAnalyzer.ViewModels"
+             xmlns:mergedView1="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView"
+             xmlns:splittedView="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.SplittedView"
+             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;assembly=LogAnalyzer.ViewModels"
+             xmlns:views1="clr-namespace:LogAnalyzer.Views"
+             xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
              x:Class="LogAnalyzer.Views.App"
-             RequestedThemeVariant="Dark">
+             RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
              <Application.Styles>
@@ -42,9 +48,29 @@
 					 <logAnalysis2:LogAnalysisMainView/>
                  </DataTemplate>
 
-                 <DataTemplate DataType="{x:Type logAnalysis:LogPanelViewModel}">
-					 <logAnalysis2:LogPanelView/>
+                 <DataTemplate DataType="{x:Type containers:FileInfo}">
+					 <logAnalysis2:LogFileHeaderElement/>
+                 </DataTemplate>             
+                
+                 <DataTemplate DataType="{x:Type logAnalysis1:SplittedLogPanelViewModel}">
+					 <views1:SplittedLogPanel/>
+                 </DataTemplate>             
+                 
+                 <DataTemplate DataType="{x:Type logAnalysis1:LogPanelViewModel}">
+					 <splittedView:LogPanelView/>
+                 </DataTemplate>             
+                 
+                 <DataTemplate DataType="{x:Type mergedView:MergedLogPanelViewModel}">
+					 <mergedView1:MergedLogPanel/>
                  </DataTemplate>
 
 			 </Application.DataTemplates>
+
+             <Application.Resources>
+                 <ResourceDictionary>
+                     <ResourceDictionary.MergedDictionaries>
+                         <ResourceInclude Source="avares://LogAnalyzer.Resources/ColorResources.axaml"/>
+                     </ResourceDictionary.MergedDictionaries>
+                 </ResourceDictionary>
+             </Application.Resources>
 </Application>
