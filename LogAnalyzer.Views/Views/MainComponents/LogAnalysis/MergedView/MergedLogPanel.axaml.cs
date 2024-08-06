@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis;
+namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView;
 
 public partial class MergedLogPanel : UserControl
 {

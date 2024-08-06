@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Avalonia.Threading;
+﻿using Avalonia.Threading;
 using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data.Containers;
@@ -8,9 +6,11 @@ using LogAnalyzer.Models.Events;
 using LogAnalyzer.Models.MainFeatures.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
-namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
 
 public class LogPanelViewModel(
     CommandFactory.CreateLogAnalyzeCommand _commandFactory)
@@ -26,8 +26,8 @@ public class LogPanelViewModel(
 
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
 
-    private FileInfo _file;
-    public FileInfo File
+    private FileInfo? _file;
+    public FileInfo? File
     {
         get => _file;
         protected set => SetProperty(ref _file, value);

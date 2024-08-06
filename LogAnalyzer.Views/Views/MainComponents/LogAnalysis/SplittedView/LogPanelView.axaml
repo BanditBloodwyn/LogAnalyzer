@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
-             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis3="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             xmlns:splittedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;assembly=LogAnalyzer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
-             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogPanelView"
-             x:DataType="logAnalysis:LogPanelViewModel">
+             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.SplittedView.LogPanelView"
+             x:DataType="splittedView:LogPanelViewModel">
     
     <Design.DataContext>
 		<logAnalysis3:LogPanelDesignViewModel/>

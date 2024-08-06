@@ -2,12 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
+             xmlns:mergedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;assembly=LogAnalyzer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="300"
-             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedLogPanel"
-             x:DataType="logAnalysis:MergedLogPanelViewModel">
+             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView.MergedLogPanel"
+             x:DataType="mergedView:MergedLogPanelViewModel">
 
     <Design.DataContext>
         <logAnalysis1:MergedLogPanelDesignViewModel/>

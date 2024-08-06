@@ -3,13 +3,16 @@ using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Resources;
 using LogAnalyzer.Services.IO.FileDialog;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 using System.Windows.Input;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 
 public class LogAnalysisMainViewModel(
     IFileDialogService _fileDialogService,
+    SplittedLogPanelViewModel _splittedLogPanelVM,
     MergedLogPanelViewModel _mergedLogPanelVM)
     : MainFeatureViewModelBase
 {

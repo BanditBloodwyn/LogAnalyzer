@@ -9,10 +9,10 @@ using LogAnalyzer.ViewModels.Commands;
 using System.Collections.ObjectModel;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
-namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 
 public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _commandFactory)
-    : ViewModelBase
+    : ViewModelBase, ILogPanel
 {
     public ObservableCollection<FileInfo> OpenedFiles { get; } = [];
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
@@ -23,7 +23,7 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
     {
         OpenedFiles.Clear();
         LogEntries.Clear();
-        
+
         _logEntryOffsets.Clear();
         _logEntryOffsets.AddRange(DistributePositions(-50, 50, filesToOpen.Length));
 
@@ -52,7 +52,7 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
 
     private void OnLogEntryProcessed(int? index, LogEntry logEntry)
     {
-        if(index.HasValue) 
+        if (index.HasValue)
             logEntry.Offset = _logEntryOffsets[index.Value];
 
         Dispatcher.UIThread.Invoke(() => LogEntries.AddTimeSorted(logEntry));
@@ -65,7 +65,7 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
             yield return 0;
             yield break;
         }
-        
+
         for (int i = 0; i < count; i++)
             yield return min + (max - min) * i / (count - 1);
     }

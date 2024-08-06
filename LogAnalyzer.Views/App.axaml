@@ -8,7 +8,10 @@
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:mainFeatures="clr-namespace:LogAnalyzer.ViewModels.MainFeatures;assembly=LogAnalyzer.ViewModels"
-             xmlns:views1="clr-namespace:LogAnalyzer.Views"
+             xmlns:mergedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;assembly=LogAnalyzer.ViewModels"
+             xmlns:mergedView1="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView"
+             xmlns:splittedView="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.SplittedView"
+             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;assembly=LogAnalyzer.ViewModels"
              x:Class="LogAnalyzer.Views.App"
              RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -43,12 +46,12 @@
 					 <logAnalysis2:LogAnalysisMainView/>
                  </DataTemplate>
 
-                 <DataTemplate DataType="{x:Type logAnalysis:LogPanelViewModel}">
-					 <logAnalysis2:LogPanelView/>
+                 <DataTemplate DataType="{x:Type logAnalysis1:LogPanelViewModel}">
+					 <splittedView:LogPanelView/>
                  </DataTemplate>             
                  
-                 <DataTemplate DataType="{x:Type logAnalysis:MergedLogPanelViewModel}">
-					 <logAnalysis2:MergedLogPanel/>
+                 <DataTemplate DataType="{x:Type mergedView:MergedLogPanelViewModel}">
+					 <mergedView1:MergedLogPanel/>
                  </DataTemplate>
 
 			 </Application.DataTemplates>

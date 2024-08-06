@@ -3,6 +3,7 @@ using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.ViewModels;
 using LogAnalyzer.ViewModels.MainFeatures;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
 using LogAnalyzer.ViewModels.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 
