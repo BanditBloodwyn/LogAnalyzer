@@ -12,6 +12,7 @@
              xmlns:mergedView1="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView"
              xmlns:splittedView="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.SplittedView"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;assembly=LogAnalyzer.ViewModels"
+             xmlns:views1="clr-namespace:LogAnalyzer.Views"
              x:Class="LogAnalyzer.Views.App"
              RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -46,6 +47,10 @@
 					 <logAnalysis2:LogAnalysisMainView/>
                  </DataTemplate>
 
+                 <DataTemplate DataType="{x:Type logAnalysis1:SplittedLogPanelViewModel}">
+					 <views1:SplittedLogPanel/>
+                 </DataTemplate>             
+                 
                  <DataTemplate DataType="{x:Type logAnalysis1:LogPanelViewModel}">
 					 <splittedView:LogPanelView/>
                  </DataTemplate>             

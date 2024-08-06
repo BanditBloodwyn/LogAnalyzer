@@ -28,6 +28,7 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
             fileInfo.Assignment = new FileAssignment(index, filesToOpen.Length);
 
             OpenedFiles.Add(fileInfo);
+
             CreateLogAnalyzeCommand(fileInfo);
         }
     }
