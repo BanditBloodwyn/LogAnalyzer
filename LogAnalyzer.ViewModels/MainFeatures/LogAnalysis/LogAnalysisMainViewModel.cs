@@ -22,7 +22,7 @@ public class LogAnalysisMainViewModel(
 
     #region GUI Bindings
 
-    public MergedLogPanelViewModel MergedLogPanel { get; set; } = _mergedLogPanelVM;
+    public ILogPanel LogPanel { get; set; } = _mergedLogPanelVM;
 
 
     private ICommand? _openNewLogPanelCommand;
@@ -33,6 +33,11 @@ public class LogAnalysisMainViewModel(
     public async void OpenNewLogs()
     {
         FileInfo[] filesToOpen = (await _fileDialogService.OpenFileDialogAsync()).ToArray();
-        MergedLogPanel.OpenFiles(filesToOpen);
+        LogPanel.OpenFiles(filesToOpen);
+    }
+
+    public void SwitchView()
+    {
+
     }
 }

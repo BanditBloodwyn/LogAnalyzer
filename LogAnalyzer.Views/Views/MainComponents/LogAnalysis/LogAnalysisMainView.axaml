@@ -21,7 +21,7 @@
 
         <Border Grid.Row="1"
                 BorderBrush="{StaticResource LightBrush}" BorderThickness="0,0,0,0">
-            <ContentControl Content="{Binding MergedLogPanel}"/>
+            <ContentControl Content="{Binding LogPanel}"/>
 		</Border>
     </Grid>
 </UserControl>
