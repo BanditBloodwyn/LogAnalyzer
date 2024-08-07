@@ -33,13 +33,6 @@ public class LogPanelViewModel(
         protected set => SetProperty(ref _file, value);
     }
 
-    private bool _isAnalyzing;
-    public bool IsAnalyzing
-    {
-        get => _isAnalyzing;
-        protected set => SetProperty(ref _isAnalyzing, value);
-    }
-
     private ICommand? _closeLogPanelCommand;
     public ICommand CloseLogPanelCommand => _closeLogPanelCommand ??= new CloseLogPanelCommand(this);
 
@@ -57,7 +50,6 @@ public class LogPanelViewModel(
     public void StartLogAnalysisAndDisplay(FileInfo file)
     {
         File = file;
-        IsAnalyzing = true;
 
         CreateLogAnalyzeCommand(file);
     }
@@ -86,7 +78,6 @@ public class LogPanelViewModel(
     private void Reset()
     {
         LogEntries.Clear();
-        IsAnalyzing = false;
 
         if (_fileAnalysisCtSource != null)
         {
