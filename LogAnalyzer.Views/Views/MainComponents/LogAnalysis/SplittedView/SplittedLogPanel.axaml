@@ -7,16 +7,4 @@
              x:Class="LogAnalyzer.Views.SplittedLogPanel"
              x:DataType="splittedView:SplittedLogPanelViewModel">
 
-    <ItemsControl ItemsSource="{Binding Cache}">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <UniformGrid Rows="1" Columns="{Binding Cache.OpenedFiles.Count}"/>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
 </UserControl>
