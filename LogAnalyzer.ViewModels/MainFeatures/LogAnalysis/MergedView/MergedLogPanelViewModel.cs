@@ -6,7 +6,6 @@ using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.Models.Events;
 using LogAnalyzer.Models.MainFeatures.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands;
-using System.Collections.ObjectModel;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
@@ -14,21 +13,19 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _commandFactory)
     : ViewModelBase, ILogPanel
 {
-    private LogAnalysisCache _cache = new();
-
-    public ObservableCollection<FileInfo> OpenedFiles => _cache.OpenedFiles;
-    public ObservableCollection<LogEntry> LogEntries => _cache.LogEntries;
+    public LogAnalysisCache Cache { get; } = new();
 
     public void OpenFiles(FileInfo[] filesToOpen)
     {
-        _cache.Reset();
+        Cache.Reset();
+
+        foreach (FileInfo fileInfo in filesToOpen)
+            Cache.OpenedFiles.Add(fileInfo);
 
         for (int index = 0; index < filesToOpen.Length; index++)
         {
             FileInfo fileInfo = filesToOpen[index];
             fileInfo.Assignment = new FileAssignment(index, filesToOpen.Length);
-
-            _cache.OpenedFiles.Add(fileInfo);
 
             CreateLogAnalyzeCommand(fileInfo);
         }
@@ -52,6 +49,6 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
         if (fileAssignment.HasValue)
             logEntry.FileAssignment = fileAssignment.Value;
 
-        Dispatcher.UIThread.Invoke(() => _cache.LogEntries.AddTimeSorted(logEntry));
+        Dispatcher.UIThread.Invoke(() => Cache.LogEntries.AddTimeSorted(logEntry));
     }
 }

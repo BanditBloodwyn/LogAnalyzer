@@ -19,7 +19,7 @@
 
 	<Grid RowDefinitions="30,5,*">
         <ItemsControl Grid.Row="0"
-                      ItemsSource="{Binding OpenedFiles}">
+                      ItemsSource="{Binding Cache.OpenedFiles}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="1"/>
@@ -37,7 +37,7 @@
                 Margin="0,2"/>
 
         <ScrollViewer Grid.Row="2">
-            <ItemsControl ItemsSource="{Binding LogEntries}">
+            <ItemsControl ItemsSource="{Binding Cache.LogEntries}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="50,0" Spacing="3"/>
