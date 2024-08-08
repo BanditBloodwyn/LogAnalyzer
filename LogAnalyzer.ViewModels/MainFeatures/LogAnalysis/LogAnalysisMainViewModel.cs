@@ -22,9 +22,9 @@ public class LogAnalysisMainViewModel(
 
     #region GUI Bindings
 
-    private ILogPanel _logPanel = _mergedLogPanelVM;
+    private LogPanelBaseViewModel _logPanel = _mergedLogPanelVM;
 
-    public ILogPanel LogPanel
+    public LogPanelBaseViewModel LogPanel
     {
         get => _logPanel;
         set => SetProperty(ref _logPanel, value);
