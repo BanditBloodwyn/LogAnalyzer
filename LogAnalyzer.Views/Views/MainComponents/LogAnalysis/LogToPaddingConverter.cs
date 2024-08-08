@@ -1,25 +1,26 @@
 ﻿using Avalonia;
 using Avalonia.Data.Converters;
 using System;
-using System.Globalization;
-using LogAnalyzer.Models.Data.Containers;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis;
 
-public class LogFileOffsetToPaddingConverter : IValueConverter
+public class LogToPaddingConverter : IMultiValueConverter
 {
     private readonly List<double> _logEntryOffsets = [];
 
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not FileAssignment fileAssignment)
+        if (values[0] is not int fileIndex)
+            return new Thickness(0);
+        if (values[1] is not int fileCount)
             return new Thickness(0);
 
         if (_logEntryOffsets.Count == 0)
-            _logEntryOffsets.AddRange(DistributePositions(-50, 50, fileAssignment.TotalFileCount));
+            _logEntryOffsets.AddRange(DistributePositions(-50, 50, fileCount));
 
-        double offset = _logEntryOffsets[fileAssignment.FileIndex];
+        double offset = _logEntryOffsets[fileIndex];
 
         return new Thickness(offset, 0, -offset, 0);
     }
@@ -40,5 +41,4 @@ public class LogFileOffsetToPaddingConverter : IValueConverter
         for (int i = 0; i < count; i++)
             yield return min + (max - min) * i / (count - 1);
     }
-
 }

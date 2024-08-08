@@ -22,19 +22,14 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
         foreach (FileInfo fileInfo in filesToOpen)
             Cache.OpenedFiles.Add(fileInfo);
 
-        for (int index = 0; index < filesToOpen.Length; index++)
-        {
-            FileInfo fileInfo = filesToOpen[index];
-            fileInfo.Assignment = new FileAssignment(index, filesToOpen.Length);
-
+        foreach (var fileInfo in filesToOpen) 
             CreateLogAnalyzeCommand(fileInfo);
-        }
     }
 
     private void CreateLogAnalyzeCommand(FileInfo fileInfo)
     {
         IProgress<LogEntry> entryProgress = new Progress<LogEntry>(
-            logEntry => OnLogEntryProcessed(fileInfo.Assignment, logEntry));
+            OnLogEntryProcessed);
 
         LogAnalyzeCommand logAnalyzeCommand = _commandFactory();
         logAnalyzeCommand.FileInfo = fileInfo;
@@ -44,11 +39,8 @@ public class MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _com
             new AddNewProgressCommandEvent(logAnalyzeCommand));
     }
 
-    private void OnLogEntryProcessed(FileAssignment? fileAssignment, LogEntry logEntry)
+    private void OnLogEntryProcessed(LogEntry logEntry)
     {
-        if (fileAssignment.HasValue)
-            logEntry.FileAssignment = fileAssignment.Value;
-
         Dispatcher.UIThread.Invoke(() => Cache.LogEntries.AddTimeSorted(logEntry));
     }
 }
