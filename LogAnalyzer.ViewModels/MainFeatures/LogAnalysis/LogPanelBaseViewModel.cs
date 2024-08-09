@@ -1,4 +1,5 @@
-﻿using LogAnalyzer.Core.EventBus;
+﻿using Avalonia.Threading;
+using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data;
 using LogAnalyzer.Models.Data.Containers;
@@ -12,6 +13,12 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _commandFactory)
     : ViewModelBase
 {
+    private const int BATCHSIZE = 100;
+    private const int UPDATEINTERVALMS = 100;
+    
+    private readonly List<LogEntry> _logEntryBatch = [];
+    private DateTime _lastUpdateTime = DateTime.MinValue;
+
     public LogAnalysisCache Cache { get; } = new();
 
     public void OpenFiles(FileInfo[] filesToOpen)
@@ -21,7 +28,7 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
         foreach (FileInfo fileInfo in filesToOpen)
             Cache.OpenedFiles.Add(fileInfo);
 
-        foreach (var fileInfo in filesToOpen)
+        foreach (FileInfo fileInfo in filesToOpen)
             CreateLogAnalyzeCommand(fileInfo);
     }
 
@@ -40,6 +47,23 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
 
     private void OnLogEntryProcessed(LogEntry logEntry)
     {
-        Cache.LogEntries.AddTimeSorted(logEntry);
+        _logEntryBatch.Add(logEntry);
+
+        if (_logEntryBatch.Count >= BATCHSIZE || (DateTime.Now - _lastUpdateTime).TotalMilliseconds >= UPDATEINTERVALMS)
+            UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        List<LogEntry> entriesToAdd = _logEntryBatch.ToList();
+        _logEntryBatch.Clear();
+
+        Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            foreach (LogEntry entry in entriesToAdd) 
+                Cache.LogEntries.AddTimeSorted(entry);
+        });
+
+        _lastUpdateTime = DateTime.Now;
     }
 }
