@@ -1,4 +1,5 @@
-﻿using LogAnalyzer.Models.Data.Containers;
+﻿using LogAnalyzer.Models.Data;
+using LogAnalyzer.Models.Data.Containers;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
@@ -7,6 +8,12 @@ namespace LogAnalyzer.Models.MainFeatures.LogAnalysis;
 
 public class LogAnalysisCache
 {
+    private const int BATCHSIZE = 100;
+    private const int UPDATEINTERVALMS = 100;
+
+    private readonly List<LogEntry> _logEntryBatch = [];
+    private DateTime _lastUpdateTime = DateTime.MinValue;
+
     public event Action? OpenedFilesChanged;
     public event Action? LogEntriesChanged;
 
@@ -16,7 +23,24 @@ public class LogAnalysisCache
     public LogAnalysisCache()
     {
         OpenedFiles.CollectionChanged += OpenedFilesOnCollectionChanged;
-        LogEntries.CollectionChanged += LogEntriesOnCollectionChanged;
+    }
+
+    public void AddLogEntryBatched(LogEntry logEntry)
+    {
+        _logEntryBatch.Add(logEntry);
+
+        if (_logEntryBatch.Count >= BATCHSIZE || (DateTime.Now - _lastUpdateTime).TotalMilliseconds >= UPDATEINTERVALMS)
+        {
+            List<LogEntry> entriesToAdd = _logEntryBatch.ToList();
+            _logEntryBatch.Clear();
+
+            foreach (LogEntry entry in entriesToAdd)
+                LogEntries.AddTimeSorted(entry);
+
+            _lastUpdateTime = DateTime.Now;
+           
+            LogEntriesChanged?.Invoke();
+        }
     }
 
     public void Reset()
@@ -28,10 +52,5 @@ public class LogAnalysisCache
     private void OpenedFilesOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         OpenedFilesChanged?.Invoke();
-    }
-
-    private void LogEntriesOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        LogEntriesChanged?.Invoke();
     }
 }
