@@ -18,7 +18,11 @@ public class CommandsPanelViewModel : ViewModelBase
     private void OnAddCommand(AddNewProgressCommandEvent @event)
     {
         ProgressCommandViewModel commandVM = new(@event.Command);
-        commandVM.ProgressFinished += vm => Commands.Remove(vm);
+        commandVM.ProgressFinished += vm =>
+        {
+            if(Commands.Contains(vm)) 
+                Commands.Remove(vm);
+        };
         
         Commands.Add(commandVM);
 
