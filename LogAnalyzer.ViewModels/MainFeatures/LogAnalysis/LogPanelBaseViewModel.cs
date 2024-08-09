@@ -1,5 +1,4 @@
-﻿using Avalonia.Threading;
-using LogAnalyzer.Core.EventBus;
+﻿using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data;
 using LogAnalyzer.Models.Data.Containers;
@@ -41,6 +40,6 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
 
     private void OnLogEntryProcessed(LogEntry logEntry)
     {
-        Dispatcher.UIThread.Invoke(() => Cache.LogEntries.AddTimeSorted(logEntry));
+        Cache.LogEntries.AddTimeSorted(logEntry);
     }
 }
