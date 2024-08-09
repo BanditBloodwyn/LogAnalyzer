@@ -20,8 +20,10 @@ public class CommandsPanelViewModel : ViewModelBase
         ProgressCommandViewModel commandVM = new(@event.Command);
         commandVM.ProgressFinished += vm =>
         {
-            if(Commands.Contains(vm)) 
+            lock (Commands)
+            {
                 Commands.Remove(vm);
+            }
         };
         
         Commands.Add(commandVM);
