@@ -3,8 +3,64 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:splittedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;assembly=LogAnalyzer.ViewModels"
+             xmlns:logAnalysis="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
+             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.SplittedLogPanel"
              x:DataType="splittedView:SplittedLogPanelViewModel">
+
+    <Design.DataContext>
+		<logAnalysis1:SplittedLogPanelDesignViewModel/>
+    </Design.DataContext>
+
+	<Grid RowDefinitions="30,*">
+		<ItemsControl Grid.Row="0" ItemsSource="{Binding FilePanels}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Rows="1"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Grid ColumnDefinitions="*,30">
+						<ContentControl Grid.Column="0" Content="{Binding FileInfo}"/>
+						<Button Grid.Column="1" 
+                                Height="25" Width="25" 
+								FontSize="12"
+                                Content="X"
+                                Command="{Binding ((splittedView:SplittedLogPanelViewModel)DataContext).OpenNewLogPanelCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding FileInfo}"/>
+					</Grid>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+       
+        <Border Grid.Row="0"
+                BorderBrush="{StaticResource LightBrush}" BorderThickness="0,0,0,1"
+                Margin="0,2"/>
+
+		<ItemsControl Grid.Row="1" ItemsSource="{Binding FilePanels}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Rows="1"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<ScrollViewer Grid.Row="1">
+						<Grid RowDefinitions="Auto,*" Margin="5">
+							<ItemsControl Grid.Row="1" ItemsSource="{Binding LogEntries}">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<logAnalysis:LogEntryElement/>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</Grid>
+					</ScrollViewer>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</Grid>
 
 </UserControl>

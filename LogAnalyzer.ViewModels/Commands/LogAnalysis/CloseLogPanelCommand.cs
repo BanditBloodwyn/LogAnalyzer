@@ -1,10 +1,11 @@
-﻿using System.Windows.Input;
-using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
+﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
+using System.Windows.Input;
+using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.Commands.LogAnalysis;
 
 public class CloseLogPanelCommand(
-    LogPanelViewModel _viewModel)
+    SplittedLogPanelViewModel _viewModel)
     : ICommand
 {
     public event EventHandler? CanExecuteChanged;
@@ -16,6 +17,7 @@ public class CloseLogPanelCommand(
 
     public void Execute(object? parameter)
     {
-        _viewModel.RequestClose();
+        if (parameter is FileInfo fileInfo)
+            _viewModel.RequestClose(fileInfo);
     }
 }

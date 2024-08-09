@@ -10,7 +10,6 @@
              xmlns:mainFeatures="clr-namespace:LogAnalyzer.ViewModels.MainFeatures;assembly=LogAnalyzer.ViewModels"
              xmlns:mergedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;assembly=LogAnalyzer.ViewModels"
              xmlns:mergedView1="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView"
-             xmlns:splittedView="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.SplittedView"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;assembly=LogAnalyzer.ViewModels"
              xmlns:views1="clr-namespace:LogAnalyzer.Views"
              xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
@@ -54,10 +53,6 @@
                 
                  <DataTemplate DataType="{x:Type logAnalysis1:SplittedLogPanelViewModel}">
 					 <views1:SplittedLogPanel/>
-                 </DataTemplate>             
-                 
-                 <DataTemplate DataType="{x:Type logAnalysis1:LogPanelViewModel}">
-					 <splittedView:LogPanelView/>
                  </DataTemplate>             
                  
                  <DataTemplate DataType="{x:Type mergedView:MergedLogPanelViewModel}">
