@@ -3,14 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
-             xmlns:logAnalysis="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
+             xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="50"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement"
              x:DataType="containers:LogEntry">
 
     <UserControl.Resources>
-		<logAnalysis:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
-		<logAnalysis:LogInnerMessageHeightConverter x:Key="LogInnerMessageHeightConverter"/>
+		<converters:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
+		<converters:LogInnerMessageHeightConverter x:Key="LogInnerMessageHeightConverter"/>
     </UserControl.Resources>
 
     <UserControl.Styles>

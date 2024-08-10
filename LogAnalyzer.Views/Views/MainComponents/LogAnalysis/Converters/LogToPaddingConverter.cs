@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis;
+namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters;
 
 public class LogToPaddingConverter : IMultiValueConverter
 {

@@ -5,6 +5,7 @@
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
              xmlns:mergedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;assembly=LogAnalyzer.ViewModels"
+             xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="300"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView.MergedLogPanel"
              x:DataType="mergedView:MergedLogPanelViewModel">
@@ -14,7 +15,7 @@
     </Design.DataContext>
    
     <UserControl.Resources>
-        <logAnalysis2:LogToPaddingConverter x:Key="LogToPaddingConverter"/>
+        <converters:LogToPaddingConverter x:Key="LogToPaddingConverter"/>
     </UserControl.Resources>
 
 	<Grid RowDefinitions="30,5,*">
