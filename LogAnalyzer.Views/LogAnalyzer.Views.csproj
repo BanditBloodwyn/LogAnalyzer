@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaXaml Update="Views\MainComponents\LogAnalysis\LogEntryElement.axaml">
+    <AvaloniaXaml Update="Views\MainComponents\LogAnalysis\LogEntryElement\LogEntryElement.axaml">
       <SubType>Designer</SubType>
     </AvaloniaXaml>
   </ItemGroup>
@@ -37,7 +37,7 @@
     <Compile Update="Views\MainComponents\LogAnalysis\LogAnalysisMainView.axaml.cs">
       <DependentUpon>LogAnalysisMainView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainComponents\LogAnalysis\LogEntryElement.axaml.cs">
+    <Compile Update="Views\MainComponents\LogAnalysis\LogEntryElement\LogEntryElement.axaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>LogEntryElement.axaml</DependentUpon>
     </Compile>

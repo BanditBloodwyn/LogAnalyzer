@@ -5,7 +5,7 @@
              xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
              xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="50"
-             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement"
+             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement.LogEntryElement"
              x:DataType="containers:LogEntry">
 
     <UserControl.Resources>

@@ -6,6 +6,7 @@
              xmlns:logAnalysis2="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
              xmlns:mergedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;assembly=LogAnalyzer.ViewModels"
              xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
+             xmlns:logEntryElement="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="300"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView.MergedLogPanel"
              x:DataType="mergedView:MergedLogPanelViewModel">
@@ -46,14 +47,14 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-						<logAnalysis2:LogEntryElement>
-							<logAnalysis2:LogEntryElement.Margin>
+						<logEntryElement:LogEntryElement>
+							<logEntryElement:LogEntryElement.Margin>
 								<MultiBinding Converter="{StaticResource LogToPaddingConverter}">
                                     <Binding Path="FileIndex"/>
                                     <Binding Path="((mergedView:MergedLogPanelViewModel)DataContext).Cache.OpenedFiles.Count" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}"/>
                                 </MultiBinding>
-                            </logAnalysis2:LogEntryElement.Margin>
-                        </logAnalysis2:LogEntryElement>
+                            </logEntryElement:LogEntryElement.Margin>
+                        </logEntryElement:LogEntryElement>
                             
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

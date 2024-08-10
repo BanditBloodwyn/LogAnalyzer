@@ -5,8 +5,9 @@
              xmlns:splittedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             xmlns:logEntryElement="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="LogAnalyzer.Views.SplittedLogPanel"
+             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.SplittedView.SplittedLogPanel"
              x:DataType="splittedView:SplittedLogPanelViewModel">
 
     <Design.DataContext>
@@ -52,7 +53,7 @@
 							<ItemsControl Grid.Row="1" ItemsSource="{Binding LogEntries}">
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
-										<logAnalysis:LogEntryElement/>
+										<logEntryElement:LogEntryElement/>
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>

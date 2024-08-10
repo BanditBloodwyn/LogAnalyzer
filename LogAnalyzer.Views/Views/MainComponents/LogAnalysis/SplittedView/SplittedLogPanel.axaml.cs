@@ -1,8 +1,6 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 
-namespace LogAnalyzer.Views;
+namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis.SplittedView;
 
 public partial class SplittedLogPanel : UserControl
 {
