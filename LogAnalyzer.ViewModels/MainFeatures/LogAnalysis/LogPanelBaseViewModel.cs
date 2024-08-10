@@ -11,12 +11,6 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _commandFactory)
     : ViewModelBase
 {
-    private const int BATCHSIZE = 100;
-    private const int UPDATEINTERVALMS = 100;
-
-    private readonly List<LogEntry> _logEntryBatch = [];
-    private DateTime _lastUpdateTime = DateTime.MinValue;
-
     public LogAnalysisCache Cache { get; } = new();
 
     public void OpenFiles(FileInfo[] filesToOpen)
