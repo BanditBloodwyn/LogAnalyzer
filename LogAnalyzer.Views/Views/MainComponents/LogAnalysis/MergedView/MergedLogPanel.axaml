@@ -7,7 +7,7 @@
              xmlns:mergedView="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;assembly=LogAnalyzer.ViewModels"
              xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
              xmlns:logEntryElement="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="300"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.MergedView.MergedLogPanel"
              x:DataType="mergedView:MergedLogPanelViewModel">
 

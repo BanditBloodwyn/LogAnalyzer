@@ -8,4 +8,6 @@ public readonly struct LogEntry(string timeStamp, string source, string logType,
     public string Message { get; } = message;
     public string InnerMessage { get; } = innerMessage;
     public int FileIndex { get; } = fileIndex;
+
+    public bool HasInnerMessage => !string.IsNullOrEmpty(innerMessage);
 }

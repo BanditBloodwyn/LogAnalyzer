@@ -4,54 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
              xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="50"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="30"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement.LogEntryElement"
              x:DataType="containers:LogEntry">
 
-    <UserControl.Resources>
+	<UserControl.Resources>
 		<converters:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
-		<converters:LogInnerMessageHeightConverter x:Key="LogInnerMessageHeightConverter"/>
-    </UserControl.Resources>
+	</UserControl.Resources>
 
-    <UserControl.Styles>
-        <Style Selector="Border">
-            <Setter Property="Background" Value="{StaticResource LightBrush}"/>
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
-                </Transitions>
-            </Setter>
+	<UserControl.Styles>
+		<Style Selector="Border">
+			<Setter Property="Background" Value="{StaticResource LightBrush}"/>
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.2"/>
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<Style Selector="Border:pointerover">
+			<Setter Property="Background" Value="{StaticResource Accent3Brush}"/>
+		</Style>
+
+		<Style Selector="Expander">
+			<Setter Property="MinHeight" Value="0"/>
+			<Setter Property="IsEnabled" Value="{Binding HasInnerMessage}"/>
         </Style>
-        <Style Selector="Border:pointerover">
-            <Setter Property="Background" Value="{StaticResource Accent3Brush}"/>
-        </Style>
-    </UserControl.Styles>
+
+	</UserControl.Styles>
 
 	<Border BorderBrush="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}}"
 			BorderThickness="10,0,0,0"
-			CornerRadius="5">
-		<StackPanel>
-			<Grid ColumnDefinitions="170,270,*,100">
-				<Label Grid.Column="0"
-					   FontWeight="ExtraLight"
-					   VerticalContentAlignment="Center"
-					   Content="{Binding TimeStamp}"/>
-				<Label Grid.Column="1"
-					   FontWeight="Heavy"
-					   Content="{Binding Source}"/>
-				<Label Grid.Column="2" Content="{Binding Message}"/>
-				<Label Grid.Column="3"
-					   FontWeight="ExtraLight" FontSize="11"
-					   HorizontalContentAlignment="Right"
-					   Content="{Binding LogType}"/>
-			</Grid>
-			<Grid ColumnDefinitions="173, *"
-				  Height="{Binding InnerMessage, Converter={StaticResource LogInnerMessageHeightConverter}}">
+			CornerRadius="5"
+            MinHeight="30">
+		<Expander HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsVisible="{Binding InnerMessage}">
+            <Expander.Header>
+                <Grid ColumnDefinitions="170,270,*,100">
+					<Label Grid.Column="0"
+                           FontWeight="ExtraLight"
+                           VerticalContentAlignment="Center"
+                           Content="{Binding TimeStamp}"/>
+					<Label Grid.Column="1"
+                           FontWeight="Heavy"
+                           Content="{Binding Source}"/>
+					<Label Grid.Column="2" Content="{Binding Message}"/>
+					<Label Grid.Column="3"
+                           FontWeight="ExtraLight" FontSize="11"
+                           HorizontalContentAlignment="Right"
+                           Content="{Binding LogType}"/>
+				</Grid>
+			</Expander.Header>
+			
+			<Grid ColumnDefinitions="173, *">
 				<Label Grid.Column="1"
 					   FontSize="11"
 					   Content="{Binding InnerMessage}"/>
 			</Grid>
-		</StackPanel>
+		</Expander>
+
 	</Border>
 
 </UserControl>
