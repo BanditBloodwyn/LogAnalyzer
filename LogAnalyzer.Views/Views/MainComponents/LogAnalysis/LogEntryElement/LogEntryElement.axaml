@@ -46,7 +46,7 @@
 			BorderThickness="10,0,0,0"
 			CornerRadius="5"
             MinHeight="30">
-		<Expander HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsVisible="{Binding InnerMessage}">
+		<Expander HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="{Binding HasInnerMessage}">
             <Expander.Header>
                 <Grid ColumnDefinitions="170,270,*,100">
 					<Label Grid.Column="0"
