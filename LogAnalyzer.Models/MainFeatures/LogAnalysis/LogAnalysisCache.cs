@@ -1,4 +1,5 @@
-﻿using LogAnalyzer.Models.Data;
+﻿using Avalonia.Threading;
+using LogAnalyzer.Core;
 using LogAnalyzer.Models.Data.Containers;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -20,6 +21,8 @@ public class LogAnalysisCache
     public ObservableCollection<FileInfo> OpenedFiles { get; } = [];
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
 
+    public BulkObservableCollection<LogEntry> LogEntryCache { get; } = new();
+
     public LogAnalysisCache()
     {
         OpenedFiles.CollectionChanged += OpenedFilesOnCollectionChanged;
@@ -34,12 +37,15 @@ public class LogAnalysisCache
             List<LogEntry> entriesToAdd = _logEntryBatch.ToList();
             _logEntryBatch.Clear();
 
-            foreach (LogEntry entry in entriesToAdd)
-                LogEntries.AddTimeSorted(entry);
+            LogEntryCache.AddRangeSorted(entriesToAdd);
+            //foreach (LogEntry entry in entriesToAdd)
+            //{
+            //    LogEntries.AddTimeSorted(entry);
+            //}
 
             _lastUpdateTime = DateTime.Now;
-           
-            LogEntriesChanged?.Invoke();
+
+            //LogEntriesChanged?.Invoke();
         }
     }
 
@@ -47,6 +53,7 @@ public class LogAnalysisCache
     {
         OpenedFiles.Clear();
         LogEntries.Clear();
+        LogEntryCache.Clear();
     }
 
     private void OpenedFilesOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

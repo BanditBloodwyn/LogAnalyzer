@@ -10,6 +10,8 @@ public class LogToPaddingConverter : IMultiValueConverter
 {
     private readonly List<double> _logEntryOffsets = [];
 
+    private const int DEFAULTMARGIN = 50;
+
     public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
     {
         if (values[0] is not int fileIndex)
@@ -25,7 +27,7 @@ public class LogToPaddingConverter : IMultiValueConverter
 
         double offset = _logEntryOffsets[fileIndex];
 
-        return new Thickness(offset, 0, -offset, 0);
+        return new Thickness(offset + DEFAULTMARGIN, 0, -offset + DEFAULTMARGIN, 0);
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

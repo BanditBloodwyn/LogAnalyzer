@@ -1,6 +1,9 @@
-﻿namespace LogAnalyzer.Models.Data.Containers;
+﻿using LogAnalyzer.Core;
 
-public readonly struct LogEntry(string timeStamp, string source, string logType, string message, string innerMessage, int fileIndex)
+namespace LogAnalyzer.Models.Data.Containers;
+
+public readonly struct LogEntry(string timeStamp, string source, string logType, string message, string innerMessage, int fileIndex) 
+    : IHasTimestamp
 {
     public string TimeStamp { get; } = timeStamp;
     public string Source { get; } = source;

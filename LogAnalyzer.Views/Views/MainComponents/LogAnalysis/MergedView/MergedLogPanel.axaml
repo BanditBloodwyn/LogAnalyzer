@@ -39,26 +39,24 @@
                 Margin="0,2"/>
 
         <ScrollViewer Grid.Row="2">
-            <ItemsControl ItemsSource="{Binding Cache.LogEntries}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Margin="50,0" Spacing="3"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
+            <ItemsRepeater ItemsSource="{Binding Cache.LogEntryCache}">
+				<ItemsRepeater.Layout>
+                    <StackLayout Spacing="3"/>
+				</ItemsRepeater.Layout>
+				<ItemsRepeater.ItemTemplate>
+					<DataTemplate>
 						<logEntryElement:LogEntryElement>
 							<logEntryElement:LogEntryElement.Margin>
 								<MultiBinding Converter="{StaticResource LogToPaddingConverter}">
-                                    <Binding Path="FileIndex"/>
-                                    <Binding Path="((mergedView:MergedLogPanelViewModel)DataContext).Cache.OpenedFiles.Count" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}"/>
-                                </MultiBinding>
-                            </logEntryElement:LogEntryElement.Margin>
-                        </logEntryElement:LogEntryElement>
-                            
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+									<Binding Path="FileIndex"/>
+									<Binding Path="((mergedView:MergedLogPanelViewModel)DataContext).Cache.OpenedFiles.Count" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}"/>
+								</MultiBinding>
+							</logEntryElement:LogEntryElement.Margin>
+						</logEntryElement:LogEntryElement>
+
+					</DataTemplate>
+				</ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
 		</ScrollViewer>
     </Grid>
 </UserControl>
