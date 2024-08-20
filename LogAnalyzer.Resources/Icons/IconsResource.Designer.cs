@@ -79,5 +79,15 @@ namespace LogAnalyzer.Resources.Icons {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        internal static byte[] log_hasInnerMessage {
+            get {
+                object obj = ResourceManager.GetObject("log_hasInnerMessage", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

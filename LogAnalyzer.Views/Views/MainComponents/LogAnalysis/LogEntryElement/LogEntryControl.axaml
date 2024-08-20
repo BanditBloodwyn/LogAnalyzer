@@ -1,0 +1,86 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
+             xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="200"
+             x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement.LogEntryControl"
+             x:DataType="containers:LogEntry"
+             Initialized="OnInitialized">
+
+	<UserControl.Resources>
+		<converters:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
+	</UserControl.Resources>
+
+	<UserControl.Styles>
+		<Style Selector="Panel#pnl_Header">
+			<Setter Property="Background" Value="{StaticResource LightBrush}"/>
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.2"/>
+				</Transitions>
+			</Setter>
+		</Style>
+		<Style Selector="Panel#pnl_Header:pointerover">
+			<Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
+		</Style>
+	</UserControl.Styles>
+
+	<Border BorderBrush="{Binding LogType, Converter={StaticResource LogTypeToBrushConverter}}"
+            BorderThickness="10,0,0,0"
+            CornerRadius="10">
+		<Border BorderBrush="{StaticResource LightBrush}"
+                BorderThickness="0,0,10,0"
+                CornerRadius="10">
+			<Grid RowDefinitions="30, *"
+                  Margin="0,0,0,0">
+
+				<Panel x:Name="pnl_Header" Grid.Row="0" PointerPressed="Pnl_Header_OnPointerPressed">
+					<Grid ColumnDefinitions="200,320,*,50,100">
+						<Label Grid.Column="0"
+                               FontWeight="ExtraLight"
+                               VerticalContentAlignment="Center"
+                               Content="{Binding TimeStamp}"/>
+						<Label Grid.Column="1"
+                               FontWeight="Heavy"
+                               VerticalContentAlignment="Center"
+                               Content="{Binding Source}"/>
+						<Label x:Name="lbl_Header_Message" Grid.Column="2"
+                               VerticalContentAlignment="Center"
+                               Content="{Binding Message}">
+							<ToolTip.Tip>
+                                <ToolTip MaxWidth="1000"
+                                         Margin="10"
+                                         ShowDelay="0">
+                                    <TextBlock Text="{Binding Message}"/>
+                                </ToolTip>
+                            </ToolTip.Tip>
+                        </Label>
+                        <StackPanel Grid.Column="3"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <Image x:Name="img_HasInnerMessage" Width="15" Height="15"/>
+                        </StackPanel>
+                        <Label Grid.Column="4"
+                               FontWeight="ExtraLight" FontSize="11"
+                               VerticalContentAlignment="Center"
+                               HorizontalContentAlignment="Right"
+                               Content="{Binding LogType}"/>
+					</Grid>
+				</Panel>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Margin="205,10,20,0"
+                               TextWrapping="Wrap"
+                               Text="{Binding Message}"/>
+                    <Label x:Name="lbl_InnerMessage"
+                           Margin="200,10,0,0"
+                           FontSize="11"
+                           Content="{Binding InnerMessage}"/>
+
+				</StackPanel>
+			</Grid>
+
+		</Border>
+	</Border>
+</UserControl>
