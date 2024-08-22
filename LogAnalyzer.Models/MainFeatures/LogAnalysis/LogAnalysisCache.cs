@@ -1,5 +1,4 @@
-﻿using Avalonia.Threading;
-using LogAnalyzer.Core;
+﻿using LogAnalyzer.Core;
 using LogAnalyzer.Models.Data.Containers;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -16,7 +15,6 @@ public class LogAnalysisCache
     private DateTime _lastUpdateTime = DateTime.MinValue;
 
     public event Action? OpenedFilesChanged;
-    public event Action? LogEntriesChanged;
 
     public ObservableCollection<FileInfo> OpenedFiles { get; } = [];
     public ObservableCollection<LogEntry> LogEntries { get; } = [];
@@ -38,14 +36,8 @@ public class LogAnalysisCache
             _logEntryBatch.Clear();
 
             LogEntryCache.AddRangeSorted(entriesToAdd);
-            //foreach (LogEntry entry in entriesToAdd)
-            //{
-            //    LogEntries.AddTimeSorted(entry);
-            //}
 
             _lastUpdateTime = DateTime.Now;
-
-            //LogEntriesChanged?.Invoke();
         }
     }
 
