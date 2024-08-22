@@ -13,11 +13,11 @@ public class LogAnalyzeCommand(
     : ProgressCommand("Analyze log file")
 {
     public Data.Containers.FileInfo? FileInfo { get; set; }
-    public IProgress<LogEntry>? LogEntryProgress { get; set; }
+    public LogAnalysisCache? Cache { get; set; }
 
     public override async Task Execute()
     {
-        if (FileInfo?.Path == null || LogEntryProgress == null)
+        if (FileInfo?.Path == null || Cache == null)
             return;
 
         MessageProgress?.Report(Path.GetFileName(FileInfo.Path));
@@ -33,7 +33,7 @@ public class LogAnalyzeCommand(
             while (await _logFinder.FindLogEntries(streamReader, CancellationToken) is { } logEntryString)
             {
                 LogEntry logEntry = await _logParser.ParseLogString(logEntryString, CancellationToken, FileInfo.FileIndex);
-                LogEntryProgress.Report(logEntry);
+                Cache.LogEntries.Add(logEntry);
 
                 bytesRead += logEntryString.Length + Environment.NewLine.Length;
                 int percentComplete = (int)(bytesRead * 100 / fileSize);

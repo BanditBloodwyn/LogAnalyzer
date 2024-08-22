@@ -19,29 +19,29 @@ public class MergedLogPanelDesignViewModel : MergedLogPanelViewModel
             "2024-07-12_Backbone.log",
             @"C:\Test\",
             @"C:\Test\2024-07-12_Backbone.log"));
-       
-        Cache.LogEntryCache.Add(new LogEntry(
-        "07/12/2024 09:18:21,392",
-        "WebCommunicatorLogger",
-        "Debug",
-        "[4] Query to http://de123450msup17.de123450.vw-group.com:7700/bbvcd/DeliveryData",
-        "<MESSAGE DTD=\"XMLMSG\" VERSION=\"1.4.0.0\">\r\n  <COMMAND>\r\n    <REQUEST NAME=\"GetDeliveryNote\" DTD=\"DeliveryData\" VERSION=\"1.4.0.0\" ID=\"2\">\r\n      <PARAM NAME=\"COUNTRY_CODE\" VALUE=\"DEU\" />\r\n      <PARAM NAME=\"DEALER\" VALUE=\"32444\" />\r\n      <PARAM NAME=\"REGION\" VALUE=\"150\" />\r\n      <PARAM NAME=\"BRAND_ID\" VALUE=\"0\" />\r\n      <PARAM NAME=\"CONTROL\" VALUE=\"WORK\" />\r\n    </REQUEST>\r\n  </COMMAND>\r\n</MESSAGE>",
-        0));
-        Cache.LogEntryCache.Add(new LogEntry(
+
+        Cache.LogEntries.Add(new LogEntry(
+            "07/12/2024 09:18:21,392",
+            "WebCommunicatorLogger",
+            "Debug",
+            "[4] Query to http://de123450msup17.de123450.vw-group.com:7700/bbvcd/DeliveryData",
+            "<MESSAGE DTD=\"XMLMSG\" VERSION=\"1.4.0.0\">\r\n  <COMMAND>\r\n    <REQUEST NAME=\"GetDeliveryNote\" DTD=\"DeliveryData\" VERSION=\"1.4.0.0\" ID=\"2\">\r\n      <PARAM NAME=\"COUNTRY_CODE\" VALUE=\"DEU\" />\r\n      <PARAM NAME=\"DEALER\" VALUE=\"32444\" />\r\n      <PARAM NAME=\"REGION\" VALUE=\"150\" />\r\n      <PARAM NAME=\"BRAND_ID\" VALUE=\"0\" />\r\n      <PARAM NAME=\"CONTROL\" VALUE=\"WORK\" />\r\n    </REQUEST>\r\n  </COMMAND>\r\n</MESSAGE>",
+            0));
+        Cache.LogEntries.Add(new LogEntry(
             "07/12/2024 09:18:21,216",
             "CoreConfigAccessor",
             "Info",
             @"Connection configuration file: 'D:\GIT\DotNet\Products\AtbasNET\Framework\Start\bin\Debug\Atbas.Framework.Connection.cfg'",
             "",
             0));
-        Cache.LogEntryCache.Add(new LogEntry(
+        Cache.LogEntries.Add(new LogEntry(
             "07/12/2024 09:18:21,392",
             "LexcomRemoteToken",
             "Warning",
             "Share '\\\\TFS\\po_etord' not disconnected",
             "System.ComponentModel.Win32Exception: Diese Netzwerkverbindung ist nicht vorhanden.",
             1));
-        Cache.LogEntryCache.Add(new LogEntry(
+        Cache.LogEntries.Add(new LogEntry(
             "07/12/2024 09:18:21,392",
             "CommissioningScannerCommandProcessor",
             "Error",
