@@ -1,26 +1,18 @@
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.Resources;
+using System;
 
 namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement;
 
 public partial class LogEntryControl : UserControl
 {
+    private LogEntry? _logEntry;
+
     public static readonly StyledProperty<bool> IsExpandedProperty =
         AvaloniaProperty.Register<LogEntryControl, bool>(nameof(IsExpanded), defaultValue: false);
-
-    private bool HasInnerMessage
-    {
-        get
-        {
-            if (DataContext is LogEntry logEntry)
-                return !string.IsNullOrEmpty(logEntry.InnerMessage);
-            return false;
-        }
-    }
     private bool IsExpanded
     {
         get => GetValue(IsExpandedProperty);
@@ -30,24 +22,42 @@ public partial class LogEntryControl : UserControl
     public LogEntryControl()
     {
         InitializeComponent();
-        
 
         img_HasInnerMessage.Source = DefaultIcons.LogInnerMessageIcon;
+        img_RepoDurationWarning.Source = DefaultIcons.LogLongRepoInteraction;
+        img_RepoDurationCritical.Source = DefaultIcons.LogVeryLongRepoInteraction;
     }
 
-    private void OnInitialized(object? sender, EventArgs e)
+    private void OnDataContextChanged(object? sender, EventArgs e)
     {
+        if (DataContext is not LogEntry logEntry)
+            return;
+
+        _logEntry = logEntry;
+
+        InitIcons();
+
         UpdateHeight();
         UpdateUI();
     }
 
+    private void InitIcons()
+    {
+        img_HasInnerMessage.IsVisible = _logEntry?.HasInnerMessage ?? false;
+        img_RepoDurationWarning.IsVisible = _logEntry?.RepositoryInteractionInformation?.HasDurationWarning ?? false;
+        img_RepoDurationCritical.IsVisible = _logEntry?.RepositoryInteractionInformation?.HasCriticalDuration ?? false;
+    }
+
     private void Pnl_Header_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (!HasInnerMessage)
+        if (!_logEntry.HasValue)
+            return;
+
+        if (!_logEntry.Value.HasInnerMessage)
             return;
 
         IsExpanded = !IsExpanded;
-        
+
         UpdateHeight();
         UpdateUI();
     }
@@ -64,6 +74,5 @@ public partial class LogEntryControl : UserControl
     private void UpdateUI()
     {
         lbl_Header_Message.IsVisible = !IsExpanded;
-        img_HasInnerMessage.IsVisible = HasInnerMessage;
     }
 }

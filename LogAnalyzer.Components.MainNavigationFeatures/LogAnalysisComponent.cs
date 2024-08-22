@@ -2,6 +2,7 @@
 using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Models.Strategies.LogStringFinding;
 using LogAnalyzer.Models.Strategies.LogStringParsing;
+using LogAnalyzer.Models.Strategies.RepositoryInteractionInformationExtraction;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
@@ -15,6 +16,7 @@ public class LogAnalysisComponent : ComponentBase,
     public void RegisterDependencies(IServiceCollection service)
     {
         service
+            .AddSingleton<IRepositoryInteractionInformationExtractor, ClassicATBASRepositoryInteractionInformationExtractor>()
             .AddTransient<ILogStringFindingStrategy, ClassicATBASLogStringFinding>()
             .AddTransient<ILogStringParsingStrategy, ClassicATBASLogStringParsing>()
             .AddTransient<SplittedLogPanelViewModel>()

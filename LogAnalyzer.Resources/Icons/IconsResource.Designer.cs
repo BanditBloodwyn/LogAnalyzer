@@ -89,5 +89,25 @@ namespace LogAnalyzer.Resources.Icons {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        internal static byte[] log_long {
+            get {
+                object obj = ResourceManager.GetObject("log_long", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        internal static byte[] log_veryLong {
+            get {
+                object obj = ResourceManager.GetObject("log_veryLong", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

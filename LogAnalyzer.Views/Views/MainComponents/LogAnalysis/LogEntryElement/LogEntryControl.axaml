@@ -7,7 +7,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="200"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement.LogEntryControl"
              x:DataType="containers:LogEntry"
-             Initialized="OnInitialized">
+             DataContextChanged="OnDataContextChanged"
+             >
 
 	<UserControl.Resources>
 		<converters:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
@@ -60,7 +61,9 @@
                         <StackPanel Grid.Column="3"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Right">
-                            <Image x:Name="img_HasInnerMessage" Width="15" Height="15"/>
+                            <Image x:Name="img_HasInnerMessage" Width="20" Height="20"/>
+                            <Image x:Name="img_RepoDurationWarning" Width="20" Height="20"/>
+                            <Image x:Name="img_RepoDurationCritical" Width="20" Height="20"/>
                         </StackPanel>
                         <Label Grid.Column="4"
                                FontWeight="ExtraLight" FontSize="11"
