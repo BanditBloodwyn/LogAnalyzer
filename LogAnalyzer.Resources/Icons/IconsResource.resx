@@ -124,4 +124,13 @@
   <data name="feature_settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>feature_settings.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="log_hasInnerMessage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>log_hasInnerMessage.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="log_long" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>log_long.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="log_veryLong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>log_veryLong.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

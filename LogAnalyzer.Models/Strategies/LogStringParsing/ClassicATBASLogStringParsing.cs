@@ -1,11 +1,12 @@
 ﻿using LogAnalyzer.Models.Data.Containers;
+using LogAnalyzer.Models.Strategies.RepositoryInteractionInformationExtraction;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace LogAnalyzer.Models.Strategies.LogStringParsing;
 
-public class ClassicATBASLogStringParsing : ILogStringParsingStrategy
+public class ClassicATBASLogStringParsing(IRepositoryInteractionInformationExtractor _repoInteractionInfoExtractor) : ILogStringParsingStrategy
 {
     public async Task<LogEntry> ParseLogString(
         string logString,
@@ -27,13 +28,16 @@ public class ClassicATBASLogStringParsing : ILogStringParsingStrategy
         string message = GetMessage(logString);
         string innerMessage = GetInnerMessage(logString);
 
+        RepositoryInteractionInformation? repositoryInteractionInformation = _repoInteractionInfoExtractor.Extract(message, innerMessage);
+
         return new LogEntry(
             timeStamp,
             source,
             type,
             message,
             innerMessage,
-            fileIndex);
+            fileIndex,
+            repositoryInteractionInformation);
     }
 
     private static string GetTimetamp(string logString)

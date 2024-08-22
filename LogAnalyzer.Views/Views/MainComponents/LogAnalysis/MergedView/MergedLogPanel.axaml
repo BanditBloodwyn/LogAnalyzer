@@ -45,14 +45,14 @@
 				</ItemsRepeater.Layout>
 				<ItemsRepeater.ItemTemplate>
 					<DataTemplate>
-						<logEntryElement:LogEntryElement>
-							<logEntryElement:LogEntryElement.Margin>
+						<logEntryElement:LogEntryControl>
+							<logEntryElement:LogEntryControl.Margin>
 								<MultiBinding Converter="{StaticResource LogToPaddingConverter}">
 									<Binding Path="FileIndex"/>
 									<Binding Path="((mergedView:MergedLogPanelViewModel)DataContext).Cache.OpenedFiles.Count" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}"/>
 								</MultiBinding>
-							</logEntryElement:LogEntryElement.Margin>
-						</logEntryElement:LogEntryElement>
+							</logEntryElement:LogEntryControl.Margin>
+						</logEntryElement:LogEntryControl>
 
 					</DataTemplate>
 				</ItemsRepeater.ItemTemplate>
