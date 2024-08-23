@@ -21,6 +21,7 @@ public class SplittedLogPanelDesignViewModel : SplittedLogPanelViewModel
             @"C:\Test\2024-07-12_Backbone.log"));
 
         Cache.LogEntries.Add(new LogEntry(
+            1,
             "07/12/2024 09:18:21,392",
             "WebCommunicatorLogger",
             "Debug",
@@ -28,6 +29,7 @@ public class SplittedLogPanelDesignViewModel : SplittedLogPanelViewModel
             "<MESSAGE DTD=\"XMLMSG\" VERSION=\"1.4.0.0\">\r\n  <COMMAND>\r\n    <REQUEST NAME=\"GetDeliveryNote\" DTD=\"DeliveryData\" VERSION=\"1.4.0.0\" ID=\"2\">\r\n      <PARAM NAME=\"COUNTRY_CODE\" VALUE=\"DEU\" />\r\n      <PARAM NAME=\"DEALER\" VALUE=\"32444\" />\r\n      <PARAM NAME=\"REGION\" VALUE=\"150\" />\r\n      <PARAM NAME=\"BRAND_ID\" VALUE=\"0\" />\r\n      <PARAM NAME=\"CONTROL\" VALUE=\"WORK\" />\r\n    </REQUEST>\r\n  </COMMAND>\r\n</MESSAGE>",
             0));
         Cache.LogEntries.Add(new LogEntry(
+            2,
             "07/12/2024 09:18:21,216",
             "CoreConfigAccessor",
             "Info",
@@ -35,6 +37,7 @@ public class SplittedLogPanelDesignViewModel : SplittedLogPanelViewModel
             "",
             0));
         Cache.LogEntries.Add(new LogEntry(
+            3,
             "07/12/2024 09:18:21,392",
             "LexcomRemoteToken",
             "Warning",
@@ -42,6 +45,7 @@ public class SplittedLogPanelDesignViewModel : SplittedLogPanelViewModel
             "System.ComponentModel.Win32Exception: Diese Netzwerkverbindung ist nicht vorhanden.",
             1));
         Cache.LogEntries.Add(new LogEntry(
+            4,
             "07/12/2024 09:18:21,392",
             "BackboneCommunicator",
             "Error",

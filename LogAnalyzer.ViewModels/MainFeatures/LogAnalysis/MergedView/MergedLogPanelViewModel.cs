@@ -9,13 +9,13 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 public class MergedLogPanelViewModel : LogPanelBaseViewModel
 {
     private const int UPDATEINTERVALMS = 500;
-    
+
     private readonly Stopwatch _stopwatch = new Stopwatch();
     private readonly System.Timers.Timer _updateTimer;
     private bool _updatePending;
 
-    private List<LogEntry> _logEntries = [];
-    public List<LogEntry> LogEntries
+    private List<LogEntryViewModel> _logEntries = [];
+    public List<LogEntryViewModel> LogEntries
     {
         get => _logEntries;
         set => SetProperty(ref _logEntries, value);
@@ -25,7 +25,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         : base(commandFactory)
     {
         Cache.LogEntries.CollectionChanged += OnLogEntriesChanged;
-       
+
         _updateTimer = new System.Timers.Timer(UPDATEINTERVALMS);
         _updateTimer.Elapsed += OnUpdateTimerElapsed;
         _stopwatch.Start();
@@ -41,8 +41,8 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         else
         {
             _updatePending = true;
-            
-            if (!_updateTimer.Enabled) 
+
+            if (!_updateTimer.Enabled)
                 _updateTimer.Start();
         }
     }
@@ -50,11 +50,11 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     private void OnUpdateTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         _updateTimer.Stop();
-        
+
         if (_updatePending)
         {
             UpdateLogEntries();
-            
+
             _updatePending = false;
             _stopwatch.Restart();
         }
@@ -63,15 +63,24 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     private void UpdateLogEntries()
     {
         List<LogEntry> cacheSnapshot;
-        lock (Cache.LogEntries) 
-            cacheSnapshot = [..Cache.LogEntries];
+        lock (Cache.LogEntries)
+            cacheSnapshot = [.. Cache.LogEntries];
 
-        List<LogEntry> newEntries = cacheSnapshot.Except(LogEntries).ToList();
-        
+        List<long> cacheIndeces = cacheSnapshot.Select(log => log.index).ToList();
+        List<long> vmIndeces = LogEntries.Select(log => log.Index).ToList();
+        List<long> newIndeces = cacheIndeces.Except(vmIndeces).ToList();
+        List<LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.index)).ToList();
+
         if (newEntries.Count != 0)
         {
-            LogEntries = [..LogEntries.Concat(newEntries)];
+            LogEntries = [.. LogEntries.Concat(CreateNewLogEntryVMs(newEntries))];
             OnPropertyChanged(nameof(LogEntries));
         }
+    }
+
+    private static IEnumerable<LogEntryViewModel> CreateNewLogEntryVMs(IEnumerable<LogEntry> newEntries)
+    {
+        foreach (LogEntry newEntry in newEntries)
+            yield return new LogEntryViewModel(newEntry);
     }
 }
