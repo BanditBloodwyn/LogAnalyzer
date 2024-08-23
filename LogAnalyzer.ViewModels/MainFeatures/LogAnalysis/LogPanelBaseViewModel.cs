@@ -1,6 +1,5 @@
 ﻿using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
-using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.Models.Events;
 using LogAnalyzer.Models.MainFeatures.LogAnalysis;
 using LogAnalyzer.ViewModels.Commands;
@@ -26,12 +25,9 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
 
     private void CreateLogAnalyzeCommand(FileInfo fileInfo)
     {
-        IProgress<LogEntry> entryProgress = new Progress<LogEntry>(
-            Cache.AddLogEntryBatched);
-
         LogAnalyzeCommand logAnalyzeCommand = _commandFactory();
         logAnalyzeCommand.FileInfo = fileInfo;
-        logAnalyzeCommand.LogEntryProgress = entryProgress;
+        logAnalyzeCommand.Cache = Cache;
 
         EventBus<AddNewProgressCommandEvent>.Raise(
             new AddNewProgressCommandEvent(logAnalyzeCommand));

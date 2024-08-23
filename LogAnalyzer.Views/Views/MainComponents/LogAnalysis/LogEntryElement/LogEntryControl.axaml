@@ -2,13 +2,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
              xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
+             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
+             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="200"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement.LogEntryControl"
-             x:DataType="containers:LogEntry"
-             DataContextChanged="OnDataContextChanged"
-             >
+             x:DataType="logAnalysis:LogEntryViewModel"
+             DataContextChanged="OnDataContextChanged">
+
+    <Design.DataContext>
+		<logAnalysis1:LogEntryDesignViewModel/>
+	</Design.DataContext>
 
 	<UserControl.Resources>
 		<converters:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
@@ -61,9 +65,9 @@
                         <StackPanel Grid.Column="3"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Right">
-                            <Image x:Name="img_HasInnerMessage" Width="20" Height="20"/>
-                            <Image x:Name="img_RepoDurationWarning" Width="20" Height="20"/>
-                            <Image x:Name="img_RepoDurationCritical" Width="20" Height="20"/>
+                            <Image x:Name="img_HasInnerMessage" Width="25" Height="25"/>
+                            <Image x:Name="img_RepoDurationWarning" Width="25" Height="25"/>
+                            <Image x:Name="img_RepoDurationCritical" Width="25" Height="25"/>
                         </StackPanel>
                         <Label Grid.Column="4"
                                FontWeight="ExtraLight" FontSize="11"

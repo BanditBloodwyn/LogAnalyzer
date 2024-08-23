@@ -9,6 +9,7 @@ namespace LogAnalyzer.Models.Strategies.LogStringParsing;
 public class ClassicATBASLogStringParsing(IRepositoryInteractionInformationExtractor _repoInteractionInfoExtractor) : ILogStringParsingStrategy
 {
     public async Task<LogEntry> ParseLogString(
+        long logEntryIndex,
         string logString,
         CancellationToken cancellationToken,
         int fileIndex)
@@ -31,6 +32,7 @@ public class ClassicATBASLogStringParsing(IRepositoryInteractionInformationExtra
         RepositoryInteractionInformation? repositoryInteractionInformation = _repoInteractionInfoExtractor.Extract(message, innerMessage);
 
         return new LogEntry(
+            logEntryIndex,
             timeStamp,
             source,
             type,
