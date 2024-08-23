@@ -74,6 +74,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         if (newEntries.Count != 0)
         {
             LogEntries = [.. LogEntries.Concat(CreateNewLogEntryVMs(newEntries))];
+            LogEntries.Sort((item1, item2) => DateTime.Parse(item1.TimeStamp).CompareTo(DateTime.Parse(item2.TimeStamp)));
             OnPropertyChanged(nameof(LogEntries));
         }
     }
