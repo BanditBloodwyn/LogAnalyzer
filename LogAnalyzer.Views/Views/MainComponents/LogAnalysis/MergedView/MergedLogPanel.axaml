@@ -39,7 +39,7 @@
                 Margin="0,2"/>
 
         <ScrollViewer Grid.Row="2">
-            <ItemsRepeater ItemsSource="{Binding Cache.LogEntries}">
+            <ItemsRepeater ItemsSource="{Binding LogEntries}">
 				<ItemsRepeater.Layout>
                     <StackLayout Spacing="3"/>
 				</ItemsRepeater.Layout>
