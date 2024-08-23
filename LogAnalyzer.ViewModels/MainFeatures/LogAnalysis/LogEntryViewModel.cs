@@ -6,7 +6,7 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
 {
     public long Index => _logEntry.index;
-    public string TimeStamp => _logEntry.timeStamp;
+    public string TimeStamp => !string.IsNullOrEmpty(_logEntry.timeStamp) ? _logEntry.timeStamp : "01/01/0000 00:00:00,000";
     public string Source => _logEntry.source;
     public string LogType => _logEntry.logType;
     public string Message => _logEntry.message;
