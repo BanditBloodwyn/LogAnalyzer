@@ -15,7 +15,9 @@
                 <ContentControl Content="{Binding FeatureButtonsPanelVm}"/>
 			</Border>
 
-			<Border Grid.Row="2"
+			<ContentControl Grid.Row="1" Content="{Binding ToolPanelVM}"/>
+			
+            <Border Grid.Row="2"
                     BorderBrush="{StaticResource LightBrush}"
                     BorderThickness="0,1,0,0">
 				<ContentControl Content="{Binding CommandsPanelVM}"/>
