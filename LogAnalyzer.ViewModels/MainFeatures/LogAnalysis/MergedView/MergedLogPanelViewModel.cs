@@ -31,6 +31,11 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         _stopwatch.Start();
     }
 
+    protected override void Reset()
+    {
+        LogEntries.Clear();
+    }
+
     private void OnLogEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (_stopwatch.ElapsedMilliseconds >= UPDATEINTERVALMS)

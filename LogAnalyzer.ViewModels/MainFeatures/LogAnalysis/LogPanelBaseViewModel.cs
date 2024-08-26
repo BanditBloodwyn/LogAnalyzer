@@ -15,6 +15,7 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
     public void OpenFiles(FileInfo[] filesToOpen)
     {
         Cache.Reset();
+        Reset();
 
         foreach (FileInfo fileInfo in filesToOpen)
             Cache.OpenedFiles.Add(fileInfo);
@@ -22,6 +23,9 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
         foreach (FileInfo fileInfo in filesToOpen)
             CreateLogAnalyzeCommand(fileInfo);
     }
+
+    protected virtual void Reset()
+    { }
 
     private void CreateLogAnalyzeCommand(FileInfo fileInfo)
     {
