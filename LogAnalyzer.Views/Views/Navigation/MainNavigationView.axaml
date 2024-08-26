@@ -3,10 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             xmlns:navigation1="clr-namespace:LogAnalyzer.ViewModels.Design.Navigation;assembly=LogAnalyzer.ViewModels.Design"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="1000"
              x:Class="LogAnalyzer.Views.Views.Navigation.MainNavigationView"
              x:DataType="navigation:MainNavigationViewModel">
     
+    <Design.DataContext>
+		<navigation1:MainNavigationDesignViewModel/>
+	</Design.DataContext>
+
     <Border BorderThickness="0,0,1,0" BorderBrush="{StaticResource LightBrush}">
         <Grid RowDefinitions="70, *, *">
             <Border Grid.Row="0"

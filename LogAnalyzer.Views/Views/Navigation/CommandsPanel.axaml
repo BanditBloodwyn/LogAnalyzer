@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
              xmlns:navigation1="clr-namespace:LogAnalyzer.Views.Views.Navigation"
+             xmlns:navigation2="clr-namespace:LogAnalyzer.ViewModels.Design.Navigation;assembly=LogAnalyzer.ViewModels.Design"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.Navigation.CommandsPanel"
              x:DataType="navigation:CommandsPanelViewModel">
+
+    <Design.DataContext>
+		<navigation2:CommandsPanelDesignViewModel/>
+    </Design.DataContext>
 
     <ItemsControl ItemsSource="{Binding Commands}">
         <ItemsControl.ItemsPanel>
