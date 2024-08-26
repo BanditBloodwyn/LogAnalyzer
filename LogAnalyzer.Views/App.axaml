@@ -48,6 +48,10 @@
 					 <logAnalysis2:LogAnalysisMainView/>
                  </DataTemplate>
 
+				 <DataTemplate DataType="{x:Type logAnalysis:LogAnalysisToolPanelViewModel}">
+					 <views1:LogAnalysisToolPanel/>
+                 </DataTemplate>
+
                  <DataTemplate DataType="{x:Type containers:FileInfo}">
 					 <logAnalysis2:LogFileHeaderElement/>
                  </DataTemplate>             

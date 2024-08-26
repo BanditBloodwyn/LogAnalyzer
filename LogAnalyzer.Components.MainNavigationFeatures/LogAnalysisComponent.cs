@@ -3,9 +3,6 @@ using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Models.Strategies.LogStringFinding;
 using LogAnalyzer.Models.Strategies.LogStringParsing;
 using LogAnalyzer.Models.Strategies.RepositoryInteractionInformationExtraction;
-using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
-using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
-using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.Components.MainNavigationFeatures;
@@ -18,9 +15,6 @@ public class LogAnalysisComponent : ComponentBase,
         service
             .AddSingleton<IRepositoryInteractionInformationExtractor, ClassicATBASRepositoryInteractionInformationExtractor>()
             .AddTransient<ILogStringFindingStrategy, ClassicATBASLogStringFinding>()
-            .AddTransient<ILogStringParsingStrategy, ClassicATBASLogStringParsing>()
-            .AddTransient<SplittedLogPanelViewModel>()
-            .AddTransient<MergedLogPanelViewModel>()
-            .AddSingleton<LogAnalysisMainViewModel>();
+            .AddTransient<ILogStringParsingStrategy, ClassicATBASLogStringParsing>();
     }
 }

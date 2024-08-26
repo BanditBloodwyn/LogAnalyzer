@@ -1,4 +1,5 @@
 ﻿using Avalonia.Media.Imaging;
+using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Resources;
 using LogAnalyzer.Services.IO.FileDialog;
@@ -13,12 +14,14 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 public class LogAnalysisMainViewModel(
     IFileDialogService _fileDialogService,
     SplittedLogPanelViewModel _splittedLogPanelVM,
-    MergedLogPanelViewModel _mergedLogPanelVM)
-    : MainFeatureViewModelBase
+    MergedLogPanelViewModel _mergedLogPanelVM,
+    LogAnalysisToolPanelViewModel toolPanelVM)
+    : MainFeatureViewModelBase, IToolPanelProvider
 {
     public override int NavigationIndex => 0;
     public override string FeatureHeader => "Log Analysis";
     public override Bitmap FeatureIcon => DefaultIcons.LogAnalysisIcon;
+    public ViewModelBase ToolPanel => toolPanelVM;
 
     #region GUI Bindings
 
