@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
              xmlns:navigation1="clr-namespace:LogAnalyzer.ViewModels.Design.Navigation;assembly=LogAnalyzer.ViewModels.Design"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="70"
              x:Class="LogAnalyzer.Views.Views.Navigation.FeatureButtonsPanel"
              x:DataType="navigation:FeatureButtonsPanelViewModel">
    
@@ -15,24 +15,26 @@
     <ItemsControl ItemsSource="{Binding Features}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel/>
+                <UniformGrid Rows="1"/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Button
+                <Button Padding="0"
                     Background="Transparent"
-                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                     CommandParameter="{Binding RelativeSource={RelativeSource DataContext}}"
                     Command="{Binding ((navigation:FeatureButtonsPanelViewModel)DataContext).OpenFeatureCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
-                    <Grid ColumnDefinitions="*,*" MaxHeight="30">
-                        <Image Grid.Column="0" Source="{Binding FeatureIcon}"
-                               HorizontalAlignment="Right"
-                               Margin="0,3,30,3"/>
-                        <Label Grid.Column="1" Content="{Binding FeatureHeader}"
-                                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                                   Margin="-20,0,0,0"/>
+                    <Grid RowDefinitions="2*,*">
+                        <Image Grid.Row="0" 
+                               Margin="5,5,5,0"
+                               Source="{Binding FeatureIcon}"/>
+                        <Label Grid.Row="1" 
+                               Padding="0"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Top"
+                               Content="{Binding FeatureHeader}"/>
                     </Grid>
                 </Button>
             </DataTemplate>
