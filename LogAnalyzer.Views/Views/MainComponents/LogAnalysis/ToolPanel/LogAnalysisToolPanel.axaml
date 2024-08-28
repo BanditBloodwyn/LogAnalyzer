@@ -3,8 +3,80 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
              x:Class="LogAnalyzer.Views.LogAnalysisToolPanel"
              x:DataType="logAnalysis:LogAnalysisToolPanelViewModel">
-	Welcome to Avalonia!
+
+	<Design.DataContext>
+		<logAnalysis1:LogAnalysisToolPanelDesignViewModel/>
+	</Design.DataContext>
+
+	<StackPanel Margin="5,0">
+		<Label HorizontalContentAlignment="Center"
+               FontSize="16" FontWeight="Bold"
+               Content="Toolbox"/>
+
+		<Separator Margin="0,5"/>
+
+		<Grid ColumnDefinitions="*,*">
+			<StackPanel Grid.Column="0" Margin="0,5,5,5">
+				<Label Content="To show only"/>
+				<ItemsControl ItemsSource="{Binding ShowFilterStrings}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Spacing="2"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<TextBox Text="{Binding}"/>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+			<StackPanel Grid.Column="1" Margin="5,5,0,5">
+				<Label Content="To hide"/>
+				<ItemsControl ItemsSource="{Binding HideFilterStrings}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Spacing="2"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<TextBox Text="{Binding}"/>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+		</Grid>
+
+		<Separator Margin="0,5"/>
+
+		<Grid ColumnDefinitions="*,*">
+			<StackPanel Grid.Column="0">
+				<CheckBox IsChecked="{Binding ShowOnlyDebug}" Content="Show only debug"/>
+				<CheckBox IsChecked="{Binding ShowOnlyInfo}" Content="Show only info"/>
+				<CheckBox IsChecked="{Binding ShowOnlyWarning}" Content="Show only warning"/>
+				<CheckBox IsChecked="{Binding ShowOnlyError}" Content="Show only error"/>
+			</StackPanel>
+            <StackPanel Grid.Column="1">
+                <CheckBox IsChecked="{Binding ShowOnlyBackpack}" Content="Show only backpack"/>
+            </StackPanel>
+		</Grid>
+
+        <Separator Margin="0,5"/>
+
+		<Border BoxShadow="3 3 3 0 DarkGray"
+                CornerRadius="5"
+                Background="{StaticResource Accent1Brush}">
+			<Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                    Background="{StaticResource Accent1Brush}" Foreground="White"
+                    Content="Filter"
+                    Command="{Binding StartFilterCommand}"/>
+		</Border>
+
+        <Separator Margin="0,5" BorderThickness="2"/>
+	</StackPanel>
 </UserControl>
