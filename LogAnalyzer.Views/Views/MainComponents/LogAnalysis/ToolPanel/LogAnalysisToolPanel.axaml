@@ -55,15 +55,32 @@
 		<Separator Margin="0,5"/>
 
 		<Grid ColumnDefinitions="*,*">
-			<StackPanel Grid.Column="0">
-				<CheckBox IsChecked="{Binding ShowOnlyDebug}" Content="Show only debug"/>
-				<CheckBox IsChecked="{Binding ShowOnlyInfo}" Content="Show only info"/>
-				<CheckBox IsChecked="{Binding ShowOnlyWarning}" Content="Show only warning"/>
-				<CheckBox IsChecked="{Binding ShowOnlyError}" Content="Show only error"/>
-			</StackPanel>
-            <StackPanel Grid.Column="1">
-                <CheckBox IsChecked="{Binding ShowOnlyBackpack}" Content="Show only backpack"/>
-            </StackPanel>
+			<ItemsControl Grid.Column="0" ItemsSource="{Binding LogTypeFilters}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<CheckBox Content="{Binding FilterHeader}"
+                                  IsChecked="{Binding Checked, Mode=TwoWay}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding SpecialFilters}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding FilterHeader}"
+                                  IsChecked="{Binding Checked, Mode=TwoWay}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 		</Grid>
 
         <Separator Margin="0,5"/>

@@ -8,46 +8,15 @@ namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 public class LogAnalysisToolPanelViewModel : ViewModelBase
 {
     protected const int TEXTBOXFILTER_COUNT = 8;
+   
+    public event Action<FilterData>? StartFilteringRequested;
 
     #region UI Bindings
 
     public ObservableCollection<FilterTextboxViewModel> ShowFilterStrings { get; } = [];
     public ObservableCollection<FilterTextboxViewModel> HideFilterStrings { get; } = [];
-
-    private bool _showOnlyDebug;
-    public bool ShowOnlyDebug
-    {
-        get => _showOnlyDebug;
-        set => SetProperty(ref _showOnlyDebug, value);
-    }
-
-    private bool _showOnlyInfo;
-    public bool ShowOnlyInfo
-    {
-        get => _showOnlyInfo;
-        set => SetProperty(ref _showOnlyInfo, value);
-    }
-
-    private bool _showOnlyWarning;
-    public bool ShowOnlyWarning
-    {
-        get => _showOnlyWarning;
-        set => SetProperty(ref _showOnlyWarning, value);
-    }
-
-    private bool _showOnlyError;
-    public bool ShowOnlyError
-    {
-        get => _showOnlyError;
-        set => SetProperty(ref _showOnlyError, value);
-    }
-
-    private bool _showOnlyBackpack;
-    public bool ShowOnlyBackpack
-    {
-        get => _showOnlyBackpack;
-        set => SetProperty(ref _showOnlyBackpack, value);
-    }
+    public ObservableCollection<FilterCheckboxViewModel> LogTypeFilters { get; } = [];
+    public ObservableCollection<FilterCheckboxViewModel> SpecialFilters { get; } = [];
 
     private ICommand? _startFilterCommand;
     public ICommand StartFilterCommand => _startFilterCommand ??= new StartFilterCommand(this);
@@ -55,11 +24,13 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
 
     #endregion
 
-    public event Action<FilterData>? StartFilteringRequested;
+    #region Init
 
     public LogAnalysisToolPanelViewModel()
     {
         AddTextboxes();
+        AddLogTypeFilters();
+        AddSpecialFilters();
     }
 
     private void AddTextboxes()
@@ -73,14 +44,28 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
             HideFilterStrings.Add(new FilterTextboxViewModel());
     }
 
+    private void AddLogTypeFilters()
+    {
+        LogTypeFilters.Add(new FilterCheckboxViewModel("Debug"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel("Info"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel("Warning"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel("Error"));
+    }
+
+    private void AddSpecialFilters()
+    {
+        SpecialFilters.Add(new FilterCheckboxViewModel("Backpack"));
+        SpecialFilters.Add(new FilterCheckboxViewModel("Exception"));
+    }
+
+    #endregion
+
     public void StartFiltering()
     {
-        bool isEmpty = ShowFilterStrings.All(text => string.IsNullOrEmpty(text.Text)) &&
-                       HideFilterStrings.All(text => string.IsNullOrEmpty(text.Text));
-
         StartFilteringRequested?.Invoke(new FilterData(
-            isEmpty,
             ShowFilterStrings.Select(text => text.Text).ToArray(),
-            HideFilterStrings.Select(text => text.Text).ToArray()));
+            HideFilterStrings.Select(text => text.Text).ToArray(),
+            LogTypeFilters.ToDictionary(f => f.FilterType, f => f.Checked),
+            SpecialFilters.ToDictionary(f => f.FilterType, f => f.Checked)));
     }
 }
