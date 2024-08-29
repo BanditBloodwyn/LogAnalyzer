@@ -32,9 +32,9 @@ public class FilterBuilder
 
         string[] relevantFilterStrings = filter.specialFilters.Where(fil => fil.Value).Select(fil => fil.Key).ToArray();
 
-        bool contains = relevantFilterStrings.Any(showString => logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                        relevantFilterStrings.Any(showString => logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                        relevantFilterStrings.Any(showString => logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
+        bool contains = relevantFilterStrings.Any(showString => logEntry.Source != null && logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                        relevantFilterStrings.Any(showString => logEntry.Message != null && logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                        relevantFilterStrings.Any(showString => logEntry.InnerMessage != null && logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
         return contains;
     }
 
@@ -45,9 +45,9 @@ public class FilterBuilder
 
         string[] relevantFilterStrings = textFilters.Where(text => !string.IsNullOrEmpty(text)).ToArray();
 
-        bool contains = relevantFilterStrings.Any(showString => logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                          relevantFilterStrings.Any(showString => logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                          relevantFilterStrings.Any(showString => logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
+        bool contains = relevantFilterStrings.Any(showString => logEntry.Source != null && logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                          relevantFilterStrings.Any(showString => logEntry.Message != null && logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                          relevantFilterStrings.Any(showString => logEntry.InnerMessage != null && logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
         return contains;
     }
 }

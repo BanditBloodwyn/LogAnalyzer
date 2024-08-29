@@ -19,10 +19,10 @@ public class LogToPaddingConverter : IMultiValueConverter
         if (values[1] is not int fileCount || fileCount == 0)
             return new Thickness(0);
 
-        if (_logEntryOffsets.Count != fileCount || _logEntryOffsets.Count == 0)
+        if (_logEntryOffsets.Count != int.Max(fileCount, fileIndex + 1) || _logEntryOffsets.Count == 0)
         {
             _logEntryOffsets.Clear();
-            _logEntryOffsets.AddRange(DistributePositions(-50, 50, fileCount));
+            _logEntryOffsets.AddRange(DistributePositions(-50, 50, int.Max(fileCount, fileIndex + 1)));
         }
 
         double offset = _logEntryOffsets[fileIndex];
