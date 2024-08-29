@@ -21,23 +21,32 @@ public class FilterBuilder
 
     private static bool ShowType(FilterData filter, LogEntryViewModel logEntry)
     {
-        if (logEntry.LogType == null)
+        if (string.IsNullOrEmpty(logEntry.LogType))
             return false;
 
-        return filter.logTypeFilters.All(static typeFilter => !typeFilter.Value) || 
+        return filter.logTypeFilters.All(static typeFilter => !typeFilter.Value) ||
                filter.logTypeFilters.GetValueOrDefault(logEntry.LogType, true);
     }
 
     private static bool MatchesSpecialFilter(FilterData filter, LogEntryViewModel logEntry)
     {
-        if (filter.specialFilters.All(val => !val.Value))
+        if (filter.specialFilters.All(static val => !val.Value))
             return true;
 
-        string[] relevantFilterStrings = filter.specialFilters.Where(fil => fil.Value).Select(fil => fil.Key).ToArray();
+        string[] relevantFilterStrings = filter.specialFilters
+            .Where(static fil => fil.Value)
+            .Select(static fil => fil.Key)
+            .ToArray();
 
-        bool contains = relevantFilterStrings.Any(showString => logEntry.Source != null && logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                        relevantFilterStrings.Any(showString => logEntry.Message != null && logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                        relevantFilterStrings.Any(showString => logEntry.InnerMessage != null && logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
+        bool contains = relevantFilterStrings.Any(showString =>
+                            !string.IsNullOrEmpty(logEntry.Source) &&
+                            logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                        relevantFilterStrings.Any(showString =>
+                            !string.IsNullOrEmpty(logEntry.Message) &&
+                            logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                        relevantFilterStrings.Any(showString =>
+                            !string.IsNullOrEmpty(logEntry.InnerMessage) &&
+                            logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
         return contains;
     }
 
@@ -46,11 +55,17 @@ public class FilterBuilder
         if (textFilters.All(string.IsNullOrEmpty))
             return @default;
 
-        string[] relevantFilterStrings = textFilters.Where(text => !string.IsNullOrEmpty(text)).ToArray();
+        string[] relevantFilterStrings = textFilters.Where(static text => !string.IsNullOrEmpty(text)).ToArray();
 
-        bool contains = relevantFilterStrings.Any(showString => logEntry.Source != null && logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                          relevantFilterStrings.Any(showString => logEntry.Message != null && logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                          relevantFilterStrings.Any(showString => logEntry.InnerMessage != null && logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
+        bool contains = relevantFilterStrings.Any(showString =>
+                            !string.IsNullOrEmpty(logEntry.Source) &&
+                            logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                        relevantFilterStrings.Any(showString =>
+                            !string.IsNullOrEmpty(logEntry.Message) &&
+                            logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                        relevantFilterStrings.Any(showString =>
+                            !string.IsNullOrEmpty(logEntry.InnerMessage) &&
+                            logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
         return contains;
     }
 }
