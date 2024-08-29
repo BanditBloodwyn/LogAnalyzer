@@ -13,23 +13,25 @@
 	</Design.DataContext>
 
 	<Border BorderThickness="0,0,1,0" BorderBrush="{StaticResource LightBrush}">
-		<Grid RowDefinitions="100, 2*, *">
-			<Border Grid.Row="0"
+		<Grid ColumnDefinitions="70, *">
+			<Border Grid.Column="0"
                     BorderBrush="{StaticResource LightBrush}"
-                    BorderThickness="0,0,0,1">
+                    BorderThickness="0,0,1,0">
 				<ContentControl Content="{Binding FeatureButtonsPanelVm}"/>
 			</Border>
 
-			<ContentControl Grid.Row="1"
-							VerticalContentAlignment="Top"
-							VerticalAlignment="Stretch"
-							Content="{Binding ToolPanelVM}"/>
+			<Grid Grid.Column="1" RowDefinitions="3*, *">
+				<ContentControl Grid.Row="0"
+								VerticalContentAlignment="Top"
+								VerticalAlignment="Stretch"
+								Content="{Binding ToolPanelVM}"/>
 
-			<Border Grid.Row="2"
-                    BorderBrush="{StaticResource LightBrush}"
-                    BorderThickness="0,0,0,0">
-				<ContentControl Content="{Binding CommandsPanelVM}"/>
-			</Border>
+				<Border Grid.Row="1"
+                        BorderBrush="{StaticResource LightBrush}"
+                        BorderThickness="0,0,0,0">
+					<ContentControl Content="{Binding CommandsPanelVM}"/>
+				</Border>
+			</Grid>
 		</Grid>
 	</Border>
 </UserControl>
