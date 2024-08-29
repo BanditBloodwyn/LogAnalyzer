@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 using LogAnalyzer.Core.UI;
 using LogAnalyzer.Models.Framework;
 using LogAnalyzer.ViewModels;
+using LogAnalyzer.ViewModels.Navigation;
 using LogAnalyzer.Views.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -39,7 +40,10 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel(serviceProvider)
+                DataContext = new MainViewModel
+                {
+                    NavigationViewModel = serviceProvider.GetRequiredService<MainNavigationViewModel>()
+                }
             };
             TopLevelContext.Initialize(TopLevel.GetTopLevel(desktop.MainWindow));
         }
@@ -47,7 +51,10 @@ public partial class App : Application
         {
             singleViewPlatform.MainView = new MainView
             {
-                DataContext = new MainViewModel(serviceProvider)
+                DataContext = new MainViewModel
+                {
+                    NavigationViewModel = serviceProvider.GetRequiredService<MainNavigationViewModel>()
+                }
             };
         }
 

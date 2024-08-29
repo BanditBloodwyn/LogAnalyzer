@@ -15,6 +15,8 @@
              xmlns:containers="clr-namespace:LogAnalyzer.Models.Data.Containers;assembly=LogAnalyzer.Models.Data"
              xmlns:splittedView="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.SplittedView"
              xmlns:filterToolBox="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;assembly=LogAnalyzer.ViewModels"
+             xmlns:logAnalysis3="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             xmlns:settings="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.Settings;assembly=LogAnalyzer.ViewModels.Design"
              x:Class="LogAnalyzer.Views.App"
              RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -44,8 +46,14 @@
                  <DataTemplate DataType="{x:Type mainFeatures:SettingsMainViewModel}">
 					 <mainComponents:SettingsMainView/>
 				 </DataTemplate>
+                 <DataTemplate DataType="{x:Type settings:SettingsMainDesignViewModel}">
+					 <mainComponents:SettingsMainView/>
+				 </DataTemplate>
 				
                  <DataTemplate DataType="{x:Type logAnalysis:LogAnalysisMainViewModel}">
+					 <logAnalysis2:LogAnalysisMainView/>
+                 </DataTemplate>
+                 <DataTemplate DataType="{x:Type logAnalysis3:LogAnalysisMainDesignViewModel}">
 					 <logAnalysis2:LogAnalysisMainView/>
                  </DataTemplate>
 
