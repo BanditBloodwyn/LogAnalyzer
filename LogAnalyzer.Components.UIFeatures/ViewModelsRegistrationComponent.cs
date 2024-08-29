@@ -19,7 +19,9 @@ namespace LogAnalyzer.Components.UIFeatures
             service
                 .AddTransient<MainViewModel>()
                 .AddTransient<MainNavigationViewModel>()
-                .AddTransient<FeatureButtonsPanelViewModel>()
+                .AddTransient(provider => new FeatureButtonsPanelViewModel(
+                        provider.GetRequiredService<LogAnalysisMainViewModel>(), 
+                        provider.GetRequiredService<SettingsMainViewModel>()))
                 .AddTransient<CommandsPanelViewModel>()
 
                 .AddSingleton<LogAnalysisMainViewModel>()

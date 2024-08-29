@@ -21,14 +21,13 @@
 			</Border>
 
 			<ContentControl Grid.Row="1"
-							VerticalContentAlignment="Center"
+							VerticalContentAlignment="Top"
 							VerticalAlignment="Stretch"
 							Content="{Binding ToolPanelVM}"/>
 
-
 			<Border Grid.Row="2"
                     BorderBrush="{StaticResource LightBrush}"
-                    BorderThickness="0,1,0,0">
+                    BorderThickness="0,0,0,0">
 				<ContentControl Content="{Binding CommandsPanelVM}"/>
 			</Border>
 		</Grid>

@@ -34,6 +34,7 @@
                                Padding="0"
                                HorizontalContentAlignment="Center"
                                VerticalContentAlignment="Top"
+                               FontWeight="Bold"
                                Content="{Binding FeatureHeader}"/>
                     </Grid>
                 </Button>

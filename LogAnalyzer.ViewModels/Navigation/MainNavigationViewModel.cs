@@ -11,7 +11,8 @@ public class MainNavigationViewModel : ViewModelBase
     public ViewModelBase? ToolPanelVM { get; set; }
     public CommandsPanelViewModel CommandsPanelVM { get; set; }
 
-    public MainNavigationViewModel(FeatureButtonsPanelViewModel featureButtonsPanelVm,
+    public MainNavigationViewModel(
+        FeatureButtonsPanelViewModel featureButtonsPanelVm,
         CommandsPanelViewModel commandsPanelVm)
     {
         FeatureButtonsPanelVm = featureButtonsPanelVm;
