@@ -25,9 +25,10 @@ public class MainNavigationViewModel : ViewModelBase
     private void ChangeToolPanel(ChangeOpenedFeatureEvent @event)
     {
         if (@event.Feature is IToolPanelProvider toolPanelProvider)
-        {
             ToolPanelVM = toolPanelProvider.ToolPanel;
-            OnPropertyChanged(nameof(ToolPanelVM));
-        }
+        else
+            ToolPanelVM = null;
+
+        OnPropertyChanged(nameof(ToolPanelVM));
     }
 }
