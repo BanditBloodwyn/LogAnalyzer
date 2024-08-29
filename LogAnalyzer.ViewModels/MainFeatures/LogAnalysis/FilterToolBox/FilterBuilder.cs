@@ -21,7 +21,10 @@ public class FilterBuilder
 
     private static bool ShowType(FilterData filter, LogEntryViewModel logEntry)
     {
-        return filter.logTypeFilters.All(typeFilter => !typeFilter.Value) || 
+        if (logEntry.LogType == null)
+            return false;
+
+        return filter.logTypeFilters.All(static typeFilter => !typeFilter.Value) || 
                filter.logTypeFilters.GetValueOrDefault(logEntry.LogType, true);
     }
 
