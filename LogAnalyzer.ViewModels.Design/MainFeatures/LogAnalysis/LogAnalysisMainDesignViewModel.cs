@@ -8,5 +8,5 @@ public class LogAnalysisMainDesignViewModel : MainFeatureViewModelBase
 {
     public override int NavigationIndex => 0;
     public override string FeatureHeader => "Log Analysis";
-    public override Bitmap FeatureIcon => DefaultIcons.LogAnalysisIcon;
+    public override Bitmap FeatureIcon => DefaultIcons.LogAnalysisIconWhite;
 }

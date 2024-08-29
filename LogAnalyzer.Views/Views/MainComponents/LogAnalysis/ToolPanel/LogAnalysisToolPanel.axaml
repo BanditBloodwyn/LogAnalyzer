@@ -17,7 +17,7 @@
                FontSize="16" FontWeight="Bold"
                Content="Toolbox"/>
 
-		<Separator Margin="0,5"/>
+		<Separator Margin="0,5" Background="{StaticResource LightBrush}"/>
 
 		<Grid ColumnDefinitions="*,*">
 			<StackPanel Grid.Column="0" Margin="0,5,5,5">
@@ -52,7 +52,7 @@
 			</StackPanel>
 		</Grid>
 
-		<Separator Margin="0,5"/>
+		<Separator Margin="0,5" Background="{StaticResource LightBrush}"/>
 
 		<Grid ColumnDefinitions="*,*">
 			<ItemsControl Grid.Column="0" ItemsSource="{Binding LogTypeFilters}">
@@ -83,7 +83,7 @@
             </ItemsControl>
 		</Grid>
 
-        <Separator Margin="0,5"/>
+        <Separator Margin="0,5" Background="{StaticResource LightBrush}"/>
 
 		<Border BoxShadow="3 3 3 0 DarkGray"
                 CornerRadius="5"

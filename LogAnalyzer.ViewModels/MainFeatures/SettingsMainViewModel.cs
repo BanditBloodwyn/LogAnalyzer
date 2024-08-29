@@ -9,5 +9,5 @@ public class SettingsMainViewModel(SettingsModel _model) : MainFeatureViewModelB
 {
     public override int NavigationIndex => 1;
     public override string FeatureHeader => "Settings";
-    public override Bitmap FeatureIcon => DefaultIcons.SettingsIcon;
+    public override Bitmap FeatureIcon => DefaultIcons.SettingsIconWhite;
 }
