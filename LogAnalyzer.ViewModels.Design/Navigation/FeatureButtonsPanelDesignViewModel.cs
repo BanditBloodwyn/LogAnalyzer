@@ -1,9 +1,9 @@
-﻿using LogAnalyzer.ViewModels.MainFeatures;
-using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+﻿using LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;
+using LogAnalyzer.ViewModels.Design.MainFeatures.Settings;
 using LogAnalyzer.ViewModels.Navigation;
 
 namespace LogAnalyzer.ViewModels.Design.Navigation;
 
 public class FeatureButtonsPanelDesignViewModel() : FeatureButtonsPanelViewModel(
-    new LogAnalysisMainViewModel(null!, null!, null!),
-    new SettingsMainViewModel(null!));
+    new LogAnalysisMainDesignViewModel(),
+    new SettingsMainDesignViewModel());

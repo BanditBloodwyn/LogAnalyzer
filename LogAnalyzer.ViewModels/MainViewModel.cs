@@ -2,8 +2,6 @@
 using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Events;
-using LogAnalyzer.ViewModels.Navigation;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace LogAnalyzer.ViewModels;
 
@@ -17,12 +15,10 @@ public class MainViewModel : ViewModelBase
         set => SetProperty(ref _currentFeature, value);
     }
 
-    public ViewModelBase NavigationViewModel { get; set; }
+    public ViewModelBase? NavigationViewModel { get; init; }
 
-    public MainViewModel(IServiceProvider serviceProvider)
+    public MainViewModel()
     {
-        NavigationViewModel = serviceProvider.GetRequiredService<MainNavigationViewModel>();
-
         EventBinding<ChangeOpenedFeatureEvent> changeOpenedFeatureEventBinding = new(ChangeOpenedFeature);
         EventBus<ChangeOpenedFeatureEvent>.Register(changeOpenedFeatureEventBinding);
     }

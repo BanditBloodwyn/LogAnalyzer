@@ -1,13 +1,12 @@
 ﻿using Avalonia.Media.Imaging;
 using LogAnalyzer.Core.ViewsModels;
-using LogAnalyzer.Models.MainFeatures;
 using LogAnalyzer.Resources;
 
-namespace LogAnalyzer.ViewModels.MainFeatures;
+namespace LogAnalyzer.ViewModels.Design.MainFeatures.Settings;
 
-public class SettingsMainViewModel(SettingsModel _model) : MainFeatureViewModelBase
+public class SettingsMainDesignViewModel : MainFeatureViewModelBase
 {
-    public override int NavigationIndex => 1;
+    public override int NavigationIndex => 0;
     public override string FeatureHeader => "Settings";
     public override Bitmap FeatureIcon => DefaultIcons.SettingsIconWhite;
 }

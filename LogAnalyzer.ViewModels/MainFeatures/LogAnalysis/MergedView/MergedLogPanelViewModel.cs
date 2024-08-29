@@ -1,5 +1,6 @@
 ﻿using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.ViewModels.Commands;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Timers;
@@ -13,6 +14,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     private readonly Stopwatch _stopwatch = new Stopwatch();
     private readonly System.Timers.Timer _updateTimer;
     private bool _updatePending;
+    private FilterData? _filter;
 
     private List<LogEntryViewModel> _logEntries = [];
     public List<LogEntryViewModel> LogEntries
@@ -20,6 +22,10 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         get => _logEntries;
         set => SetProperty(ref _logEntries, value);
     }
+
+    public List<LogEntryViewModel> FilteredList => _logEntries
+        .Where(logEntry => FilterBuilder.BuildFilter(_filter, logEntry))
+        .ToList();
 
     public MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand commandFactory)
         : base(commandFactory)
@@ -29,6 +35,17 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         _updateTimer = new System.Timers.Timer(UPDATEINTERVALMS);
         _updateTimer.Elapsed += OnUpdateTimerElapsed;
         _stopwatch.Start();
+    }
+
+    protected override void Reset()
+    {
+        LogEntries.Clear();
+    }
+
+    public override void SetFilter(FilterData filter)
+    {
+        _filter = filter;
+        OnPropertyChanged(nameof(FilteredList));
     }
 
     private void OnLogEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -62,21 +79,38 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
 
     private void UpdateLogEntries()
     {
-        List<LogEntry> cacheSnapshot;
-        lock (Cache.LogEntries)
-            cacheSnapshot = [.. Cache.LogEntries];
-
-        List<long> cacheIndeces = cacheSnapshot.Select(log => log.index).ToList();
-        List<long> vmIndeces = LogEntries.Select(log => log.Index).ToList();
-        List<long> newIndeces = cacheIndeces.Except(vmIndeces).ToList();
-        List<LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.index)).ToList();
-
-        if (newEntries.Count != 0)
+        try
         {
-            LogEntries = [.. LogEntries.Concat(CreateNewLogEntryVMs(newEntries))];
-            LogEntries.Sort((item1, item2) => DateTime.Parse(item1.TimeStamp).CompareTo(DateTime.Parse(item2.TimeStamp)));
-            OnPropertyChanged(nameof(LogEntries));
+            List<LogEntry> cacheSnapshot;
+            lock (Cache.LogEntries)
+                cacheSnapshot = [.. Cache.LogEntries];
+
+            List<long> cacheIndeces = cacheSnapshot.Select(log => log.index).ToList();
+            List<long> vmIndeces = LogEntries.Select(log => log.Index).ToList();
+            List<long> newIndeces = cacheIndeces.Except(vmIndeces).ToList();
+            List<LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.index)).ToList();
+
+            if (newEntries.Count != 0)
+            {
+                LogEntries = [.. LogEntries.Concat(CreateNewLogEntryVMs(newEntries))];
+                LogEntries.Sort(TimeComparison);
+                OnPropertyChanged(nameof(LogEntries));
+                OnPropertyChanged(nameof(FilteredList));
+            }
         }
+        catch (Exception e)
+        {
+            // ignored
+        }
+    }
+
+    private static int TimeComparison(LogEntryViewModel item1, LogEntryViewModel item2)
+    {
+        if (!DateTime.TryParse(item1.TimeStamp, out DateTime timeStamp1) ||
+            !DateTime.TryParse(item2.TimeStamp, out DateTime timeStamp2))
+            return 0;
+
+        return timeStamp1.CompareTo(timeStamp2);
     }
 
     private static IEnumerable<LogEntryViewModel> CreateNewLogEntryVMs(IEnumerable<LogEntry> newEntries)

@@ -4,38 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:navigation="clr-namespace:LogAnalyzer.ViewModels.Navigation;assembly=LogAnalyzer.ViewModels"
              xmlns:navigation1="clr-namespace:LogAnalyzer.ViewModels.Design.Navigation;assembly=LogAnalyzer.ViewModels.Design"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="70" d:DesignHeight="400"
              x:Class="LogAnalyzer.Views.Views.Navigation.FeatureButtonsPanel"
              x:DataType="navigation:FeatureButtonsPanelViewModel">
-   
-    <Design.DataContext>
-		<navigation1:FeatureButtonsPanelDesignViewModel/>
-    </Design.DataContext>
 
-    <ItemsControl ItemsSource="{Binding Features}">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel/>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Button
-                    Background="Transparent"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                    CommandParameter="{Binding RelativeSource={RelativeSource DataContext}}"
-                    Command="{Binding ((navigation:FeatureButtonsPanelViewModel)DataContext).OpenFeatureCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
-                    <Grid ColumnDefinitions="*,*" MaxHeight="30">
-                        <Image Grid.Column="0" Source="{Binding FeatureIcon}"
-                               HorizontalAlignment="Right"
-                               Margin="0,3,30,3"/>
-                        <Label Grid.Column="1" Content="{Binding FeatureHeader}"
-                                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                                   Margin="-20,0,0,0"/>
-                    </Grid>
-                </Button>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+	<Design.DataContext>
+		<navigation1:FeatureButtonsPanelDesignViewModel/>
+	</Design.DataContext>
+
+	<ItemsControl ItemsSource="{Binding Features}">
+		<ItemsControl.ItemsPanel>
+			<ItemsPanelTemplate>
+				<StackPanel Spacing="5" Margin="5"/>
+			</ItemsPanelTemplate>
+		</ItemsControl.ItemsPanel>
+		<ItemsControl.ItemTemplate>
+			<DataTemplate>
+				<Border BoxShadow="3 3 3 0 DarkGray"
+                        CornerRadius="5"
+                        Background="{StaticResource Accent1Brush}">
+					<Label>
+						<Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+								Background="{StaticResource Accent1Brush}" Foreground="White"
+								Command="{Binding ((navigation:FeatureButtonsPanelViewModel)DataContext).OpenFeatureCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+								CommandParameter="{Binding RelativeSource={RelativeSource DataContext}}">
+							<Image Margin="0,0,0,0"
+								   Source="{Binding FeatureIcon}"/>
+						</Button>
+						<ToolTip.Tip>
+							<TextBlock Text="{Binding FeatureHeader}"/>
+						</ToolTip.Tip>
+					</Label>
+				</Border>
+
+			</DataTemplate>
+		</ItemsControl.ItemTemplate>
+	</ItemsControl>
 </UserControl>

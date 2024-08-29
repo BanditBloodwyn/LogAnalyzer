@@ -7,7 +7,7 @@ using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 
-public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _commandFactory)
+public abstract class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _commandFactory)
     : ViewModelBase
 {
     public LogAnalysisCache Cache { get; } = new();
@@ -15,6 +15,7 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
     public void OpenFiles(FileInfo[] filesToOpen)
     {
         Cache.Reset();
+        Reset();
 
         foreach (FileInfo fileInfo in filesToOpen)
             Cache.OpenedFiles.Add(fileInfo);
@@ -22,6 +23,9 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
         foreach (FileInfo fileInfo in filesToOpen)
             CreateLogAnalyzeCommand(fileInfo);
     }
+
+    protected virtual void Reset()
+    { }
 
     private void CreateLogAnalyzeCommand(FileInfo fileInfo)
     {
@@ -32,4 +36,6 @@ public class LogPanelBaseViewModel(CommandFactory.CreateLogAnalyzeCommand _comma
         EventBus<AddNewProgressCommandEvent>.Raise(
             new AddNewProgressCommandEvent(logAnalyzeCommand));
     }
+
+    public abstract void SetFilter(FilterData filter);
 }
