@@ -1,5 +1,6 @@
 ﻿using LogAnalyzer.Models.Data.Containers;
 using LogAnalyzer.ViewModels.Commands;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Timers;
@@ -22,7 +23,9 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         set => SetProperty(ref _logEntries, value);
     }
 
-    public List<LogEntryViewModel> FilteredList => _logEntries.Where(BuildFilter).ToList();
+    public List<LogEntryViewModel> FilteredList => _logEntries
+        .Where(logEntry => FilterBuilder.BuildFilter(_filter, logEntry))
+        .ToList();
 
     public MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand commandFactory)
         : base(commandFactory)
@@ -43,22 +46,6 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     {
         _filter = filter;
         OnPropertyChanged(nameof(FilteredList));
-    }
-
-    private bool BuildFilter(LogEntryViewModel logEntry)
-    {
-        if (_filter == null)
-            return true;
-
-        bool contains = _filter.toShow.All(string.IsNullOrEmpty) ||
-                        _filter.toShow
-                            .Where(text => !string.IsNullOrEmpty(text))
-                            .Any(showString =>
-                                logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase) ||
-                                logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase) ||
-                                logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
-
-        return contains;
     }
 
     private void OnLogEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
