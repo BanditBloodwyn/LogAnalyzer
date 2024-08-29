@@ -13,6 +13,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     private readonly Stopwatch _stopwatch = new Stopwatch();
     private readonly System.Timers.Timer _updateTimer;
     private bool _updatePending;
+    private FilterData? _filter;
 
     private List<LogEntryViewModel> _logEntries = [];
     public List<LogEntryViewModel> LogEntries
@@ -20,6 +21,8 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         get => _logEntries;
         set => SetProperty(ref _logEntries, value);
     }
+
+    public List<LogEntryViewModel> FilteredList => _logEntries.Where(BuildFilter).ToList();
 
     public MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand commandFactory)
         : base(commandFactory)
@@ -34,6 +37,28 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     protected override void Reset()
     {
         LogEntries.Clear();
+    }
+
+    public override void SetFilter(FilterData filter)
+    {
+        _filter = filter;
+        OnPropertyChanged(nameof(FilteredList));
+    }
+
+    private bool BuildFilter(LogEntryViewModel logEntry)
+    {
+        if (_filter == null)
+            return true;
+
+        bool contains = _filter.toShow.All(string.IsNullOrEmpty) ||
+                        _filter.toShow
+                            .Where(text => !string.IsNullOrEmpty(text))
+                            .Any(showString =>
+                                logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase) ||
+                                logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase) ||
+                                logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
+
+        return contains;
     }
 
     private void OnLogEntriesChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -81,6 +106,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
             LogEntries = [.. LogEntries.Concat(CreateNewLogEntryVMs(newEntries))];
             LogEntries.Sort((item1, item2) => DateTime.Parse(item1.TimeStamp).CompareTo(DateTime.Parse(item2.TimeStamp)));
             OnPropertyChanged(nameof(LogEntries));
+            OnPropertyChanged(nameof(FilteredList));
         }
     }
 

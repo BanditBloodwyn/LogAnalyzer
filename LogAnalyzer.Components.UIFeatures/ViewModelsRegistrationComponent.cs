@@ -3,6 +3,7 @@ using LogAnalyzer.Core.Components.Interfaces;
 using LogAnalyzer.ViewModels;
 using LogAnalyzer.ViewModels.MainFeatures;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
 using LogAnalyzer.ViewModels.Navigation;

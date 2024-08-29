@@ -32,4 +32,8 @@ public class SplittedLogPanelViewModel : LogPanelBaseViewModel
         foreach (FileInfo file in Cache.OpenedFiles)
             FilePanels.Add(new LogPanelViewModel(file));
     }
+
+    public override void SetFilter(FilterData filter)
+    {
+    }
 }

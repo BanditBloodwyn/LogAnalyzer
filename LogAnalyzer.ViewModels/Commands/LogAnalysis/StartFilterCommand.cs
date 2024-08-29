@@ -1,4 +1,4 @@
-﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 using System.Windows.Input;
 
 namespace LogAnalyzer.ViewModels.Commands.LogAnalysis;

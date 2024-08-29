@@ -3,7 +3,7 @@ using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
 public class LogAnalysisToolPanelViewModel : ViewModelBase
 {
@@ -11,8 +11,8 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
 
     #region UI Bindings
 
-    public ObservableCollection<string> ShowFilterStrings { get; } = [];
-    public ObservableCollection<string> HideFilterStrings { get; } = [];
+    public ObservableCollection<FilterTextboxViewModel> ShowFilterStrings { get; } = [];
+    public ObservableCollection<FilterTextboxViewModel> HideFilterStrings { get; } = [];
 
     private bool _showOnlyDebug;
     public bool ShowOnlyDebug
@@ -66,15 +66,21 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
     {
         ShowFilterStrings.Clear();
         for (int i = 0; i < TEXTBOXFILTER_COUNT - 1; i++)
-            ShowFilterStrings.Add("");
-        
+            ShowFilterStrings.Add(new FilterTextboxViewModel());
+
         HideFilterStrings.Clear();
         for (int i = 0; i < TEXTBOXFILTER_COUNT - 1; i++)
-            HideFilterStrings.Add("");
+            HideFilterStrings.Add(new FilterTextboxViewModel());
     }
 
     public void StartFiltering()
     {
-        StartFilteringRequested?.Invoke(new FilterData());
+        bool isEmpty = ShowFilterStrings.All(text => string.IsNullOrEmpty(text.Text)) &&
+                       HideFilterStrings.All(text => string.IsNullOrEmpty(text.Text));
+
+        StartFilteringRequested?.Invoke(new FilterData(
+            isEmpty,
+            ShowFilterStrings.Select(text => text.Text).ToArray(),
+            HideFilterStrings.Select(text => text.Text).ToArray()));
     }
 }
