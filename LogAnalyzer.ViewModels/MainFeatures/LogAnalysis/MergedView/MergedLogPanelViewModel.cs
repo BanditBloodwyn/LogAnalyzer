@@ -86,7 +86,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
                 cacheSnapshot = [.. Cache.LogEntries];
 
             List<long> cacheIndeces = cacheSnapshot.Select(log => log.LogIndex).ToList();
-            List<long> vmIndeces = LogEntries.Select(log => log.Index).ToList();
+            List<long> vmIndeces = LogEntries.Select(log => log.LogIndex).ToList();
             List<long> newIndeces = cacheIndeces.Except(vmIndeces).ToList();
             List<LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.LogIndex)).ToList();
 

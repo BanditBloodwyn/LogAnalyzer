@@ -2,8 +2,6 @@
 using LogAnalyzer.Core.Extentions;
 using LogAnalyzer.Models.Data.BaseTypes.Commands;
 using LogAnalyzer.Models.Data.Containers;
-using LogAnalyzer.Models.Strategies.LogStringFinding;
-using LogAnalyzer.Models.Strategies.LogStringParsing;
 using LogAnalyzer.Models.Strategies.RepositoryInteractionInformationExtraction;
 using System.Diagnostics;
 using FileInfo = System.IO.FileInfo;
@@ -11,8 +9,6 @@ using FileInfo = System.IO.FileInfo;
 namespace LogAnalyzer.Models.MainFeatures.LogAnalysis;
 
 public class LogAnalyzeCommand(
-    ILogStringFindingStrategy _logFinder,
-    ILogStringParsingStrategy _logParser,
     IRepositoryInteractionInformationExtractor _repoInteractionInfoExtractor)
     : ProgressCommand("Analyze log file")
 {
