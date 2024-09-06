@@ -8,7 +8,7 @@ public class ClassicATBASRepositoryInteractionInformationExtractor : IRepository
     private const double DURATION_WARNINGTHRESHOLD = 100;
     private const double DURATION_CRITICALTHRESHOLD = 1000;
 
-    public RepositoryInteractionInformation? Extract(string message, string innerMessage)
+    public RepositoryInteractionInformation? Extract(string message, string? innerMessage)
     {
         double? milliSeconds = ExtractMilliseconds(message);
 
@@ -43,7 +43,7 @@ public class ClassicATBASRepositoryInteractionInformationExtractor : IRepository
             : null;
     }
 
-    private static double ExtractResultCount(string message, string innerMessage)
+    private static double ExtractResultCount(string message, string? innerMessage)
     {
         string pattern = @"\((\d+) results\)";
         Match match = Regex.Match(message, pattern);

@@ -1,15 +1,15 @@
-﻿using LogAnalyzer.Models.Data.BaseTypes.Commands;
+﻿using Atbas.Core.Logging.Reader;
+using LogAnalyzer.Core.Extentions;
+using LogAnalyzer.Models.Data.BaseTypes.Commands;
 using LogAnalyzer.Models.Data.Containers;
-using LogAnalyzer.Models.Strategies.LogStringFinding;
-using LogAnalyzer.Models.Strategies.LogStringParsing;
+using LogAnalyzer.Models.Strategies.RepositoryInteractionInformationExtraction;
 using System.Diagnostics;
 using FileInfo = System.IO.FileInfo;
 
 namespace LogAnalyzer.Models.MainFeatures.LogAnalysis;
 
 public class LogAnalyzeCommand(
-    ILogStringFindingStrategy _logFinder,
-    ILogStringParsingStrategy _logParser)
+    IRepositoryInteractionInformationExtractor _repoInteractionInfoExtractor)
     : ProgressCommand("Analyze log file")
 {
     public Data.Containers.FileInfo? FileInfo { get; set; }
@@ -21,7 +21,7 @@ public class LogAnalyzeCommand(
             return;
 
         MessageProgress?.Report(Path.GetFileName(FileInfo.Path));
-        
+
         try
         {
             long fileSize = new FileInfo(FileInfo.Path).Length;
@@ -31,13 +31,18 @@ public class LogAnalyzeCommand(
             await using FileStream fileStream = new(FileInfo.Path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true);
             using StreamReader streamReader = new(fileStream);
 
-            while (await _logFinder.FindLogEntries(streamReader, CancellationToken) is { } logEntryString)
+            LogReader logReader = new LogReader();
+
+            await foreach (LogMessage? message in logReader.ReadAsync(fileStream, CancellationToken))
             {
+                if (message == null)
+                    continue;
+
                 logEntryIndex++;
-                LogEntry logEntry = await _logParser.ParseLogString(logEntryIndex, logEntryString, CancellationToken, FileInfo.FileIndex);
+                LogEntry logEntry = new LogEntry(logEntryIndex, FileInfo.FileIndex, message, _repoInteractionInfoExtractor.Extract(message.Message, message.Details));
                 Cache.LogEntries.Add(logEntry);
 
-                bytesRead += logEntryString.Length + Environment.NewLine.Length;
+                bytesRead += message.GetBytesSize() + Environment.NewLine.Length;
                 int percentComplete = (int)(bytesRead * 100 / fileSize);
                 PercentsProgress?.Report(percentComplete);
             }

@@ -4,5 +4,5 @@ namespace LogAnalyzer.Models.Strategies.RepositoryInteractionInformationExtracti
 
 public interface IRepositoryInteractionInformationExtractor
 {
-    public RepositoryInteractionInformation? Extract(string message, string innerMessage);
+    public RepositoryInteractionInformation? Extract(string message, string? innerMessage);
 }

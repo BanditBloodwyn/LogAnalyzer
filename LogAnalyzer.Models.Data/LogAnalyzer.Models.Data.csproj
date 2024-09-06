@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Atbas.Core.Logging" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LogAnalyzer.Core.Repositories\LogAnalyzer.Core.Repositories.csproj" />
     <ProjectReference Include="..\LogAnalyzer.Core\LogAnalyzer.Core.csproj" />
   </ItemGroup>

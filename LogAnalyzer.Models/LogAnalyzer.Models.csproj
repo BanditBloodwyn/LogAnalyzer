@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Atbas.Core.Logging" Version="1.2.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
   </ItemGroup>
@@ -14,10 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\LogAnalyzer.Core\LogAnalyzer.Core.csproj" />
     <ProjectReference Include="..\LogAnalyzer.Models.Data\LogAnalyzer.Models.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Strategies\LogStringParsing\" />
   </ItemGroup>
 
 </Project>

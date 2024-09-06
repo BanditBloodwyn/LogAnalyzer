@@ -85,10 +85,10 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
             lock (Cache.LogEntries)
                 cacheSnapshot = [.. Cache.LogEntries];
 
-            List<long> cacheIndeces = cacheSnapshot.Select(log => log.index).ToList();
-            List<long> vmIndeces = LogEntries.Select(log => log.Index).ToList();
+            List<long> cacheIndeces = cacheSnapshot.Select(log => log.LogIndex).ToList();
+            List<long> vmIndeces = LogEntries.Select(log => log.LogIndex).ToList();
             List<long> newIndeces = cacheIndeces.Except(vmIndeces).ToList();
-            List<LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.index)).ToList();
+            List<LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.LogIndex)).ToList();
 
             if (newEntries.Count != 0)
             {
@@ -116,6 +116,11 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     private static IEnumerable<LogEntryViewModel> CreateNewLogEntryVMs(IEnumerable<LogEntry> newEntries)
     {
         foreach (LogEntry newEntry in newEntries)
+        {
+            if(newEntry.LogMessage == null)
+                continue;
+
             yield return new LogEntryViewModel(newEntry);
+        }
     }
 }
