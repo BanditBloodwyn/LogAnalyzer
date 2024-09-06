@@ -30,16 +30,16 @@ public class ClassicATBASLogStringParsing(IRepositoryInteractionInformationExtra
         string innerMessage = GetInnerMessage(logString);
 
         RepositoryInteractionInformation? repositoryInteractionInformation = _repoInteractionInfoExtractor.Extract(message, innerMessage);
-
-        return new LogEntry(
-            logEntryIndex,
-            timeStamp,
-            source,
-            type,
-            message,
-            innerMessage,
-            fileIndex,
-            repositoryInteractionInformation);
+        return new LogEntry();
+        //return new LogEntry(
+        //    logEntryIndex,
+        //    timeStamp,
+        //    source,
+        //    type,
+        //    message,
+        //    innerMessage,
+        //    fileIndex,
+        //    repositoryInteractionInformation);
     }
 
     private static string GetTimetamp(string logString)

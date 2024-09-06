@@ -1,11 +1,9 @@
-﻿namespace LogAnalyzer.Models.Data.Containers;
+﻿using Atbas.Core.Logging.Reader;
+
+namespace LogAnalyzer.Models.Data.Containers;
 
 public readonly record struct LogEntry(
-    long index,
-    string timeStamp,
-    string source,
-    string logType,
-    string message,
-    string innerMessage,
-    int fileIndex,
-    RepositoryInteractionInformation? repositoryInteractionInformation = null);
+    long LogIndex,
+    int FileIndex,
+    LogMessage? LogMessage,
+    RepositoryInteractionInformation? RepositoryInteractionInformation = null);

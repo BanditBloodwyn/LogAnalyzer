@@ -6,7 +6,7 @@ namespace LogAnalyzer.ViewModels.Design.Navigation;
 public class ProgressCommandDesignViewModel : ProgressCommandViewModel
 {
     public ProgressCommandDesignViewModel() 
-        : base(new LogAnalyzeCommand(null!, null!))
+        : base(new LogAnalyzeCommand(null!, null!, null!))
     {
         Name = "Analyze log file";
         PercentsDone = 30;
