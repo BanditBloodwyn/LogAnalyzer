@@ -4,6 +4,7 @@ using Avalonia.Media;
 using LogAnalyzer.Resources;
 using System;
 using System.Globalization;
+using Atbas.Core.Logging;
 
 namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters;
 
@@ -11,12 +12,14 @@ public class LogTypeToBrushConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        return (value as string)?.ToLower() switch
+        return (value is MessageType type ? type : MessageType.Debug) switch
         {
-            "error" => CreateGradientBrush(DefaultColors.Danger),
-            "warning" => CreateGradientBrush(DefaultColors.Warning),
-            "info" => CreateGradientBrush(DefaultColors.Info),
-            _ => CreateGradientBrush(DefaultColors.Accent3)
+            MessageType.Error => CreateGradientBrush(DefaultColors.Danger),
+            MessageType.Warning => CreateGradientBrush(DefaultColors.Warning),
+            MessageType.Info => CreateGradientBrush(DefaultColors.Info),
+            MessageType.Detail => CreateGradientBrush(DefaultColors.Success),
+            MessageType.Debug => CreateGradientBrush(DefaultColors.Accent3),
+            _ => throw new ArgumentOutOfRangeException()
         };
     }
 

@@ -2,6 +2,7 @@
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Atbas.Core.Logging;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
@@ -46,16 +47,17 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
 
     private void AddLogTypeFilters()
     {
-        LogTypeFilters.Add(new FilterCheckboxViewModel("Debug"));
-        LogTypeFilters.Add(new FilterCheckboxViewModel("Info"));
-        LogTypeFilters.Add(new FilterCheckboxViewModel("Warning"));
-        LogTypeFilters.Add(new FilterCheckboxViewModel("Error"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Debug, "Debug"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Detail, "Detail"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Info, "Info"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Warning, "Warning"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Error, "Error"));
     }
 
     private void AddSpecialFilters()
     {
-        SpecialFilters.Add(new FilterCheckboxViewModel("Backpack"));
-        SpecialFilters.Add(new FilterCheckboxViewModel("Exception"));
+        SpecialFilters.Add(new FilterCheckboxViewModel("Backpack", "Backpack"));
+        SpecialFilters.Add(new FilterCheckboxViewModel("Exception", "Exception"));
     }
 
     #endregion
@@ -65,7 +67,7 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
         StartFilteringRequested?.Invoke(new FilterData(
             ShowFilterStrings.Select(text => text.Text).ToArray(),
             HideFilterStrings.Select(text => text.Text).ToArray(),
-            LogTypeFilters.ToDictionary(f => f.FilterType, f => f.Checked),
-            SpecialFilters.ToDictionary(f => f.FilterType, f => f.Checked)));
+            LogTypeFilters.ToDictionary(f => (MessageType)f.FilterType, f => f.Checked),
+            SpecialFilters.ToDictionary(f => (string)f.FilterType, f => f.Checked)));
     }
 }

@@ -2,11 +2,11 @@
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
-public class FilterCheckboxViewModel(string filter) : ViewModelBase
+public class FilterCheckboxViewModel(object filterType, string filter) : ViewModelBase
 {
-    public string FilterType { get; } = filter;
+    public object FilterType { get; } = filterType;
     public string FilterHeader { get; } = $"{filter} only";
-   
+
     private bool _checked;
     public bool Checked
     {

@@ -1,7 +1,9 @@
-﻿namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+﻿using Atbas.Core.Logging;
+
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 
 public record FilterData(
     string[] toShow, 
     string[] toHide,
-    IReadOnlyDictionary<string, bool> logTypeFilters,
+    IReadOnlyDictionary<MessageType, bool> logTypeFilters,
     IReadOnlyDictionary<string, bool> specialFilters);

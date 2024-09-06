@@ -21,11 +21,11 @@ public class FilterBuilder
 
     private static bool ShowType(FilterData filter, LogEntryViewModel logEntry)
     {
-        if (string.IsNullOrEmpty(logEntry.LogType))
+        if (logEntry.LogType == null)
             return false;
 
         return filter.logTypeFilters.All(static typeFilter => !typeFilter.Value) ||
-               filter.logTypeFilters.GetValueOrDefault(logEntry.LogType, true);
+               filter.logTypeFilters.GetValueOrDefault(logEntry.LogType.Value, true);
     }
 
     private static bool MatchesSpecialFilter(FilterData filter, LogEntryViewModel logEntry)

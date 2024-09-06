@@ -1,4 +1,5 @@
-﻿using LogAnalyzer.Core.ViewsModels;
+﻿using Atbas.Core.Logging;
+using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data.Containers;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
@@ -10,7 +11,7 @@ public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
     public int FileIndex => _logEntry.FileIndex;
     public string TimeStamp => _logEntry.LogMessage?.TimeStamp.ToString("dd.MM.yyyy HH:mm:ss") ?? "";
     public string Source => _logEntry.LogMessage?.Sender ?? "";
-    public string LogType => _logEntry.LogMessage?.Significance.ToString() ?? "";
+    public MessageType? LogType => _logEntry.LogMessage?.Significance;
     public string Message => _logEntry.LogMessage?.Message ?? "";
     public string InnerMessage => _logEntry.LogMessage?.Details ?? "";
     
