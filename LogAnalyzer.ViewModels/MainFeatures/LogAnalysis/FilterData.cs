@@ -1,9 +1,9 @@
-﻿using Atbas.Core.Logging;
+﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 
 public record FilterData(
-    string[] toShow, 
+    bool filterIsEmpty,
+    string[] toShow,
     string[] toHide,
-    IReadOnlyDictionary<MessageType, bool> logTypeFilters,
-    IReadOnlyDictionary<string, bool> specialFilters);
+    FilterCheckboxViewModel[] checkboxFilters);

@@ -2,52 +2,37 @@
 
 public class FilterBuilder
 {
-    public static bool BuildFilter(FilterData? filter, LogEntryViewModel logEntry)
+    public static bool BuildFilter(FilterData? filterData, LogEntryViewModel logEntry)
     {
-        if (filter == null)
+        if (filterData == null)
             return true;
 
-        bool matchesType = ShowType(filter, logEntry);
-        bool matchesSpecialFilter = MatchesSpecialFilter(filter, logEntry);
-        bool show = ApplyTextFilters(filter.toShow, logEntry);
-        bool hide = ApplyTextFilters(filter.toHide, logEntry, false);
+        if(filterData.filterIsEmpty)
+            return true;
 
-        if (!matchesType)
-            return false;
-        if (!matchesSpecialFilter)
+        bool matchesCheckboxFilers = MatchesCheckboxFilters(filterData, logEntry);
+        bool show = ApplyTextFilters(filterData.toShow, logEntry);
+        bool hide = ApplyTextFilters(filterData.toHide, logEntry, false);
+
+        if (!matchesCheckboxFilers)
             return false;
         return show && !hide;
     }
 
-    private static bool ShowType(FilterData filter, LogEntryViewModel logEntry)
+    private static bool MatchesCheckboxFilters(FilterData filterData, LogEntryViewModel logEntry)
     {
-        if (logEntry.LogType == null)
-            return false;
-
-        return filter.logTypeFilters.All(static typeFilter => !typeFilter.Value) ||
-               filter.logTypeFilters.GetValueOrDefault(logEntry.LogType.Value, true);
-    }
-
-    private static bool MatchesSpecialFilter(FilterData filter, LogEntryViewModel logEntry)
-    {
-        if (filter.specialFilters.All(static val => !val.Value))
+        if (filterData.checkboxFilters.All(filter => !filter.Checked))
             return true;
 
-        string[] relevantFilterStrings = filter.specialFilters
-            .Where(static fil => fil.Value)
-            .Select(static fil => fil.Key)
-            .ToArray();
+        bool match = false;
 
-        bool contains = relevantFilterStrings.Any(showString =>
-                            !string.IsNullOrEmpty(logEntry.Source) &&
-                            logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                        relevantFilterStrings.Any(showString =>
-                            !string.IsNullOrEmpty(logEntry.Message) &&
-                            logEntry.Message.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
-                        relevantFilterStrings.Any(showString =>
-                            !string.IsNullOrEmpty(logEntry.InnerMessage) &&
-                            logEntry.InnerMessage.Contains(showString, StringComparison.OrdinalIgnoreCase));
-        return contains;
+        foreach (FilterCheckboxViewModel filter in filterData.checkboxFilters)
+        {
+            if (!filter.Checked)
+                continue;
+            match = match || filter.FilterFunction(logEntry);
+        }
+        return match;
     }
 
     private static bool ApplyTextFilters(string[] textFilters, LogEntryViewModel logEntry, bool @default = true)

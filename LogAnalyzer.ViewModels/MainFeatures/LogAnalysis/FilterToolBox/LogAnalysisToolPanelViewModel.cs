@@ -1,15 +1,15 @@
-﻿using LogAnalyzer.Core.ViewsModels;
+﻿using Atbas.Core.Logging;
+using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Atbas.Core.Logging;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
 public class LogAnalysisToolPanelViewModel : ViewModelBase
 {
     protected const int TEXTBOXFILTER_COUNT = 8;
-   
+
     public event Action<FilterData>? StartFilteringRequested;
 
     #region UI Bindings
@@ -47,27 +47,35 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
 
     private void AddLogTypeFilters()
     {
-        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Debug, "Debug"));
-        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Detail, "Detail"));
-        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Info, "Info"));
-        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Warning, "Warning"));
-        LogTypeFilters.Add(new FilterCheckboxViewModel(MessageType.Error, "Error"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(log => log.LogType == MessageType.Debug, "Debug only"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(log => log.LogType == MessageType.Detail, "Detail only"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(log => log.LogType == MessageType.Info, "Info only"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(log => log.LogType == MessageType.Warning, "Warning only"));
+        LogTypeFilters.Add(new FilterCheckboxViewModel(log => log.LogType == MessageType.Error, "Error only"));
     }
 
     private void AddSpecialFilters()
     {
-        SpecialFilters.Add(new FilterCheckboxViewModel("Backpack", "Backpack"));
-        SpecialFilters.Add(new FilterCheckboxViewModel("Exception", "Exception"));
+        SpecialFilters.Add(new FilterCheckboxViewModel(log => log.Source.Equals("Backpack"), "Backpack only"));
+        SpecialFilters.Add(new FilterCheckboxViewModel(log => log.Message.Contains("Exception") || log.InnerMessage.Contains("Exception"), "contains Exception"));
     }
 
     #endregion
 
     public void StartFiltering()
     {
+        string[] showStrings = ShowFilterStrings.Select(text => text.Text).ToArray();
+        string[] hideStrings = HideFilterStrings.Select(text => text.Text).ToArray();
+        FilterCheckboxViewModel[] checkboxFilters = LogTypeFilters.Union(SpecialFilters).ToArray();
+
+        bool filterIsEmpty = showStrings.All(string.IsNullOrEmpty) &&
+                             hideStrings.All(string.IsNullOrEmpty) &&
+                             checkboxFilters.All(filter => !filter.Checked);
+
         StartFilteringRequested?.Invoke(new FilterData(
-            ShowFilterStrings.Select(text => text.Text).ToArray(),
-            HideFilterStrings.Select(text => text.Text).ToArray(),
-            LogTypeFilters.ToDictionary(f => (MessageType)f.FilterType, f => f.Checked),
-            SpecialFilters.ToDictionary(f => (string)f.FilterType, f => f.Checked)));
+            filterIsEmpty,
+            showStrings,
+            hideStrings,
+            checkboxFilters));
     }
 }
