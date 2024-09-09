@@ -28,6 +28,9 @@ public partial class LogEntryControl : UserControl
         img_HasInnerMessage.Source = DefaultIcons.LogInnerMessageIcon;
         img_RepoDurationWarning.Source = DefaultIcons.LogLongRepoInteraction;
         img_RepoDurationCritical.Source = DefaultIcons.LogVeryLongRepoInteraction;
+
+        PointerEntered += OnPointerEntered;
+        PointerExited += OnPointerExited;
     }
 
     private void OnDataContextChanged(object? sender, EventArgs e)
@@ -44,6 +47,15 @@ public partial class LogEntryControl : UserControl
         UpdateUI();
     }
 
+    private void UpdateUI()
+    {
+        Height = IsExpanded
+            ? lbl_InnerMessage.Height
+            : 30;
+
+        lbl_Header_Message.IsVisible = !IsExpanded;
+    }
+
     private void Pnl_Header_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (!_logEntry?.HasInnerMessage ?? false)
@@ -52,12 +64,11 @@ public partial class LogEntryControl : UserControl
         IsExpanded = !IsExpanded;
     }
 
-    private void UpdateUI()
+    private void OnPointerEntered(object? sender, PointerEventArgs e)
     {
-        Height = IsExpanded
-            ? lbl_InnerMessage.Height
-            : 30;
+    }
 
-        lbl_Header_Message.IsVisible = !IsExpanded;
+    private void OnPointerExited(object? sender, PointerEventArgs e)
+    {
     }
 }

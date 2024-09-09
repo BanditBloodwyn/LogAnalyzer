@@ -7,19 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Icons\feature_settings.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Icons\feature_settings.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Icons\IconsResource.Designer.cs">
+    <Compile Update="IconsResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>IconsResource.resx</DependentUpon>
@@ -27,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Icons\IconsResource.resx">
+    <EmbeddedResource Update="IconsResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>IconsResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>

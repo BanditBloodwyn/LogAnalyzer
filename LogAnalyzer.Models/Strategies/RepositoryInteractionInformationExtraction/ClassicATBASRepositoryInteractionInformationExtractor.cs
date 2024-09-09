@@ -10,22 +10,38 @@ public class ClassicATBASRepositoryInteractionInformationExtractor : IRepository
 
     public RepositoryInteractionInformation? Extract(string message, string? innerMessage)
     {
+        long? communicationId = ExtractCommId(message);
         double? milliSeconds = ExtractMilliseconds(message);
 
-        if (!milliSeconds.HasValue)
+        if (!milliSeconds.HasValue && !communicationId.HasValue)
             return null;
 
         double resultsCount = ExtractResultCount(message, innerMessage);
-
+        
         RepositoryInteractionInformation repoInfo = new RepositoryInteractionInformation
         {
-            DurationMS = milliSeconds.Value,
+            DurationMS = milliSeconds,
             ResultCount = resultsCount,
-            HasDurationWarning = milliSeconds.Value >= DURATION_WARNINGTHRESHOLD && milliSeconds.Value < DURATION_CRITICALTHRESHOLD,
-            HasCriticalDuration = milliSeconds.Value >= DURATION_CRITICALTHRESHOLD,
+            CommunicationID = communicationId,
+            HasDurationWarning = milliSeconds >= DURATION_WARNINGTHRESHOLD && milliSeconds < DURATION_CRITICALTHRESHOLD,
+            HasCriticalDuration = milliSeconds >= DURATION_CRITICALTHRESHOLD,
         };
 
         return repoInfo;
+    }
+
+    private static long? ExtractCommId(string message)
+    {
+        string pattern = @"\[(\d+)\]";
+        Match match = Regex.Match(message, pattern);
+
+        if (!match.Success)
+            return null;
+
+        string communicationIdString = match.Groups[1].Value;
+        return long.TryParse(communicationIdString, out long communicationId)
+            ? communicationId
+            : null;
     }
 
     private static double? ExtractMilliseconds(string message)

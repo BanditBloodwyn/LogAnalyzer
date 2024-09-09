@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LogAnalyzer.Resources.Icons {
+namespace LogAnalyzer.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LogAnalyzer.Resources.Icons {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LogAnalyzer.Resources.Icons.IconsResource", typeof(IconsResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LogAnalyzer.Resources.IconsResource", typeof(IconsResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -96,6 +96,16 @@ namespace LogAnalyzer.Resources.Icons {
         internal static byte[] feature_settings_white {
             get {
                 object obj = ResourceManager.GetObject("feature_settings_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        internal static byte[] log_hasCommId {
+            get {
+                object obj = ResourceManager.GetObject("log_hasCommId", resourceCulture);
                 return ((byte[])(obj));
             }
         }
