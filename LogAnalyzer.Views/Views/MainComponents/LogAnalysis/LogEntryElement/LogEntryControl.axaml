@@ -16,11 +16,12 @@
 
 	<UserControl.Resources>
 		<converters:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
+		<converters:MarkingToBrushConverter x:Key="MarkingToBrushConverter"/>
 	</UserControl.Resources>
 
 	<UserControl.Styles>
 		<Style Selector="Panel#pnl_Header">
-			<Setter Property="Background" Value="{StaticResource LightBrush}"/>
+			<Setter Property="Background" Value="{Binding ConnectionMarked, Converter={StaticResource MarkingToBrushConverter}}"/>
 			<Setter Property="Transitions">
 				<Transitions>
 					<BrushTransition Property="Background" Duration="0:0:0.2"/>

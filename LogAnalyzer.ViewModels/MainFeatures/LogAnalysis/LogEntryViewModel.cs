@@ -18,6 +18,13 @@ public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
 
     public bool HasInnerMessage => !string.IsNullOrEmpty(InnerMessage);
 
+    private bool _connectionMarked;
+    public bool ConnectionMarked
+    {
+        get => _connectionMarked;
+        set => SetProperty(ref _connectionMarked, value);
+    }
+
     public event Action<long>? RequestShowCommunicationConnections;
     public event Action<long>? RequestRemoveCommunicationConnections;
 
