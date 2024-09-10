@@ -119,11 +119,22 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
                 continue;
 
             LogEntryViewModel newLogEntry = new LogEntryViewModel(newEntry);
-
+            newLogEntry.RequestShowCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, true);
+            newLogEntry.RequestRemoveCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, false);
+            
             AddToConnections(newLogEntry);
 
             yield return newLogEntry;
         }
+    }
+
+    private void ToggleCommunicationConnectionMarkings(long connectionId, bool marked)
+    {
+        if (!Connections.ContainsKey(connectionId))
+            return;
+
+        foreach (LogEntryViewModel logEntryVM in Connections[connectionId]) 
+            logEntryVM.ConnectionMarked = marked;
     }
 
     private void AddToConnections(LogEntryViewModel newLogEntry)

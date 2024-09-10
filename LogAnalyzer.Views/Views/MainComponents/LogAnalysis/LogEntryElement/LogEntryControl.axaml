@@ -21,7 +21,7 @@
 
 	<UserControl.Styles>
 		<Style Selector="Panel#pnl_Header">
-			<Setter Property="Background" Value="{Binding ConnectionMarked, Converter={StaticResource MarkingToBrushConverter}}"/>
+			<Setter Property="Background" Value="{StaticResource LightBrush}"/>
 			<Setter Property="Transitions">
 				<Transitions>
 					<BrushTransition Property="Background" Duration="0:0:0.2"/>
@@ -42,7 +42,9 @@
 			<Grid RowDefinitions="30, *"
                   Margin="0,0,0,0">
 
-				<Panel x:Name="pnl_Header" Grid.Row="0" PointerPressed="Pnl_Header_OnPointerPressed">
+				<Panel x:Name="pnl_Header" Grid.Row="0" 
+                       Background="{Binding ConnectionMarked, Converter={StaticResource MarkingToBrushConverter}}"
+                       PointerPressed="Pnl_Header_OnPointerPressed">
 					<Grid ColumnDefinitions="200,320,*,50,100">
 						<Label Grid.Column="0"
                                FontWeight="ExtraLight"
