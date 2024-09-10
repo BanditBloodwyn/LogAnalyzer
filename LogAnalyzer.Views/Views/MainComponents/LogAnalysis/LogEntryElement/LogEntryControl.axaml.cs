@@ -66,9 +66,11 @@ public partial class LogEntryControl : UserControl
 
     private void OnPointerEntered(object? sender, PointerEventArgs e)
     {
+        _logEntry?.OnPointerEntered();
     }
 
     private void OnPointerExited(object? sender, PointerEventArgs e)
     {
+        _logEntry?.OnPointerExited();
     }
 }
