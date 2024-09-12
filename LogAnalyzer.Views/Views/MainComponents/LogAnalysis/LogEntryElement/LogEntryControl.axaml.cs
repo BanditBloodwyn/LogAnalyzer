@@ -58,6 +58,10 @@ public partial class LogEntryControl : UserControl
 
     private void Pnl_Header_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
+        PointerPointProperties properties = e.GetCurrentPoint(sender as Control).Properties;
+        if (!properties.IsLeftButtonPressed)
+            return;
+
         if (!_logEntry?.HasInnerMessage ?? false)
             return;
 
