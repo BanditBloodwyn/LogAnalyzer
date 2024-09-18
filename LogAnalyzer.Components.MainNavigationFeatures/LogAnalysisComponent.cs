@@ -11,6 +11,9 @@ public class LogAnalysisComponent : ComponentBase,
     public void RegisterDependencies(IServiceCollection service)
     {
         service
+            .AddSingleton<ICommIdExtractor, ClassicATBASCommIdExtractor>()
+            .AddSingleton<ICommDurationExtractor, ClassicATBASCommDurationExtractor>()
+            .AddSingleton<ICommResultCountExtractor, ClassicATBASCommResultCountExtractor>()
             .AddSingleton<IRepositoryInteractionInformationExtractor, ClassicATBASRepositoryInteractionInformationExtractor>();
     }
 }
