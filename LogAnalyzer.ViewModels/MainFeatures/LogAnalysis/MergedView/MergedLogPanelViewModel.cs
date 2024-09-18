@@ -16,6 +16,13 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     private bool _updatePending;
     private FilterData? _filter;
 
+    private Dictionary<long, List<LogEntryViewModel>> _connections = [];
+    public Dictionary<long, List<LogEntryViewModel>> Connections
+    {
+        get => _connections;
+        set => SetProperty(ref _connections, value);
+    }
+
     private List<LogEntryViewModel> _logEntries = [];
     public List<LogEntryViewModel> LogEntries
     {
@@ -93,7 +100,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
             if (newEntries.Count != 0)
             {
                 LogEntries = [.. LogEntries.Concat(CreateNewLogEntryVMs(newEntries))];
-                LogEntries.Sort(TimeComparison);
+                LogEntries.Sort(LogEntryViewModel.TimeComparison);
                 OnPropertyChanged(nameof(LogEntries));
                 OnPropertyChanged(nameof(FilteredList));
             }
@@ -104,23 +111,42 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         }
     }
 
-    private static int TimeComparison(LogEntryViewModel item1, LogEntryViewModel item2)
-    {
-        if (!DateTime.TryParse(item1.TimeStamp, out DateTime timeStamp1) ||
-            !DateTime.TryParse(item2.TimeStamp, out DateTime timeStamp2))
-            return 0;
-
-        return timeStamp1.CompareTo(timeStamp2);
-    }
-
-    private static IEnumerable<LogEntryViewModel> CreateNewLogEntryVMs(IEnumerable<LogEntry> newEntries)
+    private IEnumerable<LogEntryViewModel> CreateNewLogEntryVMs(IEnumerable<LogEntry> newEntries)
     {
         foreach (LogEntry newEntry in newEntries)
         {
             if(newEntry.LogMessage == null)
                 continue;
 
-            yield return new LogEntryViewModel(newEntry);
+            LogEntryViewModel newLogEntry = new LogEntryViewModel(newEntry);
+            newLogEntry.RequestShowCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, true);
+            newLogEntry.RequestRemoveCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, false);
+            
+            AddToConnections(newLogEntry);
+
+            yield return newLogEntry;
         }
+    }
+
+    private void ToggleCommunicationConnectionMarkings(long connectionId, bool marked)
+    {
+        if (!Connections.ContainsKey(connectionId))
+            return;
+
+        foreach (LogEntryViewModel logEntryVM in Connections[connectionId]) 
+            logEntryVM.ConnectionMarked = marked;
+    }
+
+    private void AddToConnections(LogEntryViewModel newLogEntry)
+    {
+        if (newLogEntry.RepositoryInteractionInformation?.CommunicationID == null)
+            return;
+
+        long connectionId = newLogEntry.RepositoryInteractionInformation.Value.CommunicationID.Value;
+
+        if (!Connections.ContainsKey(connectionId))
+            Connections.Add(connectionId, []);
+
+        Connections[connectionId].Add(newLogEntry);
     }
 }

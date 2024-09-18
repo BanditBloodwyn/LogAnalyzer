@@ -1,5 +1,4 @@
 ﻿using Avalonia.Media.Imaging;
-using LogAnalyzer.Resources.Icons;
 
 namespace LogAnalyzer.Resources;
 
@@ -12,6 +11,7 @@ public static class DefaultIcons
     public static Bitmap LogInnerMessageIcon => GetBitmapFromBytes(IconsResource.log_hasInnerMessage);
     public static Bitmap LogLongRepoInteraction => GetBitmapFromBytes(IconsResource.log_long);
     public static Bitmap LogVeryLongRepoInteraction => GetBitmapFromBytes(IconsResource.log_veryLong);
+    public static Bitmap LogHasCommId => GetBitmapFromBytes(IconsResource.log_hasCommId);
 
     private static Bitmap GetBitmapFromBytes(byte[] bytes)
     {

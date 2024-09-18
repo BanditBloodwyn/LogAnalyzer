@@ -118,25 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="feature_loganalysis_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\feature_loganalysis_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="feature_loganalysis" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>feature_loganalysis.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Resources\feature_loganalysis.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="feature_settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>feature_settings.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="log_hasInnerMessage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>log_hasInnerMessage.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="log_long" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>log_long.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="log_veryLong" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>log_veryLong.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="feature_loganalysis_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\feature_loganalysis_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Resources\feature_settings.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="feature_settings_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\feature_settings_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Resources\feature_settings_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="log_hasCommId" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\log_hasCommId.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="log_hasInnerMessage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\log_hasInnerMessage.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="log_long" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\log_long.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="log_veryLong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\log_veryLong.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

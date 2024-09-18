@@ -16,6 +16,7 @@
 
 	<UserControl.Resources>
 		<converters:LogTypeToBrushConverter x:Key="LogTypeToBrushConverter"/>
+		<converters:MarkingToBrushConverter x:Key="MarkingToBrushConverter"/>
 	</UserControl.Resources>
 
 	<UserControl.Styles>
@@ -41,7 +42,9 @@
 			<Grid RowDefinitions="30, *"
                   Margin="0,0,0,0">
 
-				<Panel x:Name="pnl_Header" Grid.Row="0" PointerPressed="Pnl_Header_OnPointerPressed">
+				<Panel x:Name="pnl_Header" Grid.Row="0" 
+                       Background="{Binding ConnectionMarked, Converter={StaticResource MarkingToBrushConverter}}"
+                       PointerPressed="Pnl_Header_OnPointerPressed">
 					<Grid ColumnDefinitions="200,320,*,50,100">
 						<Label Grid.Column="0"
                                FontWeight="ExtraLight"
