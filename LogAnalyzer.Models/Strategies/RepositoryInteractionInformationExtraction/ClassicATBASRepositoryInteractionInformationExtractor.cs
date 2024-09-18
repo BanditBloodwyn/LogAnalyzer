@@ -32,16 +32,27 @@ public class ClassicATBASRepositoryInteractionInformationExtractor : IRepository
 
     private static long? ExtractCommId(string message)
     {
-        string pattern = @"\[(\d+)\]";
-        Match match = Regex.Match(message, pattern);
+        string pattern1 = @"\[(\d+)\]";
+        string pattern2 = @"<(\d+)>";
+        Match match1 = Regex.Match(message, pattern1);
+        Match match2 = Regex.Match(message, pattern2);
 
-        if (!match.Success)
-            return null;
+        if (match1.Success)
+        {
+            string communicationIdString = match1.Groups[1].Value;
+            return long.TryParse(communicationIdString, out long communicationId)
+                ? communicationId
+                : null;
+        }
+        if (match2.Success)
+        {
+            string communicationIdString = match2.Groups[1].Value;
+            return long.TryParse(communicationIdString, out long communicationId)
+                ? communicationId
+                : null;
+        }
 
-        string communicationIdString = match.Groups[1].Value;
-        return long.TryParse(communicationIdString, out long communicationId)
-            ? communicationId
-            : null;
+        return null;
     }
 
     private static double? ExtractMilliseconds(string message)
