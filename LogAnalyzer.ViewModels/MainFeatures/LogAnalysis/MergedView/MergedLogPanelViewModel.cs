@@ -11,7 +11,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
 {
     private const int UPDATEINTERVALMS = 500;
 
-    private readonly Stopwatch _stopwatch = new Stopwatch();
+    private readonly Stopwatch _stopwatch = new();
     private readonly System.Timers.Timer _updateTimer;
     private bool _updatePending;
     private FilterData? _filter;
@@ -92,8 +92,8 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
             lock (Cache.LogEntries)
                 cacheSnapshot = [.. Cache.LogEntries];
 
-            List<long> cacheIndeces = cacheSnapshot.Select(log => log.LogIndex).ToList();
-            List<long> vmIndeces = LogEntries.Select(log => log.LogIndex).ToList();
+            List<long> cacheIndeces = cacheSnapshot.Select(static log => log.LogIndex).ToList();
+            List<long> vmIndeces = LogEntries.Select(static log => log.LogIndex).ToList();
             List<long> newIndeces = cacheIndeces.Except(vmIndeces).ToList();
             List<Models.Data.Containers.LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.LogIndex)).ToList();
 
@@ -105,7 +105,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
                 OnPropertyChanged(nameof(FilteredList));
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // ignored
         }
@@ -118,7 +118,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
             if (newEntry.LogMessage == null)
                 continue;
 
-            LogEntryViewModel newLogEntry = new LogEntryViewModel(newEntry);
+            LogEntryViewModel newLogEntry = new(newEntry);
             newLogEntry.RequestShowCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, true);
             newLogEntry.RequestRemoveCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, false);
 
