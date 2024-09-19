@@ -1,6 +1,6 @@
-﻿using LogAnalyzer.Models.Data.Containers;
-using LogAnalyzer.ViewModels.Commands;
+﻿using LogAnalyzer.ViewModels.Commands;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Timers;
@@ -88,14 +88,14 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
     {
         try
         {
-            List<LogEntry> cacheSnapshot;
+            List<Models.Data.Containers.LogEntry> cacheSnapshot;
             lock (Cache.LogEntries)
                 cacheSnapshot = [.. Cache.LogEntries];
 
             List<long> cacheIndeces = cacheSnapshot.Select(log => log.LogIndex).ToList();
             List<long> vmIndeces = LogEntries.Select(log => log.LogIndex).ToList();
             List<long> newIndeces = cacheIndeces.Except(vmIndeces).ToList();
-            List<LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.LogIndex)).ToList();
+            List<Models.Data.Containers.LogEntry> newEntries = cacheSnapshot.Where(log => newIndeces.Contains(log.LogIndex)).ToList();
 
             if (newEntries.Count != 0)
             {
@@ -111,17 +111,17 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         }
     }
 
-    private IEnumerable<LogEntryViewModel> CreateNewLogEntryVMs(IEnumerable<LogEntry> newEntries)
+    private IEnumerable<LogEntryViewModel> CreateNewLogEntryVMs(IEnumerable<Models.Data.Containers.LogEntry> newEntries)
     {
-        foreach (LogEntry newEntry in newEntries)
+        foreach (Models.Data.Containers.LogEntry newEntry in newEntries)
         {
-            if(newEntry.LogMessage == null)
+            if (newEntry.LogMessage == null)
                 continue;
 
             LogEntryViewModel newLogEntry = new LogEntryViewModel(newEntry);
             newLogEntry.RequestShowCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, true);
             newLogEntry.RequestRemoveCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, false);
-            
+
             AddToConnections(newLogEntry);
 
             yield return newLogEntry;
@@ -133,7 +133,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         if (!Connections.ContainsKey(connectionId))
             return;
 
-        foreach (LogEntryViewModel logEntryVM in Connections[connectionId]) 
+        foreach (LogEntryViewModel logEntryVM in Connections[connectionId])
             logEntryVM.ConnectionMarked = marked;
     }
 

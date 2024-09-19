@@ -1,7 +1,7 @@
 ﻿using Atbas.Core.Logging;
 using Atbas.Core.Logging.Reader;
 using LogAnalyzer.Models.Data.Containers;
-using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
 

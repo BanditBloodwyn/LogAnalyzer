@@ -2,10 +2,13 @@
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data.Containers;
 
-namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 
-public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
+public class LogEntryViewModel(Models.Data.Containers.LogEntry _logEntry) : ViewModelBase
 {
+    public event Action<long>? RequestShowCommunicationConnections;
+    public event Action<long>? RequestRemoveCommunicationConnections;
+
     public long LogIndex => _logEntry.LogIndex;
 
     public int FileIndex => _logEntry.FileIndex;
@@ -25,8 +28,12 @@ public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
         set => SetProperty(ref _connectionMarked, value);
     }
 
-    public event Action<long>? RequestShowCommunicationConnections;
-    public event Action<long>? RequestRemoveCommunicationConnections;
+    private string[]? _contextMenuContent;
+    public string[]? ContextMenuContent
+    {
+        get => _contextMenuContent;
+        private set => SetProperty(ref _contextMenuContent, value);
+    }
 
     public void OnPointerEntered()
     {
@@ -43,6 +50,9 @@ public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
         if (communicationId.HasValue)
             RequestRemoveCommunicationConnections?.Invoke(communicationId.Value);
     }
+
+    public void UpdateContextMenuContent(int clickedColumn) =>
+        ContextMenuContent = ContextMenuProvider.ContextMenuContent(clickedColumn);
 
     public static int TimeComparison(LogEntryViewModel item1, LogEntryViewModel item2)
     {

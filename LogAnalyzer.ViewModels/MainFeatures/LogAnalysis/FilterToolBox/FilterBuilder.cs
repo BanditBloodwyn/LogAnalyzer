@@ -1,4 +1,6 @@
-﻿namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
+﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
+
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
 public class FilterBuilder
 {

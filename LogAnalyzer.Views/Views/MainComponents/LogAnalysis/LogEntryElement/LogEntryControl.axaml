@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
-             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             xmlns:logEntry="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;assembly=LogAnalyzer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="200"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement.LogEntryControl"
-             x:DataType="logAnalysis:LogEntryViewModel"
+             x:DataType="logEntry:LogEntryViewModel"
              DataContextChanged="OnDataContextChanged">
 
     <Design.DataContext>
@@ -45,7 +45,8 @@
 				<Panel x:Name="pnl_Header" Grid.Row="0" 
                        Background="{Binding ConnectionMarked, Converter={StaticResource MarkingToBrushConverter}}"
                        PointerPressed="Pnl_Header_OnPointerPressed">
-					<Grid ColumnDefinitions="200,320,*,50,100">
+					<Grid x:Name="grid_Header" 
+                          ColumnDefinitions="200,320,*,50,100">
 						<Label Grid.Column="0"
                                FontWeight="ExtraLight"
                                VerticalContentAlignment="Center"
@@ -93,4 +94,8 @@
 
 		</Border>
 	</Border>
+
+    <UserControl.ContextMenu>
+        <ContextMenu ItemsSource="{Binding ContextMenuContent}"/>
+    </UserControl.ContextMenu>
 </UserControl>
