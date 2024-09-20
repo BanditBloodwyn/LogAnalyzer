@@ -1,4 +1,5 @@
 ﻿using Atbas.Core.Logging;
+using Avalonia.Controls;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data.Containers;
 
@@ -28,8 +29,8 @@ public class LogEntryViewModel(Models.Data.Containers.LogEntry _logEntry) : View
         set => SetProperty(ref _connectionMarked, value);
     }
 
-    private string[]? _contextMenuContent;
-    public string[]? ContextMenuContent
+    private MenuItem[]? _contextMenuContent;
+    public MenuItem[]? ContextMenuContent
     {
         get => _contextMenuContent;
         private set => SetProperty(ref _contextMenuContent, value);
