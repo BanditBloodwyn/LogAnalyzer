@@ -23,7 +23,7 @@ public class FilterPanelViewModel : ViewModelBase
     private ICommand? _resetFilterCommand;
     public ICommand ResetFilterCommand => _resetFilterCommand ??= new RelayCommand(ResetFilter);
 
-  
+
     #region Init
 
     public FilterPanelViewModel()
@@ -109,7 +109,7 @@ public class FilterPanelViewModel : ViewModelBase
         }
     }
 
-    public void SetLogTypeFilters(params MessageType?[] logTypes)
+    public void SetLogTypeFilters(bool inverted, params MessageType?[] logTypes)
     {
         foreach (var logType in logTypes)
         {
@@ -122,7 +122,9 @@ public class FilterPanelViewModel : ViewModelBase
                 if (string.IsNullOrEmpty(logTypeString))
                     continue;
 
-                if (filter.FilterHeader.Contains(logTypeString))
+                if (inverted
+                        ? !filter.FilterHeader.Contains(logTypeString)
+                        : filter.FilterHeader.Contains(logTypeString))
                     filter.Checked = true;
             }
         }
