@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
              xmlns:filterToolBox="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;assembly=LogAnalyzer.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="800"
              x:Class="LogAnalyzer.Views.LogAnalysisToolPanel"
              x:DataType="filterToolBox:LogAnalysisToolPanelViewModel">
 
@@ -19,7 +19,45 @@
 
 		<Separator Margin="0,5" Background="{StaticResource LightBrush}"/>
 
-		<Grid ColumnDefinitions="*,*">
+        <Label HorizontalContentAlignment="Center"
+               FontWeight="Bold"
+               Content="Search"/>
+		<TextBox Margin="0,0,0,5"/>
+		<CheckBox Content="Backward direction"/>
+		<CheckBox Content="Match whole word only"/>
+		<CheckBox Content="Match case"/>
+
+		<Grid ColumnDefinitions="*,5,*">
+            <Border Grid.Column="0" 
+                    BoxShadow="3 3 3 0 DarkGray"
+                    CornerRadius="5"
+                    Background="{StaticResource Accent1Brush}">
+                <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource Accent1Brush}" Foreground="White"
+                        Content="Find next"
+                        Command="{Binding StartFilterCommand}"/>
+            </Border>
+            <Border Grid.Column="2" 
+                    BoxShadow="3 3 3 0 DarkGray"
+                    CornerRadius="5"
+                    Background="{StaticResource Accent1Brush}">
+                <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{StaticResource Accent1Brush}" Foreground="White"
+                        Content="Count"
+                        Command="{Binding StartFilterCommand}"/>
+            </Border>
+		</Grid>
+
+
+		<Separator Margin="0,10" Background="{StaticResource LightBrush}"/>
+        
+        <Label HorizontalContentAlignment="Center"
+               FontWeight="Bold"
+               Content="Filter"/>
+
+        <Grid ColumnDefinitions="*,*">
 			<StackPanel Grid.Column="0" Margin="0,5,5,5">
 				<Label Content="To show only"/>
 				<ItemsControl ItemsSource="{Binding ShowFilterStrings, Mode=TwoWay}">
@@ -85,13 +123,13 @@
 
         <Separator Margin="0,5" Background="{StaticResource LightBrush}"/>
 
-		<Grid ColumnDefinitions="*,*" Margin="0,0,0,5">
+		<UniformGrid Margin="0,0,0,5">
 			<Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
 					VerticalContentAlignment="Center"
 					Content="Reset Filter"
 					Command="{Binding ResetFilterCommand}"/>
 
-		</Grid>
+		</UniformGrid>
 
 		<Border BoxShadow="3 3 3 0 DarkGray"
                 CornerRadius="5"

@@ -7,10 +7,11 @@
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogAnalysisMainView"
              x:DataType="logAnalysis:LogAnalysisMainViewModel">
 	<Grid RowDefinitions="29,*">
-		<StackPanel Grid.Row="0" Orientation="Horizontal">
+		<StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="30">
 			<Border BoxShadow="3 3 3 0 DarkGray"
                     CornerRadius="5"
                     Height="30" Width="30"
+                    Margin="30,0"
                     Background="{StaticResource Accent1Brush}">
 				<Button VerticalAlignment="Top"
                         HorizontalContentAlignment="Center"
@@ -21,7 +22,6 @@
 			<Button VerticalAlignment="Top"
 					HorizontalContentAlignment="Center"
 					Height="30" Width="30"
-					Margin="30,0,0,0"
 					Command="{Binding SwitchViewCommand}">|</Button>
 		</StackPanel>
 
