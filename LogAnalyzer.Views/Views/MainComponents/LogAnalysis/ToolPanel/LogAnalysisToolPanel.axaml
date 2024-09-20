@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
              xmlns:filterToolBox="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;assembly=LogAnalyzer.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="800"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="900"
              x:Class="LogAnalyzer.Views.LogAnalysisToolPanel"
              x:DataType="filterToolBox:LogAnalysisToolPanelViewModel">
 
@@ -13,44 +13,14 @@
 	</Design.DataContext>
 
 	<StackPanel Margin="5,0">
-		<Label HorizontalContentAlignment="Center"
+        <Label HorizontalContentAlignment="Center"
                FontSize="16" FontWeight="Bold"
                Content="Toolbox"/>
 
 		<Separator Margin="0,5" Background="{StaticResource LightBrush}"/>
-
-        <Label HorizontalContentAlignment="Center"
-               FontWeight="Bold"
-               Content="Search"/>
-		<TextBox Margin="0,0,0,5"/>
-		<CheckBox Content="Backward direction"/>
-		<CheckBox Content="Match whole word only"/>
-		<CheckBox Content="Match case"/>
-
-		<Grid ColumnDefinitions="*,5,*">
-            <Border Grid.Column="0" 
-                    BoxShadow="3 3 3 0 DarkGray"
-                    CornerRadius="5"
-                    Background="{StaticResource Accent1Brush}">
-                <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource Accent1Brush}" Foreground="White"
-                        Content="Find next"
-                        Command="{Binding StartFilterCommand}"/>
-            </Border>
-            <Border Grid.Column="2" 
-                    BoxShadow="3 3 3 0 DarkGray"
-                    CornerRadius="5"
-                    Background="{StaticResource Accent1Brush}">
-                <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Background="{StaticResource Accent1Brush}" Foreground="White"
-                        Content="Count"
-                        Command="{Binding StartFilterCommand}"/>
-            </Border>
-		</Grid>
-
-
+        
+        <ContentControl Content="{Binding SearchPanelVM}"/>
+        
 		<Separator Margin="0,10" Background="{StaticResource LightBrush}"/>
         
         <Label HorizontalContentAlignment="Center"

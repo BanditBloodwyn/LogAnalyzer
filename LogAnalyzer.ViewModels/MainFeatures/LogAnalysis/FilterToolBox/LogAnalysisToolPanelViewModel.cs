@@ -14,6 +14,8 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
 
     #region UI Bindings
 
+    public ViewModelBase SearchPanelVM { get; init; }
+
     public ObservableCollection<FilterTextboxViewModel> ShowFilterStrings { get; } = [];
     public ObservableCollection<FilterTextboxViewModel> HideFilterStrings { get; } = [];
     public ObservableCollection<FilterCheckboxViewModel> LogTypeFilters { get; } = [];
@@ -29,8 +31,10 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
 
     #region Init
 
-    public LogAnalysisToolPanelViewModel()
+    public LogAnalysisToolPanelViewModel(SearchPanelViewModel searchPanelVM)
     {
+        SearchPanelVM = searchPanelVM;
+
         AddTextboxes();
         AddLogTypeFilters();
         AddSpecialFilters();
