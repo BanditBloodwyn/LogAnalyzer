@@ -3,14 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:LogAnalyzer.Views.Views.MainComponents.LogAnalysis.Converters"
-             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels"
              xmlns:logAnalysis1="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             xmlns:logEntry="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;assembly=LogAnalyzer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="200"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement.LogEntryControl"
-             x:DataType="logAnalysis:LogEntryViewModel"
-             DataContextChanged="OnDataContextChanged">
+             x:DataType="logEntry:LogEntryViewModel"
+             DataContextChanged="OnDataContextChanged"
+             >
 
-    <Design.DataContext>
+	<Design.DataContext>
 		<logAnalysis1:LogEntryDesignViewModel/>
 	</Design.DataContext>
 
@@ -42,10 +43,11 @@
 			<Grid RowDefinitions="30, *"
                   Margin="0,0,0,0">
 
-				<Panel x:Name="pnl_Header" Grid.Row="0" 
+				<Panel x:Name="pnl_Header" Grid.Row="0"
                        Background="{Binding ConnectionMarked, Converter={StaticResource MarkingToBrushConverter}}"
                        PointerPressed="Pnl_Header_OnPointerPressed">
-					<Grid ColumnDefinitions="200,320,*,50,100">
+					<Grid x:Name="grid_Header"
+                          ColumnDefinitions="200,320,*,50,100">
 						<Label Grid.Column="0"
                                FontWeight="ExtraLight"
                                VerticalContentAlignment="Center"
@@ -58,39 +60,39 @@
                                VerticalContentAlignment="Center"
                                Content="{Binding Message}">
 							<ToolTip.Tip>
-                                <ToolTip MaxWidth="1000"
+								<ToolTip MaxWidth="1000"
                                          Margin="10"
                                          ShowDelay="0">
-                                    <TextBlock Text="{Binding Message}"/>
-                                </ToolTip>
-                            </ToolTip.Tip>
-                        </Label>
-                        <StackPanel Grid.Column="3"
+									<TextBlock Text="{Binding Message}"/>
+								</ToolTip>
+							</ToolTip.Tip>
+						</Label>
+						<StackPanel Grid.Column="3"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Right">
-                            <Image x:Name="img_HasInnerMessage" Width="25" Height="25"/>
-                            <Image x:Name="img_RepoDurationWarning" Width="25" Height="25"/>
-                            <Image x:Name="img_RepoDurationCritical" Width="25" Height="25"/>
-                        </StackPanel>
-                        <Label Grid.Column="4"
+							<Image x:Name="img_HasInnerMessage" Width="25" Height="25"/>
+							<Image x:Name="img_RepoDurationWarning" Width="25" Height="25"/>
+							<Image x:Name="img_RepoDurationCritical" Width="25" Height="25"/>
+						</StackPanel>
+						<Label Grid.Column="4"
                                FontWeight="ExtraLight" FontSize="11"
                                VerticalContentAlignment="Center"
                                HorizontalContentAlignment="Right"
                                Content="{Binding LogType}"/>
 					</Grid>
 				</Panel>
-                <StackPanel Grid.Row="1">
-                    <TextBlock Margin="205,10,20,0"
+				<StackPanel Grid.Row="1">
+					<TextBlock Margin="205,10,20,0"
                                TextWrapping="Wrap"
                                Text="{Binding Message}"/>
-                    <Label x:Name="lbl_InnerMessage"
+					<Label x:Name="lbl_InnerMessage"
                            Margin="200,10,0,0"
                            FontSize="11"
                            Content="{Binding InnerMessage}"/>
 
 				</StackPanel>
 			</Grid>
-
 		</Border>
 	</Border>
+
 </UserControl>

@@ -6,34 +6,28 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogAnalysisMainView"
              x:DataType="logAnalysis:LogAnalysisMainViewModel">
-    <Grid RowDefinitions="29,*">
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Border BoxShadow="3 3 3 0 DarkGray"
-                    CornerRadius="5" 
-                    Height="30" Width="30" 
+	<Grid RowDefinitions="29,*">
+		<StackPanel Grid.Row="0" Orientation="Horizontal">
+			<Border BoxShadow="3 3 3 0 DarkGray"
+                    CornerRadius="5"
+                    Height="30" Width="30"
                     Background="{StaticResource Accent1Brush}">
-                <Button VerticalAlignment="Top"
+				<Button VerticalAlignment="Top"
                         HorizontalContentAlignment="Center"
                         Height="30" Width="30"
                         Background="{StaticResource Accent1Brush}" Foreground="White"
                         Command="{Binding OpenNewLogPanelCommand}">+</Button>
 			</Border>
-            <Border BoxShadow="3 3 3 0 DarkGray"
-                    CornerRadius="5"
-                    Height="30" Width="30"
-                    Margin="30,0,0,0"
-                    Background="{StaticResource Accent1Brush}">
-                <Button VerticalAlignment="Top"
-                        HorizontalContentAlignment="Center"
-                        Height="30" Width="30"
-                        Background="{StaticResource Accent1Brush}" Foreground="White"
-                        Command="{Binding SwitchViewCommand}">|</Button>
-            </Border>
-        </StackPanel>
+			<Button VerticalAlignment="Top"
+					HorizontalContentAlignment="Center"
+					Height="30" Width="30"
+					Margin="30,0,0,0"
+					Command="{Binding SwitchViewCommand}">|</Button>
+		</StackPanel>
 
-        <Border Grid.Row="1"
+		<Border Grid.Row="1"
                 BorderBrush="{StaticResource LightBrush}" BorderThickness="0,0,0,0">
-            <ContentControl Content="{Binding LogPanel}"/>
+			<ContentControl Content="{Binding LogPanel}"/>
 		</Border>
-    </Grid>
+	</Grid>
 </UserControl>

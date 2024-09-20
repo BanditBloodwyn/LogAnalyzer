@@ -2,6 +2,7 @@
 using LogAnalyzer.Core.EventBus;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Events;
+using LogAnalyzer.ViewModels.Navigation;
 
 namespace LogAnalyzer.ViewModels;
 
@@ -17,10 +18,12 @@ public class MainViewModel : ViewModelBase
 
     public ViewModelBase? NavigationViewModel { get; init; }
 
-    public MainViewModel()
+    public MainViewModel(MainNavigationViewModel navigationVM)
     {
         EventBinding<ChangeOpenedFeatureEvent> changeOpenedFeatureEventBinding = new(ChangeOpenedFeature);
         EventBus<ChangeOpenedFeatureEvent>.Register(changeOpenedFeatureEventBinding);
+
+        NavigationViewModel = navigationVM;
     }
 
     private void ChangeOpenedFeature(ChangeOpenedFeatureEvent @event)

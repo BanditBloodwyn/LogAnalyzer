@@ -1,15 +1,18 @@
 using Avalonia.Controls;
 using Avalonia.Input;
+using LogAnalyzer.Core.Extentions;
 using LogAnalyzer.Resources;
-using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 using System;
 
 namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement;
 
 public partial class LogEntryControl : UserControl
 {
-    private LogEntryViewModel? _logEntry;
+    private LogEntryViewModel? _viewModel;
+    private ContextMenu? _contextMenu;
     private bool _isExpanded;
+    private int _currentColumn = -1;
 
     private bool IsExpanded
     {
@@ -31,6 +34,7 @@ public partial class LogEntryControl : UserControl
 
         PointerEntered += OnPointerEntered;
         PointerExited += OnPointerExited;
+        PointerMoved += OnPointerMoved;
     }
 
     private void OnDataContextChanged(object? sender, EventArgs e)
@@ -38,11 +42,11 @@ public partial class LogEntryControl : UserControl
         if (DataContext is not LogEntryViewModel logEntry)
             return;
 
-        _logEntry = logEntry;
+        _viewModel = logEntry;
 
-        img_HasInnerMessage.IsVisible = _logEntry?.HasInnerMessage ?? false;
-        img_RepoDurationWarning.IsVisible = _logEntry?.RepositoryInteractionInformation?.HasDurationWarning ?? false;
-        img_RepoDurationCritical.IsVisible = _logEntry?.RepositoryInteractionInformation?.HasCriticalDuration ?? false;
+        img_HasInnerMessage.IsVisible = _viewModel?.HasInnerMessage ?? false;
+        img_RepoDurationWarning.IsVisible = _viewModel?.RepositoryInteractionInformation?.HasDurationWarning ?? false;
+        img_RepoDurationCritical.IsVisible = _viewModel?.RepositoryInteractionInformation?.HasCriticalDuration ?? false;
 
         UpdateUI();
     }
@@ -59,22 +63,33 @@ public partial class LogEntryControl : UserControl
     private void Pnl_Header_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         PointerPointProperties properties = e.GetCurrentPoint(sender as Control).Properties;
-        if (!properties.IsLeftButtonPressed)
-            return;
 
-        if (!_logEntry?.HasInnerMessage ?? false)
-            return;
+        if (properties.IsLeftButtonPressed)
+        {
+            if (!_viewModel?.HasInnerMessage ?? false)
+                return;
 
-        IsExpanded = !IsExpanded;
+            IsExpanded = !IsExpanded;
+        }
+        if (properties.IsRightButtonPressed)
+        {
+            int column = grid_Header.GetColumnFromPosition(e.GetPosition(grid_Header).X);
+            this.OpenContextMenu(_viewModel?.UpdateContextMenuContent(column) ?? []);
+            e.Handled = true;
+        }
     }
 
-    private void OnPointerEntered(object? sender, PointerEventArgs e)
-    {
-        _logEntry?.OnPointerEntered();
-    }
+    private void OnPointerEntered(object? sender, PointerEventArgs e) => _viewModel?.OnPointerEntered();
 
-    private void OnPointerExited(object? sender, PointerEventArgs e)
+    private void OnPointerExited(object? sender, PointerEventArgs e) => _viewModel?.OnPointerExited();
+
+    private void OnPointerMoved(object? sender, PointerEventArgs e)
     {
-        _logEntry?.OnPointerExited();
+        int column = grid_Header.GetColumnFromPosition(e.GetPosition(grid_Header).X);
+
+        if (_currentColumn != column)
+            _viewModel?.UpdateContextMenuContent(column);
+
+        _currentColumn = column;
     }
 }

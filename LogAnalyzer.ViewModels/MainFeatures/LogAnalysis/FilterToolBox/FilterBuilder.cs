@@ -1,4 +1,6 @@
-﻿namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
+﻿using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
+
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
 public class FilterBuilder
 {
@@ -43,6 +45,9 @@ public class FilterBuilder
         string[] relevantFilterStrings = textFilters.Where(static text => !string.IsNullOrEmpty(text)).ToArray();
 
         bool contains = relevantFilterStrings.Any(showString =>
+                            !string.IsNullOrEmpty(logEntry.Source) &&
+                            logEntry.TimeStamp.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                        relevantFilterStrings.Any(showString =>
                             !string.IsNullOrEmpty(logEntry.Source) &&
                             logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
                         relevantFilterStrings.Any(showString =>

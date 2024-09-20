@@ -1,4 +1,5 @@
 ﻿using LogAnalyzer.Core.ViewsModels;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 

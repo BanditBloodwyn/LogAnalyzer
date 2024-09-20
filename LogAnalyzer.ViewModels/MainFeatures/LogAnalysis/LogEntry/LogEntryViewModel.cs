@@ -1,11 +1,18 @@
 ﻿using Atbas.Core.Logging;
+using Avalonia.Controls;
 using LogAnalyzer.Core.ViewsModels;
 using LogAnalyzer.Models.Data.Containers;
 
-namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
+namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 
-public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
+public class LogEntryViewModel(
+    Models.Data.Containers.LogEntry _logEntry,
+    ContextMenuProvider _contextMenuProvider) 
+    : ViewModelBase
 {
+    public event Action<long>? RequestShowCommunicationConnections;
+    public event Action<long>? RequestRemoveCommunicationConnections;
+
     public long LogIndex => _logEntry.LogIndex;
 
     public int FileIndex => _logEntry.FileIndex;
@@ -25,9 +32,6 @@ public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
         set => SetProperty(ref _connectionMarked, value);
     }
 
-    public event Action<long>? RequestShowCommunicationConnections;
-    public event Action<long>? RequestRemoveCommunicationConnections;
-
     public void OnPointerEntered()
     {
         long? communicationId = _logEntry.RepositoryInteractionInformation?.CommunicationID;
@@ -43,6 +47,8 @@ public class LogEntryViewModel(LogEntry _logEntry) : ViewModelBase
         if (communicationId.HasValue)
             RequestRemoveCommunicationConnections?.Invoke(communicationId.Value);
     }
+
+    public MenuItem[] UpdateContextMenuContent(int clickedColumn) => _contextMenuProvider.ContextMenuContent(this, clickedColumn);
 
     public static int TimeComparison(LogEntryViewModel item1, LogEntryViewModel item2)
     {

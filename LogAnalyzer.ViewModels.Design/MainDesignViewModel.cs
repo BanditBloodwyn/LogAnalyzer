@@ -2,10 +2,4 @@
 
 namespace LogAnalyzer.ViewModels.Design;
 
-public class MainDesignViewModel : MainViewModel
-{
-    public MainDesignViewModel()
-    {
-        NavigationViewModel = new MainNavigationDesignViewModel();
-    }
-}
+public class MainDesignViewModel() : MainViewModel(new MainNavigationDesignViewModel());
