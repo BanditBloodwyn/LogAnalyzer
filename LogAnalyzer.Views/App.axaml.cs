@@ -40,10 +40,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel
-                {
-                    NavigationViewModel = serviceProvider.GetRequiredService<MainNavigationViewModel>()
-                }
+                DataContext = serviceProvider.GetRequiredService<MainViewModel>()
             };
             TopLevelContext.Initialize(TopLevel.GetTopLevel(desktop.MainWindow));
         }
@@ -51,10 +48,7 @@ public partial class App : Application
         {
             singleViewPlatform.MainView = new MainView
             {
-                DataContext = new MainViewModel
-                {
-                    NavigationViewModel = serviceProvider.GetRequiredService<MainNavigationViewModel>()
-                }
+                DataContext = serviceProvider.GetRequiredService<MainViewModel>()
             };
         }
 
