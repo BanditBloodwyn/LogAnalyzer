@@ -46,6 +46,9 @@ public class FilterBuilder
 
         bool contains = relevantFilterStrings.Any(showString =>
                             !string.IsNullOrEmpty(logEntry.Source) &&
+                            logEntry.TimeStamp.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
+                        relevantFilterStrings.Any(showString =>
+                            !string.IsNullOrEmpty(logEntry.Source) &&
                             logEntry.Source.Contains(showString, StringComparison.OrdinalIgnoreCase)) ||
                         relevantFilterStrings.Any(showString =>
                             !string.IsNullOrEmpty(logEntry.Message) &&

@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Atbas.Core.Logging;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.Input;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
@@ -10,9 +11,9 @@ public class ContextMenuProvider(LogAnalysisToolPanelViewModel? _toolPanelVM)
     {
         MenuItem[] _items =
         [
-            new MenuItem { Header = "Filter by timestamp", Command = new RelayCommand(() => FilterByTileStamp(log)) },
-            new MenuItem { Header = "Filter by source", Command = new RelayCommand(() => FilterBySource(log)) },
-            new MenuItem { Header = "Filter by log type", Command = new RelayCommand(() => FilterByType(log)) },
+            new MenuItem { Header = "Filter by timestamp", Command = new RelayCommand(() => UseToShowFilter(log.TimeStamp)) },
+            new MenuItem { Header = "Filter by source", Command = new RelayCommand(() => UseToShowFilter(log.Source)) },
+            new MenuItem { Header = "Filter by log type", Command = new RelayCommand(() => FilterByType(log.LogType)) },
             new MenuItem { Header = "-", Command = null },
             new MenuItem { Header = "Copy content", Command = null },
         ];
@@ -25,29 +26,23 @@ public class ContextMenuProvider(LogAnalysisToolPanelViewModel? _toolPanelVM)
         };
     }
 
-    private void FilterByTileStamp(LogEntryViewModel log)
+    private void UseToShowFilter(params string[] stringsToShow)
     {
         if (_toolPanelVM == null)
             return;
-    }
 
-    private void FilterBySource(LogEntryViewModel log)
-    {
-        if (_toolPanelVM == null)
-            return;
-       
         _toolPanelVM.ResetFilter();
-        _toolPanelVM.SetToShowFilters(log.Source);
+        _toolPanelVM.SetToShowFilters(stringsToShow);
         _toolPanelVM.StartFiltering();
     }
 
-    private void FilterByType(LogEntryViewModel log)
+    private void FilterByType(params MessageType?[] messageTypes)
     {
         if (_toolPanelVM == null)
             return;
 
         _toolPanelVM.ResetFilter();
-        _toolPanelVM.SetLogTypeFilters(log.LogType);
+        _toolPanelVM.SetLogTypeFilters(messageTypes);
         _toolPanelVM.StartFiltering();
     }
 }
