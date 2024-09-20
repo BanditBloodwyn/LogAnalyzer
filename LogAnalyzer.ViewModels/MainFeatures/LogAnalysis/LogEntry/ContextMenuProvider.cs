@@ -5,7 +5,7 @@ using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 
-public class ContextMenuProvider(LogAnalysisToolPanelViewModel? _toolPanelVM)
+public class ContextMenuProvider(FilterPanelViewModel? _filterPanelVM)
 {
     public MenuItem[] ContextMenuContent(LogEntryViewModel log, int clickedColumn)
     {
@@ -40,21 +40,21 @@ public class ContextMenuProvider(LogAnalysisToolPanelViewModel? _toolPanelVM)
 
     private void UseToShowFilter(params string[] stringsToShow)
     {
-        if (_toolPanelVM == null)
+        if (_filterPanelVM == null)
             return;
 
-        _toolPanelVM.ResetFilter();
-        _toolPanelVM.SetToShowFilters(stringsToShow);
-        _toolPanelVM.StartFiltering();
+        _filterPanelVM.ResetFilter();
+        _filterPanelVM.SetToShowFilters(stringsToShow);
+        _filterPanelVM.StartFiltering();
     }
 
     private void FilterByType(params MessageType?[] messageTypes)
     {
-        if (_toolPanelVM == null)
+        if (_filterPanelVM == null)
             return;
 
-        _toolPanelVM.ResetFilter();
-        _toolPanelVM.SetLogTypeFilters(messageTypes);
-        _toolPanelVM.StartFiltering();
+        _filterPanelVM.ResetFilter();
+        _filterPanelVM.SetLogTypeFilters(messageTypes);
+        _filterPanelVM.StartFiltering();
     }
 }

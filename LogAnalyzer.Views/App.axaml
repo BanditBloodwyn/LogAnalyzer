@@ -64,6 +64,9 @@
                  <DataTemplate DataType="{x:Type filterToolBox:SearchPanelViewModel}">
 					 <views1:SearchPanel/>
                  </DataTemplate>
+                 <DataTemplate DataType="{x:Type filterToolBox:FilterPanelViewModel}">
+					 <views1:FilterPanel/>
+                 </DataTemplate>
 
                  <DataTemplate DataType="{x:Type containers:FileInfo}">
 					 <logAnalysis2:LogFileHeaderElement/>

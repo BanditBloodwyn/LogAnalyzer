@@ -1,0 +1,107 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:filterToolBox="clr-namespace:LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;assembly=LogAnalyzer.ViewModels"
+             xmlns:logAnalysis="clr-namespace:LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;assembly=LogAnalyzer.ViewModels.Design"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
+             x:Class="LogAnalyzer.Views.FilterPanel"
+             x:DataType="filterToolBox:FilterPanelViewModel">
+
+	<Design.DataContext>
+		<logAnalysis:FilterPanelDesignViewModel/>
+    </Design.DataContext>
+
+    <StackPanel>
+		<Label HorizontalContentAlignment="Center"
+               FontWeight="Bold"
+               Content="Filter"/>
+
+		<Grid ColumnDefinitions="*,*">
+			<StackPanel Grid.Column="0" Margin="0,5,5,5">
+				<Label Content="To show only"/>
+				<ItemsControl ItemsSource="{Binding ShowFilterStrings, Mode=TwoWay}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Spacing="2"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<TextBox Text="{Binding Text, Mode=TwoWay}"/>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+			<StackPanel Grid.Column="1" Margin="5,5,0,5">
+				<Label Content="To hide"/>
+				<ItemsControl ItemsSource="{Binding HideFilterStrings, Mode=TwoWay}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Spacing="2"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<TextBox Text="{Binding Text, Mode=TwoWay}"/>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+		</Grid>
+
+		<Separator Margin="0,5" Background="{StaticResource LightBrush}"/>
+
+		<Grid ColumnDefinitions="*,*">
+			<ItemsControl Grid.Column="0" ItemsSource="{Binding LogTypeFilters}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<CheckBox Content="{Binding FilterHeader}"
+                                  IsChecked="{Binding Checked, Mode=TwoWay}"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+			<ItemsControl Grid.Column="1" ItemsSource="{Binding SpecialFilters}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<CheckBox Content="{Binding FilterHeader}"
+                                  IsChecked="{Binding Checked, Mode=TwoWay}"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Grid>
+
+		<Separator Margin="0,5" Background="{StaticResource LightBrush}"/>
+
+		<UniformGrid Margin="0,0,0,5">
+			<Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					Content="Reset Filter"
+					Command="{Binding ResetFilterCommand}"/>
+
+		</UniformGrid>
+
+		<Border BoxShadow="3 3 3 0 DarkGray"
+                CornerRadius="5"
+                Background="{StaticResource Accent1Brush}">
+			<Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+                    Height="50"
+                    Background="{StaticResource Accent1Brush}" Foreground="White"
+                    Content="Filter"
+                    Command="{Binding StartFilterCommand}"/>
+		</Border>
+
+		<Separator Margin="0,5" BorderThickness="2"/>
+	</StackPanel>
+</UserControl>

@@ -28,6 +28,8 @@ namespace LogAnalyzer.Components.UIFeatures
                 .AddSingleton<LogAnalysisMainViewModel>()
                 .AddTransient<SettingsMainViewModel>()
                 
+                .AddSingleton<SearchPanelViewModel>()
+                .AddSingleton<FilterPanelViewModel>()
                 .AddSingleton<LogAnalysisToolPanelViewModel>()
                 .AddTransient<SplittedLogPanelViewModel>()
                 .AddTransient<MergedLogPanelViewModel>()
