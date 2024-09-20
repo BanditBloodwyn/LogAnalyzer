@@ -8,7 +8,7 @@ namespace LogAnalyzer.ViewModels.Design.MainFeatures.LogAnalysis;
 
 public class SplittedLogPanelDesignViewModel : SplittedLogPanelViewModel
 {
-    public SplittedLogPanelDesignViewModel() : base(null!)
+    public SplittedLogPanelDesignViewModel() : base(null!, null!)
     {
         Cache.Reset();
         Cache.OpenedFiles.Add(new FileInfo(

@@ -78,4 +78,53 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
             hideStrings,
             checkboxFilters));
     }
+
+    public void ResetFilter()
+    {
+        foreach (FilterTextboxViewModel filter in ShowFilterStrings) 
+            filter.Text = string.Empty;
+        foreach (FilterTextboxViewModel filter in HideFilterStrings)
+            filter.Text = string.Empty;
+        foreach (FilterCheckboxViewModel filter in LogTypeFilters)
+            filter.Checked = false;
+        foreach (FilterCheckboxViewModel filter in SpecialFilters)
+            filter.Checked = false;
+    }
+
+    public void SetToShowFilters(params string[] filters)
+    {
+        for (int i = 0; i < filters.Length; i++)
+        {
+            if (!string.IsNullOrEmpty(filters[i]))
+                ShowFilterStrings[i].Text = filters[i];
+        }
+    }
+
+    public void SetToHideFilters(params string[] filters)
+    {
+        for (int i = 0; i < filters.Length; i++)
+        {
+            if (!string.IsNullOrEmpty(filters[i]))
+                HideFilterStrings[i].Text = filters[i];
+        }
+    }
+
+    public void SetLogTypeFilters(params MessageType?[] logTypes)
+    {
+        foreach (var logType in logTypes)
+        {
+            if(logType == null)
+                continue;
+
+            foreach (FilterCheckboxViewModel filter in LogTypeFilters)
+            {
+                string? logTypeString = logType.ToString();
+                if(string.IsNullOrEmpty(logTypeString))
+                    continue;
+
+                if (filter.FilterHeader.Contains(logTypeString))
+                    filter.Checked = true;
+            }
+        }
+    }
 }

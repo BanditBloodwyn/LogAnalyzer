@@ -1,5 +1,6 @@
 ﻿using LogAnalyzer.ViewModels.Commands;
 using LogAnalyzer.ViewModels.Commands.LogAnalysis;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using FileInfo = LogAnalyzer.Models.Data.Containers.FileInfo;
@@ -13,8 +14,10 @@ public class SplittedLogPanelViewModel : LogPanelBaseViewModel
     private ICommand? _closeLogPanelCommand;
     public ICommand OpenNewLogPanelCommand => _closeLogPanelCommand ??= new CloseLogPanelCommand(this);
 
-    public SplittedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand _commandFactory)
-        : base(_commandFactory)
+    public SplittedLogPanelViewModel(
+        ContextMenuProvider contextMenuProvider, 
+        CommandFactory.CreateLogAnalyzeCommand _commandFactory)
+        : base(contextMenuProvider, _commandFactory)
     {
         Cache.OpenedFilesChanged += OnOpenedFilesChanged;
     }

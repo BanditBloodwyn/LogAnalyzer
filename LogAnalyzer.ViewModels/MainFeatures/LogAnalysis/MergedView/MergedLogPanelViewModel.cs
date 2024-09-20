@@ -34,8 +34,10 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
         .Where(logEntry => FilterBuilder.BuildFilter(_filter, logEntry))
         .ToList();
 
-    public MergedLogPanelViewModel(CommandFactory.CreateLogAnalyzeCommand commandFactory)
-        : base(commandFactory)
+    public MergedLogPanelViewModel(
+        ContextMenuProvider contextMenuProvider, 
+        CommandFactory.CreateLogAnalyzeCommand commandFactory)
+        : base(contextMenuProvider, commandFactory)
     {
         Cache.LogEntries.CollectionChanged += OnLogEntriesChanged;
 
@@ -118,7 +120,7 @@ public class MergedLogPanelViewModel : LogPanelBaseViewModel
             if (newEntry.LogMessage == null)
                 continue;
 
-            LogEntryViewModel newLogEntry = new(newEntry);
+            LogEntryViewModel newLogEntry = new(newEntry, _contextMenuProvider);
             newLogEntry.RequestShowCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, true);
             newLogEntry.RequestRemoveCommunicationConnections += log => ToggleCommunicationConnectionMarkings(log, false);
 

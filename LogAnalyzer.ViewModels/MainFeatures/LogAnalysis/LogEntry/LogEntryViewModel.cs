@@ -5,7 +5,10 @@ using LogAnalyzer.Models.Data.Containers;
 
 namespace LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 
-public class LogEntryViewModel(Models.Data.Containers.LogEntry _logEntry) : ViewModelBase
+public class LogEntryViewModel(
+    Models.Data.Containers.LogEntry _logEntry,
+    ContextMenuProvider _contextMenuProvider) 
+    : ViewModelBase
 {
     public event Action<long>? RequestShowCommunicationConnections;
     public event Action<long>? RequestRemoveCommunicationConnections;
@@ -53,7 +56,7 @@ public class LogEntryViewModel(Models.Data.Containers.LogEntry _logEntry) : View
     }
 
     public void UpdateContextMenuContent(int clickedColumn) =>
-        ContextMenuContent = ContextMenuProvider.ContextMenuContent(clickedColumn);
+        ContextMenuContent = _contextMenuProvider.ContextMenuContent(this, clickedColumn);
 
     public static int TimeComparison(LogEntryViewModel item1, LogEntryViewModel item2)
     {

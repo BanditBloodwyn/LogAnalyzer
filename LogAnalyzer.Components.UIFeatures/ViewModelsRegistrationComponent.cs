@@ -4,6 +4,7 @@ using LogAnalyzer.ViewModels;
 using LogAnalyzer.ViewModels.MainFeatures;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.FilterToolBox;
+using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.LogEntry;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.MergedView;
 using LogAnalyzer.ViewModels.MainFeatures.LogAnalysis.SplittedView;
 using LogAnalyzer.ViewModels.Navigation;
@@ -32,7 +33,9 @@ namespace LogAnalyzer.Components.UIFeatures
                 .AddTransient<MergedLogPanelViewModel>()
                 .AddTransient<LogPanelViewModel>()
                 .AddTransient<ViewModelFactory.CreateLogPanel>(static serviceProvider =>
-                    serviceProvider.GetRequiredService<LogPanelViewModel>);
+                    serviceProvider.GetRequiredService<LogPanelViewModel>)
+                
+                .AddSingleton<ContextMenuProvider>();
 
         }
     }
