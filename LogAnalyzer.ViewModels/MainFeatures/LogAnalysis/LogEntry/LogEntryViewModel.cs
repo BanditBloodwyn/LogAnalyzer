@@ -32,13 +32,6 @@ public class LogEntryViewModel(
         set => SetProperty(ref _connectionMarked, value);
     }
 
-    private MenuItem[]? _contextMenuContent;
-    public MenuItem[]? ContextMenuContent
-    {
-        get => _contextMenuContent;
-        private set => SetProperty(ref _contextMenuContent, value);
-    }
-
     public void OnPointerEntered()
     {
         long? communicationId = _logEntry.RepositoryInteractionInformation?.CommunicationID;
@@ -55,8 +48,7 @@ public class LogEntryViewModel(
             RequestRemoveCommunicationConnections?.Invoke(communicationId.Value);
     }
 
-    public void UpdateContextMenuContent(int clickedColumn) =>
-        ContextMenuContent = _contextMenuProvider.ContextMenuContent(this, clickedColumn);
+    public MenuItem[] UpdateContextMenuContent(int clickedColumn) => _contextMenuProvider.ContextMenuContent(this, clickedColumn);
 
     public static int TimeComparison(LogEntryViewModel item1, LogEntryViewModel item2)
     {

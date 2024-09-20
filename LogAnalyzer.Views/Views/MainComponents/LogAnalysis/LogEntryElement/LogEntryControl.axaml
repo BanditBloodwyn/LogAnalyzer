@@ -8,7 +8,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="200"
              x:Class="LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement.LogEntryControl"
              x:DataType="logEntry:LogEntryViewModel"
-             DataContextChanged="OnDataContextChanged">
+             DataContextChanged="OnDataContextChanged"
+             >
 
 	<Design.DataContext>
 		<logAnalysis1:LogEntryDesignViewModel/>
@@ -91,11 +92,7 @@
 
 				</StackPanel>
 			</Grid>
-
 		</Border>
 	</Border>
 
-	<UserControl.ContextMenu>
-		<ContextMenu ItemsSource="{Binding ContextMenuContent}"/>
-	</UserControl.ContextMenu>
 </UserControl>

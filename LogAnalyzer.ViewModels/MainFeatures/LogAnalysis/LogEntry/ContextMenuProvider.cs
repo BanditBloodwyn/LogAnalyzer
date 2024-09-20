@@ -11,11 +11,11 @@ public class ContextMenuProvider(LogAnalysisToolPanelViewModel? _toolPanelVM)
     {
         MenuItem[] _items =
         [
-            new MenuItem { Header = "Filter by timestamp", Command = new RelayCommand(() => UseToShowFilter(log.TimeStamp)) },
-            new MenuItem { Header = "Filter by source", Command = new RelayCommand(() => UseToShowFilter(log.Source)) },
-            new MenuItem { Header = "Filter by log type", Command = new RelayCommand(() => FilterByType(log.LogType)) },
+            CreateMenuItem("Filter by timestamp", () => UseToShowFilter(log.TimeStamp)),
+            CreateMenuItem("Filter by source", () => UseToShowFilter(log.Source)),
+            CreateMenuItem("Filter by log type", () => FilterByType(log.LogType)),
             new MenuItem { Header = "-", Command = null },
-            new MenuItem { Header = "Copy content", Command = null },
+            CreateMenuItem("Copy to clipboard", null),
         ];
 
         return clickedColumn switch
@@ -24,6 +24,18 @@ public class ContextMenuProvider(LogAnalysisToolPanelViewModel? _toolPanelVM)
             1 => [_items[1], _items[3], _items[4]],
             _ => [_items[2], _items[3], _items[4]]
         };
+    }
+
+    private static MenuItem CreateMenuItem(string header, Action? action)
+    {
+        MenuItem item = new MenuItem();
+        item.Header = header;
+        item.Command = new RelayCommand(() =>
+        {
+            action?.Invoke();
+            item.ContextMenu?.Close();
+        });
+        return item;
     }
 
     private void UseToShowFilter(params string[] stringsToShow)

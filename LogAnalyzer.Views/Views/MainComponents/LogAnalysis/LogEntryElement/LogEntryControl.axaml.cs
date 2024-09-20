@@ -10,6 +10,7 @@ namespace LogAnalyzer.Views.Views.MainComponents.LogAnalysis.LogEntryElement;
 public partial class LogEntryControl : UserControl
 {
     private LogEntryViewModel? _viewModel;
+    private ContextMenu? _contextMenu;
     private bool _isExpanded;
     private int _currentColumn = -1;
 
@@ -69,6 +70,12 @@ public partial class LogEntryControl : UserControl
                 return;
 
             IsExpanded = !IsExpanded;
+        }
+        if (properties.IsRightButtonPressed)
+        {
+            int column = grid_Header.GetColumnFromPosition(e.GetPosition(grid_Header).X);
+            this.OpenContextMenu(_viewModel?.UpdateContextMenuContent(column) ?? []);
+            e.Handled = true;
         }
     }
 
