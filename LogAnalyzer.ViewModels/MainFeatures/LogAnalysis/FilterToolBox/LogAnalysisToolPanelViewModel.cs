@@ -1,6 +1,6 @@
 ﻿using Atbas.Core.Logging;
+using CommunityToolkit.Mvvm.Input;
 using LogAnalyzer.Core.ViewsModels;
-using LogAnalyzer.ViewModels.Commands.LogAnalysis;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -20,8 +20,10 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
     public ObservableCollection<FilterCheckboxViewModel> SpecialFilters { get; } = [];
 
     private ICommand? _startFilterCommand;
-    public ICommand StartFilterCommand => _startFilterCommand ??= new StartFilterCommand(this);
-
+    public ICommand StartFilterCommand => _startFilterCommand ??= new RelayCommand(StartFiltering);
+    
+    private ICommand? _resetFilterCommand;
+    public ICommand ResetFilterCommand => _resetFilterCommand ??= new RelayCommand(ResetFilter);
 
     #endregion
 
@@ -81,7 +83,7 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
 
     public void ResetFilter()
     {
-        foreach (FilterTextboxViewModel filter in ShowFilterStrings) 
+        foreach (FilterTextboxViewModel filter in ShowFilterStrings)
             filter.Text = string.Empty;
         foreach (FilterTextboxViewModel filter in HideFilterStrings)
             filter.Text = string.Empty;
@@ -113,13 +115,13 @@ public class LogAnalysisToolPanelViewModel : ViewModelBase
     {
         foreach (var logType in logTypes)
         {
-            if(logType == null)
+            if (logType == null)
                 continue;
 
             foreach (FilterCheckboxViewModel filter in LogTypeFilters)
             {
                 string? logTypeString = logType.ToString();
-                if(string.IsNullOrEmpty(logTypeString))
+                if (string.IsNullOrEmpty(logTypeString))
                     continue;
 
                 if (filter.FilterHeader.Contains(logTypeString))
