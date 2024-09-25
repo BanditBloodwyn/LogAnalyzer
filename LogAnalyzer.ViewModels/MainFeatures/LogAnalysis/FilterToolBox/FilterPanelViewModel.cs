@@ -91,6 +91,9 @@ public class FilterPanelViewModel : ViewModelBase
             filter.Checked = false;
     }
 
+
+    #region External Setter Methods
+
     public void SetToShowFilters(params string[] filters)
     {
         for (int i = 0; i < filters.Length; i++)
@@ -129,4 +132,6 @@ public class FilterPanelViewModel : ViewModelBase
             }
         }
     }
+
+    #endregion
 }
