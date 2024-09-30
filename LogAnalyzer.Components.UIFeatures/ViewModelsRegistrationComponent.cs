@@ -18,12 +18,12 @@ namespace LogAnalyzer.Components.UIFeatures
         public void RegisterDependencies(IServiceCollection service)
         {
             service
-                .AddTransient<MainViewModel>()
-                .AddTransient<MainNavigationViewModel>()
-                .AddTransient(provider => new FeatureButtonsPanelViewModel(
+                .AddSingleton<MainViewModel>()
+                .AddSingleton<MainNavigationViewModel>()
+                .AddSingleton(provider => new FeatureButtonsPanelViewModel(
                         provider.GetRequiredService<LogAnalysisMainViewModel>(), 
                         provider.GetRequiredService<SettingsMainViewModel>()))
-                .AddTransient<CommandsPanelViewModel>()
+                .AddSingleton<CommandsPanelViewModel>()
 
                 .AddSingleton<LogAnalysisMainViewModel>()
                 .AddTransient<SettingsMainViewModel>()
@@ -31,14 +31,13 @@ namespace LogAnalyzer.Components.UIFeatures
                 .AddSingleton<SearchPanelViewModel>()
                 .AddSingleton<FilterPanelViewModel>()
                 .AddSingleton<LogAnalysisToolPanelViewModel>()
-                .AddTransient<SplittedLogPanelViewModel>()
-                .AddTransient<MergedLogPanelViewModel>()
+                .AddSingleton<SplittedLogPanelViewModel>()
+                .AddSingleton<MergedLogPanelViewModel>()
                 .AddTransient<LogPanelViewModel>()
                 .AddTransient<ViewModelFactory.CreateLogPanel>(static serviceProvider =>
                     serviceProvider.GetRequiredService<LogPanelViewModel>)
                 
                 .AddSingleton<ContextMenuProvider>();
-
         }
     }
 }
