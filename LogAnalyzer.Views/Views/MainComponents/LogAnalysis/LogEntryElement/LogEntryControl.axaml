@@ -48,17 +48,17 @@
                        PointerPressed="Pnl_Header_OnPointerPressed">
 					<Grid x:Name="grid_Header"
                           ColumnDefinitions="200,320,*,50,100">
-						<Label Grid.Column="0"
-                               FontWeight="ExtraLight"
-                               VerticalContentAlignment="Center"
-                               Content="{Binding TimeStamp}"/>
-						<Label Grid.Column="1"
-                               FontWeight="Heavy"
-                               VerticalContentAlignment="Center"
-                               Content="{Binding Source}"/>
-						<Label x:Name="lbl_Header_Message" Grid.Column="2"
-                               VerticalContentAlignment="Center"
-                               Content="{Binding Message}">
+						<SelectableTextBlock Grid.Column="0"
+                                             FontWeight="ExtraLight"
+                                             VerticalAlignment="Center"
+                                             Text="{Binding TimeStamp}"/>
+						<SelectableTextBlock Grid.Column="1"
+                                             FontWeight="Heavy"
+                                             VerticalAlignment="Center"
+                                             Text="{Binding Source}"/>
+						<SelectableTextBlock x:Name="lbl_Header_Message" Grid.Column="2"
+                               VerticalAlignment="Center"
+                               Text="{Binding Message}">
 							<ToolTip.Tip>
 								<ToolTip MaxWidth="1000"
                                          Margin="10"
@@ -66,7 +66,7 @@
 									<TextBlock Text="{Binding Message}"/>
 								</ToolTip>
 							</ToolTip.Tip>
-						</Label>
+						</SelectableTextBlock>
 						<StackPanel Grid.Column="3"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Right">
@@ -74,21 +74,21 @@
 							<Image x:Name="img_RepoDurationWarning" Width="25" Height="25"/>
 							<Image x:Name="img_RepoDurationCritical" Width="25" Height="25"/>
 						</StackPanel>
-						<Label Grid.Column="4"
-                               FontWeight="ExtraLight" FontSize="11"
-                               VerticalContentAlignment="Center"
-                               HorizontalContentAlignment="Right"
-                               Content="{Binding LogType}"/>
+						<SelectableTextBlock Grid.Column="4"
+                                             FontWeight="ExtraLight" FontSize="11"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Right"
+                                             Text="{Binding LogType}"/>
 					</Grid>
 				</Panel>
 				<StackPanel Grid.Row="1">
 					<TextBlock Margin="205,10,20,0"
                                TextWrapping="Wrap"
                                Text="{Binding Message}"/>
-					<Label x:Name="lbl_InnerMessage"
-                           Margin="200,10,0,0"
-                           FontSize="11"
-                           Content="{Binding InnerMessage}"/>
+					<SelectableTextBlock x:Name="lbl_InnerMessage"
+                                         Margin="200,10,0,0"
+                                         FontSize="11"
+                                         Text="{Binding InnerMessage}"/>
 
 				</StackPanel>
 			</Grid>
